@@ -32,15 +32,6 @@ public class MySQL implements IConn {
             } else {
                 return false;
             }
-            /*} catch (InstantiationException ex) {
-            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-            } catch (IllegalAccessException ex) {
-            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
-            return false;*/
-            /*} catch (SQLException ex) {
-            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
-            return false;*/
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
             return false;
