@@ -14,8 +14,8 @@ public class MySQL implements IConn {
     private String PASS;
     private String URL;
     public Connection Conn;
-    
-    public MySQL(String url, String bd, String user, String pass){
+
+    public MySQL(String url, String bd, String user, String pass) {
         URL = "jdbc:mysql://" + url + "/" + bd;
         BD = bd;
         LOGIN = user;
@@ -23,7 +23,7 @@ public class MySQL implements IConn {
     }
 
     @Override
-    public boolean Open() throws SQLException {
+    public boolean Open() throws Exception {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             this.Conn = DriverManager.getConnection(this.URL, this.LOGIN, this.PASS);
@@ -32,9 +32,8 @@ public class MySQL implements IConn {
             } else {
                 return false;
             }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+        } catch (Exception ex) {
+            throw ex;
         }
     }
 
