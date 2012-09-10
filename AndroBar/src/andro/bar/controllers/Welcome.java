@@ -3,6 +3,7 @@ package andro.bar.controllers;
 import Database.MySQL;
 import andro.bar.wrappers.AndroThread;
 import andro.bar.wrappers.ExtraObject;
+import andro.bar.wrappers.dialogs.ImageDialog;
 import andro.bar.wrappers.dialogs.YesNoDialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,7 +24,7 @@ public class Welcome extends andro.bar.controllers.Base {
         view = new andro.bar.views.Welcome(activity);
         model = new andro.bar.models.Welcome();
         
-        mysql = new MySQL("localhost", "androbar", "root", "");
+        mysql = new MySQL("10.0.2.2:3306", "androbar", "root", "");
         
             //view.CreateErrorMessage(Activity, MySQL.class.getName());
             //Activity.finish();
@@ -54,9 +55,10 @@ public class Welcome extends andro.bar.controllers.Base {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            YesNoDialog dialog = view.CreateYesNoMessage(Activity, "Error", "Un problema ocurrió al iniciar el programa.\n\ns "
-                    + ((SQLException) msg.obj).getMessage()
-                    + "\n\n¿Desea ir a la ventana de configuración?");
+            String errorMsg = "Un problema ocurrió al iniciar el programa.\n\n"
+                    + ((Exception) msg.obj).getMessage()
+                    + "\n\n¿Desea ir a la ventana de configuración?";
+            YesNoDialog dialog = view.CreateYesNoMessage(Activity, "Error", errorMsg);
             dialog.SetCallback(new View.OnClickListener() {
 
                 public void onClick(View v) {

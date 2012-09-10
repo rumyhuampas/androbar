@@ -3,24 +3,20 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@drawable/beerbackground"
+              android:background="@drawable/backgroundsmall"
               android:keepScreenOn = "true"
 >
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:src="@drawable/androbar"
-            />
-    <LinearLayout 
-        android:id="@+id/wl_llLoading"
-        android:orientation="horizontal"
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center"
         android:layout_weight="1"
     >
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/cat_List"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+        >
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
-
