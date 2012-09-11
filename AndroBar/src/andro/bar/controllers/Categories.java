@@ -16,6 +16,7 @@ public class Categories extends andro.bar.controllers.Base {
         view = new andro.bar.views.Categories(activity);
         //model = new andro.bar.models.Categories();
         
+        extras = Activity.getIntent().getExtras();
         GetExtras();
     }
     

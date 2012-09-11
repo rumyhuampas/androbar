@@ -20,17 +20,42 @@ public class Categories extends andro.bar.views.Base {
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.cat_List);
         llMain.removeAllViews();
         for(int i=0; i<categories.length;i++){
-            llMain.addView(DrawCategory((Object[])categories[i], CategoryOnClickHandler, CategoryOnLongClickHandler));
+            LinearLayout ll = new LinearLayout(Activity);
+            if(i % 2 == 0){
+                
+                ll.setOrientation(LinearLayout.HORIZONTAL);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
+                ll.setLayoutParams(params);
+                
+                llMain.addView(ll);
+            }
+            ll.addView(DrawCategory((Object[])categories[i], CategoryOnClickHandler, CategoryOnLongClickHandler));
         }
     }
     
     private LinearLayout DrawCategory(Object[] cat, View.OnClickListener CategoryOnClickHandler, View.OnLongClickListener CategoryOnLongClickHandler) {
         LinearLayout ll = new LinearLayout(Activity);
-        ll.setOrientation(LinearLayout.HORIZONTAL);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
+        params.weight = 1/2;
+        ll.setLayoutParams(params);
+        
+        ll.setBackgroundResource(R.drawable.buttonblack);
         ll.addView(DrawCatName((String)cat[1]));
+        
+        //ll.addView(DrawCatName((String)cat[1]));
         ll.setOnClickListener(CategoryOnClickHandler);
         ll.setOnLongClickListener(CategoryOnLongClickHandler);
         //ll.setPadding(0, 5, 0, 5);
+        return ll;
+    }
+    
+    private View DrawCategory(Object[] cat) {
+        LinearLayout ll = new LinearLayout(Activity);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
+        //params.weight = Float.parseFloat("0.5");
+        ll.setBackgroundResource(R.drawable.buttonblack);
+        ll.addView(DrawCatName((String)cat[1]));
         return ll;
     }
     
