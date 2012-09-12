@@ -19,10 +19,10 @@ public class Categories extends andro.bar.views.Base {
     public void DrawCategories(Object[] categories, View.OnClickListener CategoryOnClickHandler, View.OnLongClickListener CategoryOnLongClickHandler){
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.cat_List);
         llMain.removeAllViews();
+        LinearLayout ll = null;
         for(int i=0; i<categories.length;i++){
-            LinearLayout ll = new LinearLayout(Activity);
             if(i % 2 == 0){
-                
+                ll = new LinearLayout(Activity);
                 ll.setOrientation(LinearLayout.HORIZONTAL);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
                 ll.setLayoutParams(params);
@@ -36,8 +36,9 @@ public class Categories extends andro.bar.views.Base {
     private LinearLayout DrawCategory(Object[] cat, View.OnClickListener CategoryOnClickHandler, View.OnLongClickListener CategoryOnLongClickHandler) {
         LinearLayout ll = new LinearLayout(Activity);
         ll.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
-        params.weight = 1/2;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
+        params.weight = 1;
+        ll.setPadding(10, 10, 10, 10);
         ll.setLayoutParams(params);
         
         ll.setBackgroundResource(R.drawable.buttonblack);
@@ -66,7 +67,7 @@ public class Categories extends andro.bar.views.Base {
         //ll.setLayoutParams(params);
         TextView catName = new TextView(Activity);
         catName.setLayoutParams(params);
-        catName.setTextColor(Color.WHITE);
+        catName.setTextColor(Color.BLACK);
         catName.setText(name);
         //ll.addView(saleValueView);
         return catName;
