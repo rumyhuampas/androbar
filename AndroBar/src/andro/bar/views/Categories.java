@@ -1,11 +1,9 @@
 package andro.bar.views;
 
 import andro.bar.R;
-import android.graphics.Color;
+import andro.bar.wrappers.ViewDrawer;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import entities.Category;
 
 public class Categories extends andro.bar.views.Base {
 
@@ -19,57 +17,14 @@ public class Categories extends andro.bar.views.Base {
     public void DrawCategories(Object[] categories, View.OnClickListener CategoryOnClickHandler, View.OnLongClickListener CategoryOnLongClickHandler){
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.cat_List);
         llMain.removeAllViews();
-        LinearLayout ll = null;
+        LinearLayout row = null;
         for(int i=0; i<categories.length;i++){
             if(i % 2 == 0){
-                ll = new LinearLayout(Activity);
-                ll.setOrientation(LinearLayout.HORIZONTAL);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
-                ll.setLayoutParams(params);
-                
-                llMain.addView(ll);
+                row = ViewDrawer.DrawCategoryRow(Activity);
+                llMain.addView(row);
             }
-            ll.addView(DrawCategory((Object[])categories[i], CategoryOnClickHandler, CategoryOnLongClickHandler));
+            String name = (String)((Object[])categories[i])[1];
+            row.addView(ViewDrawer.DrawCategory(Activity, name));
         }
-    }
-    
-    private LinearLayout DrawCategory(Object[] cat, View.OnClickListener CategoryOnClickHandler, View.OnLongClickListener CategoryOnLongClickHandler) {
-        LinearLayout ll = new LinearLayout(Activity);
-        ll.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT);
-        params.weight = 1;
-        ll.setPadding(10, 10, 10, 10);
-        ll.setLayoutParams(params);
-        
-        ll.setBackgroundResource(R.drawable.buttonblack);
-        ll.addView(DrawCatName((String)cat[1]));
-        
-        //ll.addView(DrawCatName((String)cat[1]));
-        ll.setOnClickListener(CategoryOnClickHandler);
-        ll.setOnLongClickListener(CategoryOnLongClickHandler);
-        //ll.setPadding(0, 5, 0, 5);
-        return ll;
-    }
-    
-    private View DrawCategory(Object[] cat) {
-        LinearLayout ll = new LinearLayout(Activity);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
-        //params.weight = Float.parseFloat("0.5");
-        ll.setBackgroundResource(R.drawable.buttonblack);
-        ll.addView(DrawCatName((String)cat[1]));
-        return ll;
-    }
-    
-    private TextView DrawCatName(String name) {
-        //LinearLayout ll = new LinearLayout(context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
-        params.weight = 1;
-        //ll.setLayoutParams(params);
-        TextView catName = new TextView(Activity);
-        catName.setLayoutParams(params);
-        catName.setTextColor(Color.BLACK);
-        catName.setText(name);
-        //ll.addView(saleValueView);
-        return catName;
     }
 }
