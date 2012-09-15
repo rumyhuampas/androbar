@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AndroBarServer.View;
 
 namespace AndroBarServer
 {
@@ -14,6 +15,12 @@ namespace AndroBarServer
         public FMain()
         {
             InitializeComponent();
+        }
+
+        private void miCat_Click(object sender, EventArgs e)
+        {
+            FCategories fCat = new FCategories();
+            fCat.ShowDialog(this);
         }
     }
 }

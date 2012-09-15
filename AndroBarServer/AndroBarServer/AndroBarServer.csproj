@@ -49,6 +49,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ABMHelper.cs" />
+    <Compile Include="Controller\Categories.cs" />
+    <Compile Include="View\FCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FCategories.Designer.cs">
+      <DependentUpon>FCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FCategory.Designer.cs">
+      <DependentUpon>FCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +76,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="View\FCategories.resx">
+      <DependentUpon>FCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FCategory.resx">
+      <DependentUpon>FCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FMain.resx">
       <DependentUpon>FMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,6 +99,7 @@
       <LastGenOutput>AndroBar.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="App.Config" />
+    <None Include="Properties\DataSources\AndroBarServer.Model.androbarEntities.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,9 +110,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

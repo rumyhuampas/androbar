@@ -28,18 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuMain = new System.Windows.Forms.MenuStrip();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.miFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.miExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.miABM = new System.Windows.Forms.ToolStripMenuItem();
+            this.miCat = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuMain
             // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(852, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miFile,
+            this.miABM});
+            this.menuMain.Location = new System.Drawing.Point(0, 0);
+            this.menuMain.Name = "menuMain";
+            this.menuMain.Size = new System.Drawing.Size(852, 24);
+            this.menuMain.TabIndex = 0;
+            this.menuMain.Text = "menuStrip1";
             // 
             // statusStrip1
             // 
@@ -57,6 +65,35 @@
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // miFile
+            // 
+            this.miFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miExit});
+            this.miFile.Name = "miFile";
+            this.miFile.Size = new System.Drawing.Size(60, 20);
+            this.miFile.Text = "Archivo";
+            // 
+            // miExit
+            // 
+            this.miExit.Name = "miExit";
+            this.miExit.Size = new System.Drawing.Size(152, 22);
+            this.miExit.Text = "Salir";
+            // 
+            // miABM
+            // 
+            this.miABM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miCat});
+            this.miABM.Name = "miABM";
+            this.miABM.Size = new System.Drawing.Size(45, 20);
+            this.miABM.Text = "ABM";
+            // 
+            // miCat
+            // 
+            this.miCat.Name = "miCat";
+            this.miCat.Size = new System.Drawing.Size(152, 22);
+            this.miCat.Text = "Categorias";
+            this.miCat.Click += new System.EventHandler(this.miCat_Click);
+            // 
             // FMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -64,11 +101,13 @@
             this.ClientSize = new System.Drawing.Size(852, 492);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuMain);
+            this.MainMenuStrip = this.menuMain;
             this.Name = "FMain";
             this.Text = "AndroBar";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.menuMain.ResumeLayout(false);
+            this.menuMain.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -76,9 +115,13 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuMain;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripMenuItem miFile;
+        private System.Windows.Forms.ToolStripMenuItem miExit;
+        private System.Windows.Forms.ToolStripMenuItem miABM;
+        private System.Windows.Forms.ToolStripMenuItem miCat;
     }
 }
 

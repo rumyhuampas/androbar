@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="androbarModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="androbarModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="androbarModelStoreContainer">
-          <EntitySet Name="category" EntityType="androbarModel.Store.category" store:Type="Tables" Schema="androbar" />
+          <EntitySet Name="categories" EntityType="androbarModel.Store.categories" store:Type="Tables" Schema="androbar" />
           <EntitySet Name="category_products" EntityType="androbarModel.Store.category_products" store:Type="Tables" Schema="androbar" />
           <EntitySet Name="products" EntityType="androbarModel.Store.products" store:Type="Tables" Schema="androbar" />
           <EntitySet Name="users" EntityType="androbarModel.Store.users" store:Type="Tables" Schema="androbar" />
           <AssociationSet Name="FK_category_products_category" Association="androbarModel.Store.FK_category_products_category">
-            <End Role="category" EntitySet="category" />
+            <End Role="categories" EntitySet="categories" />
             <End Role="category_products" EntitySet="category_products" />
           </AssociationSet>
           <AssociationSet Name="FK_category_products_products" Association="androbarModel.Store.FK_category_products_products">
@@ -19,7 +19,7 @@
             <End Role="category_products" EntitySet="category_products" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="category">
+        <EntityType Name="categories">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -55,10 +55,10 @@
           <Property Name="IsAdmin" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_category_products_category">
-          <End Role="category" Type="androbarModel.Store.category" Multiplicity="1" />
+          <End Role="categories" Type="androbarModel.Store.categories" Multiplicity="1" />
           <End Role="category_products" Type="androbarModel.Store.category_products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="category">
+            <Principal Role="categories">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="category_products">
@@ -78,8 +78,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="androbarModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -93,7 +92,7 @@
             <End Role="category_products" EntitySet="category_products" />
           </AssociationSet>
           <AssociationSet Name="FK_category_products_products" Association="androbarModel.FK_category_products_products">
-            <End Role="products" EntitySet="products" />
+            <End Role="product" EntitySet="products" />
             <End Role="category_products" EntitySet="category_products" />
           </AssociationSet>
         </EntityContainer>
@@ -101,44 +100,44 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Image" Type="Binary" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Binary" Name="Image" />
           <NavigationProperty Name="category_products" Relationship="androbarModel.FK_category_products_category" FromRole="category" ToRole="category_products" />
         </EntityType>
         <EntityType Name="category_products">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
           <NavigationProperty Name="category" Relationship="androbarModel.FK_category_products_category" FromRole="category_products" ToRole="category" />
-          <NavigationProperty Name="product" Relationship="androbarModel.FK_category_products_products" FromRole="category_products" ToRole="products" />
+          <NavigationProperty Name="product" Relationship="androbarModel.FK_category_products_products" FromRole="category_products" ToRole="product" />
         </EntityType>
         <EntityType Name="product">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" />
-          <Property Name="Price" Type="Single" Nullable="false" />
-          <Property Name="CostPrice" Type="Single" Nullable="false" />
-          <NavigationProperty Name="category_products" Relationship="androbarModel.FK_category_products_products" FromRole="products" ToRole="category_products" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Description" />
+          <Property Type="Single" Name="Price" Nullable="false" />
+          <Property Type="Single" Name="CostPrice" Nullable="false" />
+          <NavigationProperty Name="category_products" Relationship="androbarModel.FK_category_products_products" FromRole="product" ToRole="category_products" />
         </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Pass" Type="String" Nullable="false" />
-          <Property Name="IsAdmin" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="String" Name="Pass" Nullable="false" />
+          <Property Type="Int32" Name="IsAdmin" Nullable="false" />
         </EntityType>
         <Association Name="FK_category_products_category">
-          <End Role="category" Type="androbarModel.category" Multiplicity="1" />
-          <End Role="category_products" Type="androbarModel.category_products" Multiplicity="*" />
+          <End Type="androbarModel.category" Role="category" Multiplicity="1" />
+          <End Type="androbarModel.category_products" Role="category_products" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="category">
               <PropertyRef Name="Id" />
@@ -149,10 +148,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_category_products_products">
-          <End Role="products" Type="androbarModel.product" Multiplicity="1" />
-          <End Role="category_products" Type="androbarModel.category_products" Multiplicity="*" />
+          <End Type="androbarModel.product" Role="product" Multiplicity="1" />
+          <End Type="androbarModel.category_products" Role="category_products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="products">
+            <Principal Role="product">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="category_products">
@@ -160,35 +159,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="androbarModelStoreContainer" CdmEntityContainer="androbarEntities">
-          <EntitySetMapping Name="categories"><EntityTypeMapping TypeName="androbarModel.category"><MappingFragment StoreEntitySet="category">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="Image" ColumnName="Image" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="category_products"><EntityTypeMapping TypeName="androbarModel.category_products"><MappingFragment StoreEntitySet="category_products">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-            <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="products"><EntityTypeMapping TypeName="androbarModel.product"><MappingFragment StoreEntitySet="products">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="Description" ColumnName="Description" />
-            <ScalarProperty Name="Price" ColumnName="Price" />
-            <ScalarProperty Name="CostPrice" ColumnName="CostPrice" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="users"><EntityTypeMapping TypeName="androbarModel.user"><MappingFragment StoreEntitySet="users">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="Pass" ColumnName="Pass" />
-            <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="androbarModel.category">
+              <MappingFragment StoreEntitySet="categories">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="category_products">
+            <EntityTypeMapping TypeName="androbarModel.category_products">
+              <MappingFragment StoreEntitySet="category_products">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="androbarModel.product">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="CostPrice" ColumnName="CostPrice" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="androbarModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -203,25 +218,25 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="AndroBar">
-        <EntityTypeShape EntityType="androbarModel.category" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416668" IsExpanded="true" />
-        <EntityTypeShape EntityType="androbarModel.category_products" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="androbarModel.product" Width="1.5" PointX="0.75" PointY="3.875" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="androbarModel.user" Width="1.5" PointX="2.75" PointY="3.75" Height="1.7879850260416657" IsExpanded="true" />
-        <AssociationConnector Association="androbarModel.FK_category_products_category" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="1.8939925130208333" />
-          <ConnectorPoint PointX="3" PointY="1.8939925130208333" />
+        <EntityTypeShape EntityType="androbarModel.category" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416672" />
+        <EntityTypeShape EntityType="androbarModel.category_products" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="androbarModel.product" Width="1.5" PointX="0.75" PointY="3.875" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="androbarModel.user" Width="1.5" PointX="2.75" PointY="3.75" Height="1.7879850260416674" />
+        <AssociationConnector Association="androbarModel.FK_category_products_category" >
+          <ConnectorPoint PointX="2.25" PointY="1.8939925130208337" />
+          <ConnectorPoint PointX="3" PointY="1.8939925130208337" />
         </AssociationConnector>
-        <AssociationConnector Association="androbarModel.FK_category_products_products" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="5.8240364583333326" />
-          <ConnectorPoint PointX="4.40625" PointY="5.8240364583333326" />
-          <ConnectorPoint PointX="4.40625" PointY="2.8552864583333335" />
+        <AssociationConnector Association="androbarModel.FK_category_products_products" >
+          <ConnectorPoint PointX="2.25" PointY="5.8240364583333353" />
+          <ConnectorPoint PointX="4.40625" PointY="5.8240364583333353" />
+          <ConnectorPoint PointX="4.40625" PointY="2.8552864583333317" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

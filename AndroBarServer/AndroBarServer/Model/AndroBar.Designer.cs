@@ -19,7 +19,7 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("androbarModel", "FK_category_products_category", "category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AndroBarServer.Model.category), "category_products", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AndroBarServer.Model.category_products), true)]
-[assembly: EdmRelationshipAttribute("androbarModel", "FK_category_products_products", "products", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AndroBarServer.Model.product), "category_products", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AndroBarServer.Model.category_products), true)]
+[assembly: EdmRelationshipAttribute("androbarModel", "FK_category_products_products", "product", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AndroBarServer.Model.product), "category_products", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AndroBarServer.Model.category_products), true)]
 
 #endregion
 
@@ -459,16 +459,16 @@ namespace AndroBarServer.Model
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("androbarModel", "FK_category_products_products", "products")]
+        [EdmRelationshipNavigationPropertyAttribute("androbarModel", "FK_category_products_products", "product")]
         public product product
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_category_products_products", "products").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_category_products_products", "product").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_category_products_products", "products").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_category_products_products", "product").Value = value;
             }
         }
         /// <summary>
@@ -480,13 +480,13 @@ namespace AndroBarServer.Model
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_category_products_products", "products");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_category_products_products", "product");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<product>("androbarModel.FK_category_products_products", "products", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<product>("androbarModel.FK_category_products_products", "product", value);
                 }
             }
         }
