@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Controller\ABMHelper.cs" />
     <Compile Include="Controller\Categories.cs" />
+    <Compile Include="Controller\Category.cs" />
     <Compile Include="View\FCategories.cs">
       <SubType>Form</SubType>
     </Compile>

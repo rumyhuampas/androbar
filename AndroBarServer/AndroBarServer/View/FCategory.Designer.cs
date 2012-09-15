@@ -35,6 +35,7 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.ofImag = new System.Windows.Forms.OpenFileDialog();
             this.gbData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxImag)).BeginInit();
             this.SuspendLayout();
@@ -70,6 +71,7 @@
             this.pboxImag.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pboxImag.TabIndex = 1;
             this.pboxImag.TabStop = false;
+            this.pboxImag.Click += new System.EventHandler(this.pboxImag_Click);
             // 
             // lblName
             // 
@@ -105,6 +107,14 @@
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "Aceptar";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // ofImag
+            // 
+            this.ofImag.FileName = "Imagen";
+            this.ofImag.Filter = "Imagenes|*.bmp;*.jpg;*.png";
+            this.ofImag.Title = "Imagen";
+            this.ofImag.FileOk += new System.ComponentModel.CancelEventHandler(this.ofImag_FileOk);
             // 
             // FCategory
             // 
@@ -136,5 +146,6 @@
         private System.Windows.Forms.Label lblImag;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.OpenFileDialog ofImag;
     }
 }
