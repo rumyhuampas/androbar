@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AndroBarServer.Controller;
+using AndroBarServer.Model;
+using System.IO;
 
 namespace AndroBarServer.View
 {
     public partial class FCategory : Form
     {
         private ABMHelper.ABMMODE _mode;
+        private category _cat;
         private Category _controller;
 
         public FCategory()
@@ -22,11 +25,22 @@ namespace AndroBarServer.View
             _controller = new Category();
         }
 
-        public FCategory(ABMHelper.ABMMODE mode)
+        public FCategory(ABMHelper.ABMMODE mode, category cat)
         {
             InitializeComponent();
             _mode = mode;
             _controller = new Category();
+            _cat = cat;
+            LoadCategory();
+        }
+
+        private void LoadCategory()
+        {
+            if (_cat.Image != null)
+            {
+                pboxImag.Image = Image.FromStream(new MemoryStream(_cat.Image));
+            }
+            txtName.Text = _cat.Name;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

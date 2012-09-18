@@ -31,14 +31,16 @@
             this.ssCat = new System.Windows.Forms.StatusStrip();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.pnlSearch = new System.Windows.Forms.Panel();
-            this.dgvCat = new System.Windows.Forms.DataGridView();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.lblSearch = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.dgvCat = new System.Windows.Forms.DataGridView();
+            this.pnlButtonsRight = new System.Windows.Forms.Panel();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.pnlButtons.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).BeginInit();
+            this.pnlButtonsRight.SuspendLayout();
             this.SuspendLayout();
             // 
             // ssCat
@@ -51,8 +53,7 @@
             // 
             // pnlButtons
             // 
-            this.pnlButtons.Controls.Add(this.btnNew);
-            this.pnlButtons.Controls.Add(this.btnCancel);
+            this.pnlButtons.Controls.Add(this.pnlButtonsRight);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlButtons.Location = new System.Drawing.Point(10, 368);
             this.pnlButtons.Name = "pnlButtons";
@@ -68,6 +69,25 @@
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(722, 50);
             this.pnlSearch.TabIndex = 3;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Location = new System.Drawing.Point(49, 16);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(670, 20);
+            this.txtSearch.TabIndex = 1;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(3, 19);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(40, 13);
+            this.lblSearch.TabIndex = 0;
+            this.lblSearch.Text = "Buscar";
             // 
             // dgvCat
             // 
@@ -86,44 +106,37 @@
             this.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCat.Size = new System.Drawing.Size(722, 308);
             this.dgvCat.TabIndex = 4;
+            this.dgvCat.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellDoubleClick);
             // 
-            // btnCancel
+            // pnlButtonsRight
             // 
-            this.btnCancel.Location = new System.Drawing.Point(644, 6);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancelar";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.pnlButtonsRight.Controls.Add(this.btnNew);
+            this.pnlButtonsRight.Controls.Add(this.btnCancel);
+            this.pnlButtonsRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtonsRight.Location = new System.Drawing.Point(522, 0);
+            this.pnlButtonsRight.Name = "pnlButtonsRight";
+            this.pnlButtonsRight.Size = new System.Drawing.Size(200, 34);
+            this.pnlButtonsRight.TabIndex = 0;
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(549, 6);
+            this.btnNew.Location = new System.Drawing.Point(15, 6);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 23);
-            this.btnNew.TabIndex = 1;
+            this.btnNew.TabIndex = 3;
             this.btnNew.Text = "Nueva";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // lblSearch
+            // btnCancel
             // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(3, 19);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(40, 13);
-            this.lblSearch.TabIndex = 0;
-            this.lblSearch.Text = "Buscar";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Location = new System.Drawing.Point(49, 16);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(670, 20);
-            this.txtSearch.TabIndex = 1;
+            this.btnCancel.Location = new System.Drawing.Point(110, 6);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // FCategories
             // 
@@ -143,6 +156,7 @@
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).EndInit();
+            this.pnlButtonsRight.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,9 +168,10 @@
         private System.Windows.Forms.Panel pnlButtons;
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.DataGridView dgvCat;
-        private System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label lblSearch;
+        private System.Windows.Forms.Panel pnlButtonsRight;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

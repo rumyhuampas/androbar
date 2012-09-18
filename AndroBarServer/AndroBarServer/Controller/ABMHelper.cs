@@ -3,14 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using AndroBarServer.Model;
 
 namespace AndroBarServer.Controller
 {
     public static class ABMHelper
     {
+        private static androbarEntities _db;
+
         public enum ABMMODE
         {
             ABMMODE_NEW, ABMMODE_EDIT
+        }
+
+        public static category GetCategory(int id)
+        {
+            try
+            {
+                using (_db = new androbarEntities())
+                {
+                    return (from categories in _db.categories
+                            where categories.Id == id
+                            select categories).First();
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>

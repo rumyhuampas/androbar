@@ -16,10 +16,18 @@ namespace AndroBarServer.Controller
             _db = new androbarEntities();
         }
 
-        public bool SaveCategory(Stream image, string name)
+        public bool SaveCategory(ABMHelper.ABMMODE mode, int id, Stream image, string name)
         {
             name = name.Trim();
-            category c = new category();
+            category c = null;
+            if (mode == ABMHelper.ABMMODE.ABMMODE_NEW)
+            {
+                c = new category();
+            }
+            else
+            {
+                c = ABMHelper.GetCategory(id);
+            }
             c.Name = name;
             c.Image = ABMHelper.StreamToByteArray(image, 1024);
             _db.AddTocategories(c);
