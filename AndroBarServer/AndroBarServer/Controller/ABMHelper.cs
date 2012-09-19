@@ -9,23 +9,19 @@ namespace AndroBarServer.Controller
 {
     public static class ABMHelper
     {
-        private static androbarEntities _db;
-
-        public enum ABMMODE
-        {
-            ABMMODE_NEW, ABMMODE_EDIT
-        }
-
         public static category GetCategory(int id)
         {
+            return GetCategory(null, id);
+        }
+
+        public static category GetCategory(androbarEntities db, int id)
+        {
+            if (db == null) db = new androbarEntities();
             try
             {
-                using (_db = new androbarEntities())
-                {
-                    return (from categories in _db.categories
-                            where categories.Id == id
-                            select categories).First();
-                }
+                return (from categories in db.categories
+                        where categories.Id == id
+                        select categories).First();
             }
             catch
             {

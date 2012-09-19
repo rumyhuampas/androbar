@@ -29,27 +29,45 @@
         private void InitializeComponent()
         {
             this.ssCat = new System.Windows.Forms.StatusStrip();
+            this.tsslblInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tspbLoading = new System.Windows.Forms.ToolStripProgressBar();
             this.pnlButtons = new System.Windows.Forms.Panel();
+            this.pnlButtonsRight = new System.Windows.Forms.Panel();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.dgvCat = new System.Windows.Forms.DataGridView();
-            this.pnlButtonsRight = new System.Windows.Forms.Panel();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.ssCat.SuspendLayout();
             this.pnlButtons.SuspendLayout();
+            this.pnlButtonsRight.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).BeginInit();
-            this.pnlButtonsRight.SuspendLayout();
             this.SuspendLayout();
             // 
             // ssCat
             // 
+            this.ssCat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslblInfo,
+            this.tspbLoading});
             this.ssCat.Location = new System.Drawing.Point(10, 402);
             this.ssCat.Name = "ssCat";
             this.ssCat.Size = new System.Drawing.Size(722, 22);
             this.ssCat.TabIndex = 0;
             this.ssCat.Text = "statusStrip1";
+            // 
+            // tsslblInfo
+            // 
+            this.tsslblInfo.Name = "tsslblInfo";
+            this.tsslblInfo.Size = new System.Drawing.Size(0, 17);
+            // 
+            // tspbLoading
+            // 
+            this.tspbLoading.Name = "tspbLoading";
+            this.tspbLoading.Size = new System.Drawing.Size(100, 16);
+            this.tspbLoading.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.tspbLoading.Visible = false;
             // 
             // pnlButtons
             // 
@@ -59,6 +77,36 @@
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(722, 34);
             this.pnlButtons.TabIndex = 1;
+            // 
+            // pnlButtonsRight
+            // 
+            this.pnlButtonsRight.Controls.Add(this.btnNew);
+            this.pnlButtonsRight.Controls.Add(this.btnCancel);
+            this.pnlButtonsRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlButtonsRight.Location = new System.Drawing.Point(522, 0);
+            this.pnlButtonsRight.Name = "pnlButtonsRight";
+            this.pnlButtonsRight.Size = new System.Drawing.Size(200, 34);
+            this.pnlButtonsRight.TabIndex = 0;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(15, 6);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(75, 23);
+            this.btnNew.TabIndex = 3;
+            this.btnNew.Text = "Nueva";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(110, 6);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // pnlSearch
             // 
@@ -108,36 +156,6 @@
             this.dgvCat.TabIndex = 4;
             this.dgvCat.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellDoubleClick);
             // 
-            // pnlButtonsRight
-            // 
-            this.pnlButtonsRight.Controls.Add(this.btnNew);
-            this.pnlButtonsRight.Controls.Add(this.btnCancel);
-            this.pnlButtonsRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonsRight.Location = new System.Drawing.Point(522, 0);
-            this.pnlButtonsRight.Name = "pnlButtonsRight";
-            this.pnlButtonsRight.Size = new System.Drawing.Size(200, 34);
-            this.pnlButtonsRight.TabIndex = 0;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Location = new System.Drawing.Point(15, 6);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(75, 23);
-            this.btnNew.TabIndex = 3;
-            this.btnNew.Text = "Nueva";
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(110, 6);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "Cancelar";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // FCategories
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,12 +169,14 @@
             this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Categorias";
-            this.Load += new System.EventHandler(this.FCategories_Load);
+            this.Shown += new System.EventHandler(this.FCategories_Shown);
+            this.ssCat.ResumeLayout(false);
+            this.ssCat.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
+            this.pnlButtonsRight.ResumeLayout(false);
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).EndInit();
-            this.pnlButtonsRight.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,5 +193,7 @@
         private System.Windows.Forms.Panel pnlButtonsRight;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ToolStripStatusLabel tsslblInfo;
+        private System.Windows.Forms.ToolStripProgressBar tspbLoading;
     }
 }
