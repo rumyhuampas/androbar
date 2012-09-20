@@ -72,31 +72,39 @@ namespace AndroBarServer.View
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            bool success = false;
-            if (_imageChanged == true)
+            try
             {
-                success = _controller.SaveCategory(_catId, ofImag.OpenFile(), txtName.Text);
-            }
-            else
-            {
-                success = _controller.SaveCategory(_catId, null, txtName.Text);
-            }
-            if (success == true)
-            {
-                MessageBox.Show("Exito al guardar", "Categoria", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                if (MessageBox.Show("Desea guardar otra categoria?", "Categoria", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question) == DialogResult.Yes)
+                bool success = false;
+                if (_imageChanged == true)
                 {
-                    ClearForm();
+                    success = _controller.SaveCategory(_catId, ofImag.OpenFile(), txtName.Text);
                 }
                 else
                 {
+                    success = _controller.SaveCategory(_catId, null, txtName.Text);
+                }
+                if (success == true)
+                {
+                    MessageBox.Show("Exito al guardar", "Categoria", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (MessageBox.Show("Desea guardar otra categoria?", "Categoria", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        ClearForm();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error al guardar. No se pudo guardar la categoria", "Categoria", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar", "Categoria", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al guardar. " + ex.Message, "Categoria", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
         }

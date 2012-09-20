@@ -17,6 +17,7 @@ namespace AndroBarServer.View
         private Categories _controller;
         BackgroundWorker categoryLoader;
         IEnumerable<dynamic> dgvCategories = null;
+        DataGridViewImageColumn deleteButtonColumn;
 
         public FCategories()
         {
@@ -27,6 +28,10 @@ namespace AndroBarServer.View
             categoryLoader = new BackgroundWorker();
             categoryLoader.DoWork += new DoWorkEventHandler(categoryLoader_DoWork);
             categoryLoader.RunWorkerCompleted += new RunWorkerCompletedEventHandler(categoryLoader_RunWorkerCompleted);
+
+            deleteButtonColumn = new DataGridViewImageColumn();
+            deleteButtonColumn.Image = Resources.delete;
+            deleteButtonColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -78,10 +83,7 @@ namespace AndroBarServer.View
         {
             dgvCat.Columns.Clear();
             dgvCat.DataSource = dgvCategories;
-            DataGridViewImageColumn col = new DataGridViewImageColumn();
-            col.Image = Resources.delete;
-            col.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            dgvCat.Columns.Add(col);
+            dgvCat.Columns.Add(deleteButtonColumn);
             tsslblInfo.Text = "Categorias: " + dgvCat.Rows.Count.ToString();
             tspbLoading.Visible = false;
         }
