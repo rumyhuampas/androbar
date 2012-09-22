@@ -22,5 +22,11 @@ namespace AndroBarServer
             FCategories fCat = new FCategories();
             fCat.ShowDialog(this);
         }
+
+        private void miProd_Click(object sender, EventArgs e)
+        {
+            FProducts fProd = new FProducts();
+            fProd.ShowDialog(this);
+        }
     }
 }

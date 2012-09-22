@@ -77,6 +77,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\FProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FProducts.Designer.cs">
+      <DependentUpon>FProducts.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\FCategories.resx">
       <DependentUpon>FCategories.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +102,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\FProducts.resx">
+      <DependentUpon>FProducts.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="Model\AndroBar.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AndroBar.Designer.cs</LastGenOutput>

@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.menuMain = new System.Windows.Forms.MenuStrip();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miABM = new System.Windows.Forms.ToolStripMenuItem();
             this.miCat = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.miProd = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,22 +49,6 @@
             this.menuMain.Size = new System.Drawing.Size(852, 24);
             this.menuMain.TabIndex = 0;
             this.menuMain.Text = "menuStrip1";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(852, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(852, 25);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // miFile
             // 
@@ -82,7 +67,8 @@
             // miABM
             // 
             this.miABM.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miCat});
+            this.miCat,
+            this.miProd});
             this.miABM.Name = "miABM";
             this.miABM.Size = new System.Drawing.Size(45, 20);
             this.miABM.Text = "ABM";
@@ -93,6 +79,29 @@
             this.miCat.Size = new System.Drawing.Size(152, 22);
             this.miCat.Text = "Categorias";
             this.miCat.Click += new System.EventHandler(this.miCat_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(852, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(852, 25);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // miProd
+            // 
+            this.miProd.Name = "miProd";
+            this.miProd.Size = new System.Drawing.Size(152, 22);
+            this.miProd.Text = "Productos";
+            this.miProd.Click += new System.EventHandler(this.miProd_Click);
             // 
             // FMain
             // 
@@ -122,6 +131,7 @@
         private System.Windows.Forms.ToolStripMenuItem miExit;
         private System.Windows.Forms.ToolStripMenuItem miABM;
         private System.Windows.Forms.ToolStripMenuItem miCat;
+        private System.Windows.Forms.ToolStripMenuItem miProd;
     }
 }
 

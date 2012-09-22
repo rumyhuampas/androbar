@@ -26,5 +26,14 @@ namespace AndroBarServer.Controller
                    where cat.Name.Contains(filter)
                    select new { cat.Id, cat.Name };
         }
+
+        public void DeleteCategory(int id)
+        {
+            category c = (from cat in _db.categories
+                         where cat.Id == id
+                         select cat).First();
+            _db.DeleteObject(c);
+            _db.SaveChanges();
+        }
     }
 }

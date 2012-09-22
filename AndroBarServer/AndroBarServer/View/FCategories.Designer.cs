@@ -154,7 +154,10 @@
             this.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCat.Size = new System.Drawing.Size(722, 308);
             this.dgvCat.TabIndex = 4;
+            this.dgvCat.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellClick);
             this.dgvCat.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellDoubleClick);
+            this.dgvCat.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellMouseEnter);
+            this.dgvCat.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellMouseLeave);
             // 
             // FCategories
             // 

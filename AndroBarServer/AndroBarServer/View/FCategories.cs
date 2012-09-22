@@ -87,5 +87,34 @@ namespace AndroBarServer.View
             tsslblInfo.Text = "Categorias: " + dgvCat.Rows.Count.ToString();
             tspbLoading.Visible = false;
         }
+
+        private void dgvCat_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == deleteButtonColumn.Index)
+            {
+                if (MessageBox.Show("Eliminar la categoria: '" + dgvCat.Rows[e.RowIndex].Cells[1].Value.ToString() + "'?",
+                    "Eliminar?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    _controller.DeleteCategory((int)dgvCat.Rows[e.RowIndex].Cells[0].Value);
+                    LoadCategories();
+                }
+            }
+        }
+
+        private void dgvCat_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == deleteButtonColumn.Index)
+            {
+                this.Cursor = Cursors.Hand;
+            }
+        }
+
+        private void dgvCat_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == deleteButtonColumn.Index)
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
     }
 }
