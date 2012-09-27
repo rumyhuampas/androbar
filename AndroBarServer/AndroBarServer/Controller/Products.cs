@@ -6,31 +6,31 @@ using AndroBarServer.Model;
 
 namespace AndroBarServer.Controller
 {
-    public class Categories
+    public class Products
     {
         private androbarEntities _db;
 
-        public Categories()
+        public Products()
         {
             _db = new androbarEntities();
         }
 
-        public IEnumerable<dynamic> GetAllCategories()
+        public IEnumerable<dynamic> GetAllProducts()
         {
             return GetData("");
         }
 
         public IEnumerable<dynamic> GetData(string filter)
         {
-            return from cat in _db.categories
-                   where cat.Name.Contains(filter)
-                   select new { cat.Id, cat.Name };
+            return from prod in _db.products
+                   where prod.Name.Contains(filter)
+                   select new { prod.Id, prod.Name, prod.Price, prod.CostPrice };
         }
 
-        public void DeleteCategory(int id)
+        public void DeleteProduct(int id)
         {
-            category c = ABMHelper.GetCategory(_db, id);
-            _db.DeleteObject(c);
+            product p = ABMHelper.GetProduct(_db, id);
+            _db.DeleteObject(p);
             _db.SaveChanges();
         }
     }

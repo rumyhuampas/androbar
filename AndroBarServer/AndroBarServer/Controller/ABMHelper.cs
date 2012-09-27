@@ -29,6 +29,26 @@ namespace AndroBarServer.Controller
             }
         }
 
+        public static product GetProduct(int id)
+        {
+            return GetProduct(null, id);
+        }
+
+        public static product GetProduct(androbarEntities db, int id)
+        {
+            if (db == null) db = new androbarEntities();
+            try
+            {
+                return (from products in db.products
+                        where products.Id == id
+                        select products).First();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         /// <summary>
         /// Reads data from a stream until the end is reached. The
         /// data is returned as a byte array. An IOException is

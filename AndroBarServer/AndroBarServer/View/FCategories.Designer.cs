@@ -94,7 +94,7 @@
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 3;
-            this.btnNew.Text = "Nueva";
+            this.btnNew.Text = "Nuevo";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -168,6 +168,7 @@
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.ssCat);
+            this.MinimumSize = new System.Drawing.Size(758, 472);
             this.Name = "FCategories";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

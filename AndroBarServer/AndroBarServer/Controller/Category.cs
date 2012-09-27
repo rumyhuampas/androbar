@@ -41,17 +41,5 @@ namespace AndroBarServer.Controller
             }
             return _db.SaveChanges() > 0;
         }
-
-        public IEnumerable<dynamic> GetAllCategories()
-        {
-            return GetData("");
-        }
-
-        public IEnumerable<dynamic> GetData(string filter)
-        {
-            return from cat in _db.categories
-                   where cat.Name.Contains(filter)
-                   select new { cat.Id, cat.Name };
-        }
     }
 }
