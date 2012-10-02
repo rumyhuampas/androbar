@@ -56,6 +56,7 @@
             this.btnOK.TabIndex = 5;
             this.btnOK.Text = "Aceptar";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnCancel
             // 
@@ -142,7 +143,7 @@
             this.lbCostPrice.AutoSize = true;
             this.lbCostPrice.Location = new System.Drawing.Point(10, 205);
             this.lbCostPrice.Name = "lbCostPrice";
-            this.lbCostPrice.Size = new System.Drawing.Size(72, 13);
+            this.lbCostPrice.Size = new System.Drawing.Size(69, 13);
             this.lbCostPrice.TabIndex = 9;
             this.lbCostPrice.Text = "Precio costo:";
             // 
@@ -150,14 +151,14 @@
             // 
             this.txtCostPrice.Location = new System.Drawing.Point(85, 202);
             this.txtCostPrice.Name = "txtCostPrice";
-            this.txtCostPrice.Size = new System.Drawing.Size(115, 22);
+            this.txtCostPrice.Size = new System.Drawing.Size(115, 20);
             this.txtCostPrice.TabIndex = 8;
             // 
             // txtPrice
             // 
             this.txtPrice.Location = new System.Drawing.Point(85, 176);
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(115, 22);
+            this.txtPrice.Size = new System.Drawing.Size(115, 20);
             this.txtPrice.TabIndex = 7;
             // 
             // lblPrice
@@ -165,7 +166,7 @@
             this.lblPrice.AutoSize = true;
             this.lblPrice.Location = new System.Drawing.Point(10, 179);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(41, 13);
+            this.lblPrice.Size = new System.Drawing.Size(40, 13);
             this.lblPrice.TabIndex = 6;
             this.lblPrice.Text = "Precio:";
             // 
@@ -182,7 +183,7 @@
             this.lblDesc.AutoSize = true;
             this.lblDesc.Location = new System.Drawing.Point(6, 58);
             this.lblDesc.Name = "lblDesc";
-            this.lblDesc.Size = new System.Drawing.Size(70, 13);
+            this.lblDesc.Size = new System.Drawing.Size(66, 13);
             this.lblDesc.TabIndex = 4;
             this.lblDesc.Text = "Descripcion:";
             // 
@@ -190,7 +191,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(85, 19);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(215, 22);
+            this.txtName.Size = new System.Drawing.Size(215, 20);
             this.txtName.TabIndex = 3;
             // 
             // lblName
@@ -198,7 +199,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(6, 22);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(51, 13);
+            this.lblName.Size = new System.Drawing.Size(47, 13);
             this.lblName.TabIndex = 2;
             this.lblName.Text = "Nombre:";
             // 

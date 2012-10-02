@@ -64,6 +64,16 @@ namespace AndroBarServer.View
             txtPrice.Text = prod.Price.ToString();
         }
 
+        private void ClearForm()
+        {
+            _prodId = -1;
+            txtName.Clear();
+            rtxtDesc.Clear();
+            txtPrice.Clear();
+            txtCostPrice.Clear();
+            dgvCat.Rows.Clear();
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -94,11 +104,9 @@ namespace AndroBarServer.View
             //dgvCat.DataSource = dgvCategories;
             dgvCat.Columns.Add("Id", "Id");
             dgvCat.Columns.Add("Name", "Name");
-            KeyValuePair<int, string> value;
-            for (int i = 0; i < dgvCategories.Count(); i++)
+            foreach (dynamic obj in dgvCategories)
             {
-                value = dgvCategories.ElementAt<in;
-                dgvCat.Rows.Add(value.Key, value.Value);
+                dgvCat.Rows.Add(obj.Id, obj.Name);
             }
             dgvCat.Columns.Add(deleteButtonColumn);
             cmbCat.DataSource = comboCategories;
@@ -110,7 +118,7 @@ namespace AndroBarServer.View
         {
             if (e.ColumnIndex == deleteButtonColumn.Index)
             {
-                _controller.DeleteProductCategory(_prodId, (int)dgvCat.Rows[e.RowIndex].Cells[0].Value);
+                dgvCat.Rows.RemoveAt(e.RowIndex);
             }
         }
 
@@ -141,13 +149,54 @@ namespace AndroBarServer.View
                     break;
                 }
             }
-            if (found)
+            if (!found)
             {
-                
+                dgvCat.Rows.Add((int)cmbCat.SelectedValue, cmbCat.Text);
             }
             else
             {
                 MessageBox.Show("La categoria ya esta en la lista.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _controller.DeleteProductCategoryRelations(_prodId);
+                _prodId = _controller.SaveProduct(_prodId, txtName.Text, rtxtDesc.Text, txtPrice.Text, txtCostPrice.Text);
+                if (_prodId != -1)
+                {
+                    if (dgvCat.Rows.Count > 0)
+                    {
+                        List<int> cats = new List<int>();
+                        for (int i = 0; i < dgvCat.Rows.Count; i++)
+                        {
+                            cats.Add((int)dgvCat.Rows[i].Cells[0].Value);
+                        }
+                        _controller.SaveProductCategoyRelations(_prodId, cats);
+                    }
+                    MessageBox.Show("Exito al guardar", "Producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (MessageBox.Show("Desea guardar otro producto?", "Producto", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        ClearForm();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error al guardar. No se pudo guardar el producto", "Producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar. " + ex.Message, "Producto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
         }
     }
