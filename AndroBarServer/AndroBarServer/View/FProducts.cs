@@ -48,8 +48,8 @@ namespace AndroBarServer.View
         {
             if (dgvProd.SelectedRows.Count > 0)
             {
-                FCategory fcat = new FCategory((int)dgvProd.SelectedRows[0].Cells["id"].Value);
-                fcat.ShowDialog(this);
+                FProduct fprod = new FProduct((int)dgvProd.SelectedRows[0].Cells["id"].Value);
+                fprod.ShowDialog(this);
                 LoadProducts();
             }
         }

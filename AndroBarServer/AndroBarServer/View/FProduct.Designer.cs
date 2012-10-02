@@ -31,18 +31,18 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.gbData = new System.Windows.Forms.GroupBox();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.lblName = new System.Windows.Forms.Label();
-            this.lblDesc = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.gbxCat = new System.Windows.Forms.GroupBox();
+            this.cmbCat = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dgvCat = new System.Windows.Forms.DataGridView();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.lbCostPrice = new System.Windows.Forms.Label();
+            this.txtCostPrice = new System.Windows.Forms.TextBox();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.lblPrice = new System.Windows.Forms.Label();
+            this.rtxtDesc = new System.Windows.Forms.RichTextBox();
+            this.lblDesc = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
             this.gbData.SuspendLayout();
             this.gbxCat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).BeginInit();
@@ -70,11 +70,11 @@
             // gbData
             // 
             this.gbData.Controls.Add(this.gbxCat);
-            this.gbData.Controls.Add(this.label2);
-            this.gbData.Controls.Add(this.textBox2);
-            this.gbData.Controls.Add(this.textBox1);
-            this.gbData.Controls.Add(this.label1);
-            this.gbData.Controls.Add(this.richTextBox1);
+            this.gbData.Controls.Add(this.lbCostPrice);
+            this.gbData.Controls.Add(this.txtCostPrice);
+            this.gbData.Controls.Add(this.txtPrice);
+            this.gbData.Controls.Add(this.lblPrice);
+            this.gbData.Controls.Add(this.rtxtDesc);
             this.gbData.Controls.Add(this.lblDesc);
             this.gbData.Controls.Add(this.txtName);
             this.gbData.Controls.Add(this.lblName);
@@ -85,74 +85,9 @@
             this.gbData.TabStop = false;
             this.gbData.Text = "Datos";
             // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(85, 19);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(215, 20);
-            this.txtName.TabIndex = 3;
-            // 
-            // lblName
-            // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(6, 22);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(47, 13);
-            this.lblName.TabIndex = 2;
-            this.lblName.Text = "Nombre:";
-            // 
-            // lblDesc
-            // 
-            this.lblDesc.AutoSize = true;
-            this.lblDesc.Location = new System.Drawing.Point(6, 58);
-            this.lblDesc.Name = "lblDesc";
-            this.lblDesc.Size = new System.Drawing.Size(66, 13);
-            this.lblDesc.TabIndex = 4;
-            this.lblDesc.Text = "Descripcion:";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(85, 45);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(215, 125);
-            this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = "";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 179);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Precio:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(85, 176);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(115, 20);
-            this.textBox1.TabIndex = 7;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(85, 202);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(115, 20);
-            this.textBox2.TabIndex = 8;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 205);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Precio costo:";
-            // 
             // gbxCat
             // 
-            this.gbxCat.Controls.Add(this.comboBox1);
+            this.gbxCat.Controls.Add(this.cmbCat);
             this.gbxCat.Controls.Add(this.btnAdd);
             this.gbxCat.Controls.Add(this.dgvCat);
             this.gbxCat.Location = new System.Drawing.Point(306, 19);
@@ -162,6 +97,15 @@
             this.gbxCat.TabStop = false;
             this.gbxCat.Text = "Categorias";
             // 
+            // cmbCat
+            // 
+            this.cmbCat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCat.FormattingEnabled = true;
+            this.cmbCat.Location = new System.Drawing.Point(6, 21);
+            this.cmbCat.Name = "cmbCat";
+            this.cmbCat.Size = new System.Drawing.Size(205, 21);
+            this.cmbCat.TabIndex = 14;
+            // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(217, 19);
@@ -170,6 +114,7 @@
             this.btnAdd.TabIndex = 13;
             this.btnAdd.Text = "Agregar";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // dgvCat
             // 
@@ -184,18 +129,78 @@
             this.dgvCat.Name = "dgvCat";
             this.dgvCat.ReadOnly = true;
             this.dgvCat.RowHeadersVisible = false;
+            this.dgvCat.RowTemplate.Height = 24;
             this.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCat.Size = new System.Drawing.Size(286, 159);
             this.dgvCat.TabIndex = 12;
+            this.dgvCat.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellClick);
+            this.dgvCat.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellMouseEnter);
+            this.dgvCat.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellMouseLeave);
             // 
-            // comboBox1
+            // lbCostPrice
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 21);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(205, 21);
-            this.comboBox1.TabIndex = 14;
+            this.lbCostPrice.AutoSize = true;
+            this.lbCostPrice.Location = new System.Drawing.Point(10, 205);
+            this.lbCostPrice.Name = "lbCostPrice";
+            this.lbCostPrice.Size = new System.Drawing.Size(72, 13);
+            this.lbCostPrice.TabIndex = 9;
+            this.lbCostPrice.Text = "Precio costo:";
+            // 
+            // txtCostPrice
+            // 
+            this.txtCostPrice.Location = new System.Drawing.Point(85, 202);
+            this.txtCostPrice.Name = "txtCostPrice";
+            this.txtCostPrice.Size = new System.Drawing.Size(115, 22);
+            this.txtCostPrice.TabIndex = 8;
+            // 
+            // txtPrice
+            // 
+            this.txtPrice.Location = new System.Drawing.Point(85, 176);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(115, 22);
+            this.txtPrice.TabIndex = 7;
+            // 
+            // lblPrice
+            // 
+            this.lblPrice.AutoSize = true;
+            this.lblPrice.Location = new System.Drawing.Point(10, 179);
+            this.lblPrice.Name = "lblPrice";
+            this.lblPrice.Size = new System.Drawing.Size(41, 13);
+            this.lblPrice.TabIndex = 6;
+            this.lblPrice.Text = "Precio:";
+            // 
+            // rtxtDesc
+            // 
+            this.rtxtDesc.Location = new System.Drawing.Point(85, 45);
+            this.rtxtDesc.Name = "rtxtDesc";
+            this.rtxtDesc.Size = new System.Drawing.Size(215, 125);
+            this.rtxtDesc.TabIndex = 5;
+            this.rtxtDesc.Text = "";
+            // 
+            // lblDesc
+            // 
+            this.lblDesc.AutoSize = true;
+            this.lblDesc.Location = new System.Drawing.Point(6, 58);
+            this.lblDesc.Name = "lblDesc";
+            this.lblDesc.Size = new System.Drawing.Size(70, 13);
+            this.lblDesc.TabIndex = 4;
+            this.lblDesc.Text = "Descripcion:";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(85, 19);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(215, 22);
+            this.txtName.TabIndex = 3;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(6, 22);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(51, 13);
+            this.lblName.TabIndex = 2;
+            this.lblName.Text = "Nombre:";
             // 
             // FProduct
             // 
@@ -211,7 +216,7 @@
             this.Name = "FProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Producto";
-            this.Load += new System.EventHandler(this.FProduct_Load);
+            this.Shown += new System.EventHandler(this.FProduct_Shown);
             this.gbData.ResumeLayout(false);
             this.gbData.PerformLayout();
             this.gbxCat.ResumeLayout(false);
@@ -225,16 +230,16 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.GroupBox gbData;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label lbCostPrice;
+        private System.Windows.Forms.TextBox txtCostPrice;
+        private System.Windows.Forms.TextBox txtPrice;
+        private System.Windows.Forms.Label lblPrice;
+        private System.Windows.Forms.RichTextBox rtxtDesc;
         private System.Windows.Forms.Label lblDesc;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.GroupBox gbxCat;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbCat;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView dgvCat;
     }

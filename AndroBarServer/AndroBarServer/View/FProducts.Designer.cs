@@ -61,7 +61,7 @@
             this.dgvProd.ReadOnly = true;
             this.dgvProd.RowHeadersVisible = false;
             this.dgvProd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProd.Size = new System.Drawing.Size(722, 308);
+            this.dgvProd.Size = new System.Drawing.Size(730, 319);
             this.dgvProd.TabIndex = 8;
             this.dgvProd.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProd_CellClick);
             this.dgvProd.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProd_CellDoubleClick);
@@ -75,7 +75,7 @@
             this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSearch.Location = new System.Drawing.Point(10, 10);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(722, 50);
+            this.pnlSearch.Size = new System.Drawing.Size(730, 50);
             this.pnlSearch.TabIndex = 7;
             // 
             // txtSearch
@@ -84,7 +84,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.Location = new System.Drawing.Point(49, 16);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(670, 20);
+            this.txtSearch.Size = new System.Drawing.Size(678, 22);
             this.txtSearch.TabIndex = 1;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -93,7 +93,7 @@
             this.lblSearch.AutoSize = true;
             this.lblSearch.Location = new System.Drawing.Point(3, 19);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(40, 13);
+            this.lblSearch.Size = new System.Drawing.Size(41, 13);
             this.lblSearch.TabIndex = 0;
             this.lblSearch.Text = "Buscar";
             // 
@@ -101,9 +101,9 @@
             // 
             this.pnlButtons.Controls.Add(this.pnlButtonsRight);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(10, 368);
+            this.pnlButtons.Location = new System.Drawing.Point(10, 379);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(722, 34);
+            this.pnlButtons.Size = new System.Drawing.Size(730, 34);
             this.pnlButtons.TabIndex = 6;
             // 
             // pnlButtonsRight
@@ -111,7 +111,7 @@
             this.pnlButtonsRight.Controls.Add(this.btnNew);
             this.pnlButtonsRight.Controls.Add(this.btnCancel);
             this.pnlButtonsRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonsRight.Location = new System.Drawing.Point(522, 0);
+            this.pnlButtonsRight.Location = new System.Drawing.Point(530, 0);
             this.pnlButtonsRight.Name = "pnlButtonsRight";
             this.pnlButtonsRight.Size = new System.Drawing.Size(200, 34);
             this.pnlButtonsRight.TabIndex = 0;
@@ -141,9 +141,9 @@
             this.ssCat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslblInfo,
             this.tspbLoading});
-            this.ssCat.Location = new System.Drawing.Point(10, 402);
+            this.ssCat.Location = new System.Drawing.Point(10, 413);
             this.ssCat.Name = "ssCat";
-            this.ssCat.Size = new System.Drawing.Size(722, 22);
+            this.ssCat.Size = new System.Drawing.Size(730, 22);
             this.ssCat.TabIndex = 5;
             this.ssCat.Text = "statusStrip1";
             // 
@@ -163,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 434);
+            this.ClientSize = new System.Drawing.Size(750, 445);
             this.Controls.Add(this.dgvProd);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlButtons);
