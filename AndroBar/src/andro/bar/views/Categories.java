@@ -4,6 +4,7 @@ import andro.bar.R;
 import andro.bar.wrappers.ViewDrawer;
 import android.view.View;
 import android.widget.LinearLayout;
+import java.io.InputStream;
 
 public class Categories extends andro.bar.views.Base {
 
@@ -24,7 +25,8 @@ public class Categories extends andro.bar.views.Base {
                 llMain.addView(row);
             }
             String name = (String)((Object[])categories[i])[1];
-            row.addView(ViewDrawer.DrawCategory(Activity, name));
+            InputStream image = (InputStream)((Object[])categories[i])[2];
+            row.addView(ViewDrawer.DrawCategory(Activity, name, image));
         }
     }
 }
