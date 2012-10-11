@@ -24,9 +24,13 @@ public class Categories extends andro.bar.views.Base {
                 row = ViewDrawer.DrawCategoryRow(Activity);
                 llMain.addView(row);
             }
+            Integer id = (Integer)((Object[])categories[i])[0];
             String name = (String)((Object[])categories[i])[1];
             InputStream image = (InputStream)((Object[])categories[i])[2];
-            row.addView(ViewDrawer.DrawCategory(Activity, name, image));
+            View cat = ViewDrawer.DrawCategory(Activity, id, name, image);
+            cat.setOnClickListener(CategoryOnClickHandler);
+            cat.setOnLongClickListener(CategoryOnLongClickHandler);
+            row.addView(cat);
         }
     }
 }

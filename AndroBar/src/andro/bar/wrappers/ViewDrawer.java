@@ -24,20 +24,15 @@ public class ViewDrawer {
         return row;
     }
     
-    public static View DrawCategory(Context context, String name, InputStream image) {
+    public static View DrawCategory(Context context, Integer id, String name, InputStream image) {
         FrameLayout main = new FrameLayout(context);
         LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);
         mainParams.weight = 1;
         main.setLayoutParams(mainParams);
-        //main.setBackgroundColor(Color.RED);
         
         ImageView imBack = new ImageView(context);
-        //LinearLayout.LayoutParams imBackParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
-          //      LinearLayout.LayoutParams.FILL_PARENT);
-        //imParams.gravity = Gravity.CENTER;
         imBack.setBackgroundResource(R.drawable.buttonblack);
-        //im.setScaleType(ImageView.ScaleType.FIT_XY);
         
         main.addView(imBack);
 
@@ -51,18 +46,21 @@ public class ViewDrawer {
         
         main.addView(cat);
         
+        TextView txtId = new TextView(context);
+        txtId.setText(id.toString());
+        txtId.setHeight(0);
+        txtId.setWidth(0);
+        txtId.setVisibility(View.INVISIBLE);
+        
+        cat.addView(txtId);
+        
         ImageView im = new ImageView(context);
         LinearLayout.LayoutParams imParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);
         imParams.weight = 1;
         imParams.gravity = Gravity.CENTER;
-        im.setBackgroundResource(R.drawable.buttonblack);
         im.setImageBitmap(BitmapFactory.decodeStream((InputStream) image));
         im.setLayoutParams(imParams);
-        
-        
-        
-        //im.setScaleType(ImageView.ScaleType.FIT_XY);
         
         cat.addView(im);
         
@@ -76,9 +74,15 @@ public class ViewDrawer {
         txt.setGravity(Gravity.CENTER);
         
         cat.addView(txt);
-
-        //fl.addView(llInt);
         
         return main;
+    }
+    
+    public static Integer GetCategoryId(View catView){
+        FrameLayout main = (FrameLayout) catView;
+        LinearLayout cat = (LinearLayout) main.getChildAt(1);
+        TextView idView = (TextView) cat.getChildAt(0);
+        Integer id = Integer.parseInt(idView.getText().toString());
+        return id;
     }
 }
