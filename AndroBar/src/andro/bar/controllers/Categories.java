@@ -86,25 +86,38 @@ public class Categories extends andro.bar.controllers.Base {
     public View.OnClickListener ObjectOnClickHandler = new View.OnClickListener() {
 
         public void onClick(View objView) {
-            try {
-                try {
-                    andro.bar.controllers.Welcome.mysql.Open();
-                } catch (Exception ex) {
-                    Logger.getLogger(Categories.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Category cat = new Category(andro.bar.controllers.Welcome.mysql.Conn);
-                cat.Load(ViewDrawer.GetCategoryId(objView));
-                /*Bundle extras = new Bundle();
-                extras.putParcelable("category", cat);
-                RunActivity(Activity, cat.class, extras);*/
-                /*saleList.AddSaleItem(view.GetObjectId(objView), view.GetObjectName(objView),
-                        Float.parseFloat(view.GetObjectPrice(objView).replace("$", "")),
-                        view.GetObjectType(objView));
-                view.RefreshSaleList(saleList, SaleItemOnClickHandler, SaleItemOnLongClickHandler);
-                view.SetSaleTotal(String.valueOf(saleList.GetSaleTotal()));*/
-            } catch (SQLException ex) {
-                Logger.getLogger(Categories.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            final LoadingDialog loadDialog = view.CreateLoadingMessage(Activity, "Categorias", "Cargando...");
+            loadDialog.show();
+
+            AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "GetCategory", 
+                    new Class[]{View.class}, new Object[]{objView}, Object[].class, loadDialog, GetCategoryHandler, ExceptionHandler);
+            thread.Start();
+
+            /*saleList.AddSaleItem(view.GetObjectId(objView), view.GetObjectName(objView),
+                    Float.parseFloat(view.GetObjectPrice(objView).replace("$", "")),
+                    view.GetObjectType(objView));
+            view.RefreshSaleList(saleList, SaleItemOnClickHandler, SaleItemOnLongClickHandler);
+            view.SetSaleTotal(String.valueOf(saleList.GetSaleTotal()));*/
+        }
+    };
+    
+    private Handler GetCategoryHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            Object[] message = (Object[]) msg.obj;
+            Object[] category = (Object[]) message[0];
+            LoadingDialog loadingDialog = (LoadingDialog) message[1];
+            loadingDialog.hide();
+            
+            ExtraObject catObj = new ExtraObject(category);
+            
+            Bundle extras = new Bundle();
+            extras.putParcelable("category", catObj);
+            RunActivity(Activity, ExtraObject.class, extras);
+            //view.DrawCategories(Category, ObjectOnClickHandler, null);
         }
     };
     
