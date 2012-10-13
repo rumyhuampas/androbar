@@ -12,6 +12,6 @@ public class Products extends Activity {
         super.onCreate(icicle);
         setContentView(R.layout.products);
         
-        //controller = new andro.bar.controllers.Products(this);
+        controller = new andro.bar.controllers.Products(this);
     }
 }

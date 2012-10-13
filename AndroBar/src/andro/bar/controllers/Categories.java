@@ -89,8 +89,8 @@ public class Categories extends andro.bar.controllers.Base {
             final LoadingDialog loadDialog = view.CreateLoadingMessage(Activity, "Categorias", "Cargando...");
             loadDialog.show();
 
-            AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "GetCategory", 
-                    new Class[]{View.class}, new Object[]{objView}, Object[].class, loadDialog, GetCategoryHandler, ExceptionHandler);
+            AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "GetCategoryId", 
+                    new Class[]{View.class}, new Object[]{objView}, Integer.class, loadDialog, GetCategoryHandler, ExceptionHandler);
             thread.Start();
 
             /*saleList.AddSaleItem(view.GetObjectId(objView), view.GetObjectName(objView),
@@ -108,15 +108,13 @@ public class Categories extends andro.bar.controllers.Base {
             super.handleMessage(msg);
 
             Object[] message = (Object[]) msg.obj;
-            Object[] category = (Object[]) message[0];
+            Integer catId = (Integer) message[0];
             LoadingDialog loadingDialog = (LoadingDialog) message[1];
             loadingDialog.hide();
             
-            ExtraObject catObj = new ExtraObject(category);
-            
             Bundle extras = new Bundle();
-            extras.putParcelable("category", catObj);
-            RunActivity(Activity, ExtraObject.class, extras);
+            extras.putInt("categoryId", catId);
+            RunActivity(Activity, andro.bar.Products.class, extras);
             //view.DrawCategories(Category, ObjectOnClickHandler, null);
         }
     };

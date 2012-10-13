@@ -85,4 +85,48 @@ public class ViewDrawer {
         Integer id = Integer.parseInt(idView.getText().toString());
         return id;
     }
+    
+    public static View DrawProduct(Context context, Integer id, String name) {
+        FrameLayout main = new FrameLayout(context);
+        LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT);
+        mainParams.weight = 1;
+        main.setLayoutParams(mainParams);
+        
+        ImageView imBack = new ImageView(context);
+        imBack.setBackgroundResource(R.drawable.buttonblack);
+        
+        main.addView(imBack);
+
+        LinearLayout cat = new LinearLayout(context);
+        cat.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams catParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT);
+        catParams.weight = 1;
+        cat.setPadding(10, 10, 10, 10);
+        cat.setLayoutParams(catParams);
+        
+        main.addView(cat);
+        
+        TextView txtId = new TextView(context);
+        txtId.setText(id.toString());
+        txtId.setHeight(0);
+        txtId.setWidth(0);
+        txtId.setVisibility(View.INVISIBLE);
+        
+        cat.addView(txtId);
+        
+        TextView txt = new TextView(context);
+        LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT);
+        txtParams.weight = 2;
+        txt.setLayoutParams(txtParams);
+        txt.setText(name);
+        txt.setTextColor(Color.BLACK);
+        txt.setGravity(Gravity.CENTER);
+        
+        cat.addView(txt);
+        
+        return main;
+    }
 }

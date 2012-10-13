@@ -13,13 +13,7 @@ public class Categories extends andro.bar.models.Base {
         return categories;
     }
     
-    public Object[] GetCategory(View objView) throws SQLException{
-        Category cat = new Category(andro.bar.controllers.Welcome.mysql.Conn);
-        cat.Load(ViewDrawer.GetCategoryId(objView));
-        Object[] catObj = new Object[3];
-        catObj[0] = cat.getId();
-        catObj[1] = cat.Name;
-        //catObj[2] = cat.ImageStream;
-        return catObj;
+    public Integer GetCategoryId(View objView) throws SQLException{
+        return ViewDrawer.GetCategoryId(objView);
     }
 }

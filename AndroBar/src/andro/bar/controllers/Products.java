@@ -11,9 +11,9 @@ import entities.Category;
 public class Products extends andro.bar.controllers.Base {
     private andro.bar.Products Activity;
     private andro.bar.views.Products view;
-    //private andro.bar.models.Products model;
+    private andro.bar.models.Products model;
     private Bundle extras;
-    private Category cat;
+    //private Category cat;
 
     public Products(andro.bar.Products activity) {
         Activity = activity;
@@ -22,33 +22,31 @@ public class Products extends andro.bar.controllers.Base {
 
         extras = Activity.getIntent().getExtras();
         LoadProducts();
-        //LoadProducts();
     }    
     
     private void LoadProducts(){
-        ExtraObject extraObj = (ExtraObject) extras.getParcelable("category");
-        cat = (Category) extraObj.Obj[0];
+        Integer catId = extras.getInt("categoryId");
         
-        final LoadingDialog loadDialog = view.CreateLoadingMessage(Activity, "Categorias", "Cargando...");
+        final LoadingDialog loadDialog = view.CreateLoadingMessage(Activity, "Productos", "Cargando...");
         loadDialog.show();
         
-        /*AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "LoadProducts", 
-                new Class[]{ Category.class }, new Object[]{ cat },
-                Object[].class, loadDialog, LoadCategoriesHandler, ExceptionHandler);
-        thread.Start();*/
+        AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "LoadProducts", 
+                new Class[]{ Integer.class }, new Object[]{ catId },
+                Object[].class, loadDialog, LoadProductsHandler, ExceptionHandler);
+        thread.Start();
     }
     
-    private Handler LoadCategoriesHandler = new Handler() {
+    private Handler LoadProductsHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
             Object[] message = (Object[]) msg.obj;
-            Object[] categories = (Object[]) message[0];
+            Object[] products = (Object[]) message[0];
             LoadingDialog loadingDialog = (LoadingDialog) message[1];
             loadingDialog.hide();
-            //view.DrawCategories(categories, null, null);
+            view.DrawProducts(products, null, null);
         }
     };
     
