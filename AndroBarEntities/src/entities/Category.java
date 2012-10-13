@@ -112,7 +112,7 @@ public class Category {
         PreparedStatement qry = this.Conn.prepareStatement(sql);
         try {
             qry.setInt(1, id);
-            return SelectProduct(qry);
+            return SelectCategory(qry);
         } finally {
             qry.close();
         }
@@ -124,13 +124,13 @@ public class Category {
         PreparedStatement qry = this.Conn.prepareStatement(sql);
         try {
             qry.setString(1, name);
-            return SelectProduct(qry);
+            return SelectCategory(qry);
         } finally {
             qry.close();
         }
     }
 
-    private boolean SelectProduct(PreparedStatement qry) throws SQLException {
+    private boolean SelectCategory(PreparedStatement qry) throws SQLException {
         ResultSet results = qry.executeQuery();
         try {
             if (results.next()) {
@@ -149,20 +149,20 @@ public class Category {
     public boolean Save() throws SQLException {
         if (!Exists()) {
             if (this.Id == -1) {
-                return InsertProduct();
+                return InsertCategory();
             } else {
-                return UpdateProduct();
+                return UpdateCategory();
             }
         } else {
             return false;
         }
     }
 
-    private boolean InsertProduct() throws SQLException {
+    private boolean InsertCategory() throws SQLException {
         String sql = "INSERT INTO " + this.TABLENAME + " ("
                 + this.FIELD_NAME + ", "
                 + this.FIELD_IMAGE
-                + ") VALUES (?,?,?,?,?,?,?,?,?)";
+                + ") VALUES (?,?)";
         PreparedStatement qry = this.Conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         try {
             qry.setString(1, this.Name);
@@ -184,7 +184,7 @@ public class Category {
         }
     }
 
-    private boolean UpdateProduct() throws SQLException {
+    private boolean UpdateCategory() throws SQLException {
         String sql = "UPDATE " + this.TABLENAME + " SET "
                 + this.FIELD_NAME + " = ?,"
                 + this.FIELD_IMAGE + " = ?"
@@ -272,6 +272,30 @@ public class Category {
                 while (results.next()) {
                     row.add(results.getInt(FIELD_ID));
                     row.add(results.getString(FIELD_NAME));
+                    rows.add(row.toArray());
+                    row.clear();
+                }
+                return rows.toArray();
+            } finally {
+                results.close();
+            }
+        } finally {
+            qry.close();
+        }
+    }
+    
+    public static Object[] GetAllWithImage(Connection conn) throws SQLException {
+        String sql = "SELECT * FROM " + TABLENAME + " ORDER BY " + FIELD_NAME;
+        PreparedStatement qry = conn.prepareStatement(sql);
+        try {
+            ArrayList rows = new ArrayList();
+            ArrayList row = new ArrayList();
+            ResultSet results = qry.executeQuery();
+            try {
+                while (results.next()) {
+                    row.add(results.getInt(FIELD_ID));
+                    row.add(results.getString(FIELD_NAME));
+                    row.add(results.getBinaryStream(FIELD_IMAGE));
                     rows.add(row.toArray());
                     row.clear();
                 }
