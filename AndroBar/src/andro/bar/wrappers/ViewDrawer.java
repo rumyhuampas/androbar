@@ -87,46 +87,48 @@ public class ViewDrawer {
     }
     
     public static View DrawProduct(Context context, Integer id, String name) {
-        FrameLayout main = new FrameLayout(context);
+        /*FrameLayout main = new FrameLayout(context);
         LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);
         mainParams.weight = 1;
-        main.setLayoutParams(mainParams);
+        main.setLayoutParams(mainParams);*/
         
-        ImageView imBack = new ImageView(context);
-        imBack.setBackgroundResource(R.drawable.buttonblack);
+        /*ImageView imBack = new ImageView(context);
+        imBack.setBackgroundResource(R.drawable.buttonblack);*/
         
-        main.addView(imBack);
+        //main.addView(imBack);
 
-        LinearLayout cat = new LinearLayout(context);
-        cat.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout.LayoutParams catParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+        LinearLayout prod = new LinearLayout(context);
+        prod.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams prodParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);
-        catParams.weight = 1;
-        cat.setPadding(10, 10, 10, 10);
-        cat.setLayoutParams(catParams);
+        prodParams.weight = 1;
+        prod.setPadding(10, 10, 10, 10);
+        //prodParams.height = 20;
+        prod.setLayoutParams(prodParams);
         
-        main.addView(cat);
+        //main.addView(prod);
         
-        TextView txtId = new TextView(context);
+        /*TextView txtId = new TextView(context);
         txtId.setText(id.toString());
         txtId.setHeight(0);
         txtId.setWidth(0);
         txtId.setVisibility(View.INVISIBLE);
         
-        cat.addView(txtId);
+        prod.addView(txtId);*/
         
         TextView txt = new TextView(context);
         LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);
-        txtParams.weight = 2;
+        //txtParams.weight = 2;
         txt.setLayoutParams(txtParams);
         txt.setText(name);
-        txt.setTextColor(Color.BLACK);
-        txt.setGravity(Gravity.CENTER);
+        //txt.setHeight(20);
+        txt.setTextColor(Color.WHITE);
+        //txt.setGravity(Gravity.CENTER);
         
-        cat.addView(txt);
+        prod.addView(txt);
         
-        return main;
+        return prod;
     }
 }
