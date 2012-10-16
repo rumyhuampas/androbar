@@ -1,26 +1,16 @@
 package entities;
 
-import image.ImageManagement;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class Product {
 
-    private static final String TABLENAME = "Products";
-    private static final String FIELD_ID = "Id";
-    private static final String FIELD_NAME = "Name";
-    private static final String FIELD_DESC = "Description";
-    private static final String FIELD_PRICE = "Price";
-    private static final String FIELD_COSTPRICE = "CostPrice";
+    public static final String TABLENAME = "Products";
+    public static final String FIELD_ID = "Id";
+    public static final String FIELD_NAME = "Name";
+    public static final String FIELD_DESC = "Description";
+    public static final String FIELD_PRICE = "Price";
+    public static final String FIELD_COSTPRICE = "CostPrice";
     private Connection Conn;
     private int Id;
     public String Name;

@@ -20,6 +20,10 @@ public class Category {
     private static final String FIELD_NAME = "Name";
     private static final String FIELD_IMAGE = "Image";
     
+    private static final String CATPROD_TABLENAME = "Category_Products";
+    private static final String FIELD_CATID = "CategoryId";
+    private static final String FIELD_PRODID = "ProductId";
+    
     private Connection Conn;
     private int Id;
     public String Name;
@@ -296,6 +300,34 @@ public class Category {
                     row.add(results.getInt(FIELD_ID));
                     row.add(results.getString(FIELD_NAME));
                     row.add(results.getBinaryStream(FIELD_IMAGE));
+                    rows.add(row.toArray());
+                    row.clear();
+                }
+                return rows.toArray();
+            } finally {
+                results.close();
+            }
+        } finally {
+            qry.close();
+        }
+    }
+    
+    public Object[] GetProducts() throws SQLException{
+        String sql = "SELECT * FROM " + Product.TABLENAME + " P, " + this.CATPROD_TABLENAME + " CP WHERE "
+                + "P."+ Product.FIELD_ID + " = CP." + this.FIELD_PRODID + " AND CP." + this.FIELD_CATID + " = ?";
+        PreparedStatement qry = this.Conn.prepareStatement(sql);
+        try {
+            qry.setInt(1, this.Id);
+            ArrayList rows = new ArrayList();
+            ArrayList row = new ArrayList();
+            ResultSet results = qry.executeQuery();
+            try {
+                while (results.next()) {
+                    row.add(results.getInt(Product.FIELD_ID));
+                    row.add(results.getString(Product.FIELD_NAME));
+                    row.add(results.getString(Product.FIELD_DESC));
+                    row.add(results.getFloat(Product.FIELD_PRICE));
+                    row.add(results.getFloat(Product.FIELD_COSTPRICE));
                     rows.add(row.toArray());
                     row.clear();
                 }
