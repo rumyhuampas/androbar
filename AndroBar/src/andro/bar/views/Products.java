@@ -14,21 +14,26 @@ public class Products extends andro.bar.views.Base {
         Activity = activity;
     }
     
-    public void DrawProducts(Object[] products, View.OnClickListener ProductOnClickHandler, View.OnLongClickListener ProductOnLongClickHandler){
+    public void DrawToolBar(View.OnClickListener OrderOnClickHandler){
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.prod_List);
         llMain.removeAllViews();
-        LinearLayout row = null;
+        View order = ViewDrawer.DrawToolBar(Activity);
+        order.setOnClickListener(OrderOnClickHandler);
+        llMain.addView(order);
+    }
+    
+    public void DrawProducts(Object[] products, View.OnClickListener ProductOnClickHandler, View.OnLongClickListener ProductOnLongClickHandler){
+        LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.prod_List);
+        //llMain.removeAllViews();
         for(int i=0; i<products.length;i++){
-            //if(i % 2 == 0){
-                row = ViewDrawer.DrawCategoryRow(Activity);
-                llMain.addView(row);
-            //}
             Integer id = (Integer)((Object[])products[i])[0];
             String name = (String)((Object[])products[i])[1];
-            View prod = ViewDrawer.DrawProduct(Activity, id, name);
+            String desc = (String) ((Object[])products[i])[2];
+            Float price = (Float) ((Object[])products[i])[3];
+            View prod = ViewDrawer.DrawProduct(Activity, id, name, price);
             prod.setOnClickListener(ProductOnClickHandler);
             prod.setOnLongClickListener(ProductOnLongClickHandler);
-            row.addView(prod);
+            llMain.addView(prod);
         }
     }
 }

@@ -15,9 +15,15 @@ public class Categories extends andro.bar.views.Base {
         Activity = activity;
     }
     
-    public void DrawCategories(Object[] categories, View.OnClickListener CategoryOnClickHandler, View.OnLongClickListener CategoryOnLongClickHandler){
+    public void DrawToolBar(){
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.cat_List);
         llMain.removeAllViews();
+        llMain.addView(ViewDrawer.DrawToolBar(Activity));
+    }
+    
+    public void DrawCategories(Object[] categories, View.OnClickListener CategoryOnClickHandler, View.OnLongClickListener CategoryOnLongClickHandler){
+        LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.cat_List);
+        //llMain.removeAllViews();
         LinearLayout row = null;
         for(int i=0; i<categories.length;i++){
             if(i % 2 == 0){

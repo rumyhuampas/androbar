@@ -86,49 +86,74 @@ public class ViewDrawer {
         return id;
     }
     
-    public static View DrawProduct(Context context, Integer id, String name) {
-        /*FrameLayout main = new FrameLayout(context);
-        LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+    public static View DrawProduct(Context context, Integer id, String name, Float price) {
+        LinearLayout main = new LinearLayout(context);
+        main.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 
                 LinearLayout.LayoutParams.FILL_PARENT);
-        mainParams.weight = 1;
-        main.setLayoutParams(mainParams);*/
-        
-        /*ImageView imBack = new ImageView(context);
-        imBack.setBackgroundResource(R.drawable.buttonblack);*/
-        
-        //main.addView(imBack);
+        main.setPadding(10, 10, 10, 10);
+        main.setLayoutParams(mainParams);
 
         LinearLayout prod = new LinearLayout(context);
         prod.setOrientation(LinearLayout.HORIZONTAL);
-        LinearLayout.LayoutParams prodParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+        LinearLayout.LayoutParams prodParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 
                 LinearLayout.LayoutParams.FILL_PARENT);
-        prodParams.weight = 1;
         prod.setPadding(10, 10, 10, 10);
-        //prodParams.height = 20;
         prod.setLayoutParams(prodParams);
         
-        //main.addView(prod);
-        
-        /*TextView txtId = new TextView(context);
-        txtId.setText(id.toString());
-        txtId.setHeight(0);
-        txtId.setWidth(0);
-        txtId.setVisibility(View.INVISIBLE);
-        
-        prod.addView(txtId);*/
+        main.addView(prod);
         
         TextView txt = new TextView(context);
         LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);
-        //txtParams.weight = 2;
+        txtParams.weight = 1;
         txt.setLayoutParams(txtParams);
         txt.setText(name);
-        //txt.setHeight(20);
         txt.setTextColor(Color.WHITE);
-        //txt.setGravity(Gravity.CENTER);
         
         prod.addView(txt);
         
-        return prod;
+        TextView txtPrice = new TextView(context);
+        LinearLayout.LayoutParams txtPriceParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT);
+        txtPriceParams.weight = 4;
+        txtPrice.setLayoutParams(txtPriceParams);
+        txtPrice.setText("$ " + String.valueOf(price));
+        txtPrice.setTextColor(Color.WHITE);
+        txtPrice.setGravity(Gravity.RIGHT);
+        
+        prod.addView(txtPrice);
+        
+        View sep = new View(context);
+        LinearLayout.LayoutParams sepParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 1);
+        sep.setLayoutParams(sepParams);
+        sep.setBackgroundColor(Color.WHITE);
+        
+        main.addView(sep);
+        
+        return main;
+    }
+    
+    public static View DrawToolBar(Context context) {
+        LinearLayout main = new LinearLayout(context);
+        main.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 
+                LinearLayout.LayoutParams.FILL_PARENT);
+        main.setPadding(10, 10, 10, 10);
+        main.setLayoutParams(mainParams);
+        main.setBackgroundColor(Color.LTGRAY);
+        main.setGravity(Gravity.RIGHT);
+        
+        ImageView imCart = new ImageView(context);
+        LinearLayout.LayoutParams imCartParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        //imCartParams.weight = 1;
+        //imCartParams.gravity = Gravity.RIGHT;
+        imCart.setBackgroundResource(R.drawable.cart);
+        imCart.setLayoutParams(imCartParams);
+        
+        main.addView(imCart);
+        
+        return main;
     }
 }

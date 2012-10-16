@@ -6,6 +6,7 @@ import andro.bar.wrappers.dialogs.LoadingDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import entities.Category;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,10 +24,19 @@ public class Products extends andro.bar.controllers.Base {
         Activity = activity;
         view = new andro.bar.views.Products(activity);
         model = new andro.bar.models.Products();
+        
+        view.DrawToolBar(OrderOnClickHandler);
 
         extras = Activity.getIntent().getExtras();
         LoadProducts();
     }
+    
+    public View.OnClickListener OrderOnClickHandler = new View.OnClickListener() {
+
+        public void onClick(View objView) {
+            RunActivity(Activity, andro.bar.Order.class, null);
+        }
+    };
 
     private void LoadProducts() {
         Integer catId = extras.getInt("categoryId");

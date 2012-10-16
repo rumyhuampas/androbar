@@ -1,17 +1,11 @@
 package andro.bar.controllers;
 
 import andro.bar.wrappers.AndroThread;
-import andro.bar.wrappers.ExtraObject;
-import andro.bar.wrappers.ViewDrawer;
 import andro.bar.wrappers.dialogs.LoadingDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import entities.Category;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Categories extends andro.bar.controllers.Base {
 
@@ -24,6 +18,8 @@ public class Categories extends andro.bar.controllers.Base {
         Activity = activity;
         view = new andro.bar.views.Categories(activity);
         model = new andro.bar.models.Categories();
+        
+        view.DrawToolBar();
 
         //extras = Activity.getIntent().getExtras();
         //GetExtras();
