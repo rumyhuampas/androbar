@@ -15,7 +15,8 @@ import java.util.logging.Logger;
 
 public class OrderList {
 
-    ArrayList list;
+    private ArrayList list;
+    private Context currentContext;
 
     public OrderList() {
         list = new ArrayList();
@@ -55,8 +56,31 @@ public class OrderList {
             Logger.getLogger(OrderList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    private View.OnClickListener ItemOnClickHandler = new View.OnClickListener() {
+
+        public void onClick(View objView) {
+            //andro.bar.controllers.Welcome.MainList.Add(ViewDrawer.GetProductId(objView));
+            Integer id = (Integer) ((ImageView) objView).getTag();
+
+            OrderItem item = null;
+            for (int i = 0; i < list.size(); i++) {
+                item = (OrderItem) list.get(i);
+                if (item.product.getId() == id) {
+                    if(item.amount == 1){
+                        list.remove(i);
+                    }
+                    else{
+                        item.amount--;
+                    }
+                }
+            }
+        }
+        
+    };
 
     public View DrawList(Context context) {
+        currentContext = context;
+        
         LinearLayout main = new LinearLayout(context);
         main.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
@@ -79,6 +103,14 @@ public class OrderList {
             prod.setLayoutParams(prodParams);
 
             main.addView(prod);
+
+            TextView txtId = new TextView(context);
+            txtId.setText(((Integer) item.product.getId()).toString());
+            //txtId.setHeight(0);
+            txtId.setWidth(0);
+            txtId.setVisibility(View.INVISIBLE);
+
+            prod.addView(txtId);
 
             TextView txt = new TextView(context);
             LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
@@ -119,7 +151,9 @@ public class OrderList {
             imParams.gravity = Gravity.CENTER;
             im.setBackgroundResource(R.drawable.stop);
             im.setLayoutParams(imParams);
-            im.setPadding(5, 5, 5, 5);
+            //im.setPadding(5, 5, 5, 5);
+            im.setTag(item.product.getId());
+            im.setOnClickListener(ItemOnClickHandler);
 
             prod.addView(im);
 
@@ -168,7 +202,7 @@ public class OrderList {
         txtAmount.setGravity(Gravity.RIGHT);
 
         header.addView(txtAmount);
-        
+
         TextView txtBtn = new TextView(context);
         LinearLayout.LayoutParams txtBtnParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);

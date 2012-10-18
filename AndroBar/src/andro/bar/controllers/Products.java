@@ -96,12 +96,6 @@ public class Products extends andro.bar.controllers.Base {
             andro.bar.controllers.Welcome.MainList.Add(ViewDrawer.GetProductId(objView));
             
             view.ShowToast(Activity, "Producto agregado");
-
-            /*saleList.AddSaleItem(view.GetObjectId(objView), view.GetObjectName(objView),
-                    Float.parseFloat(view.GetObjectPrice(objView).replace("$", "")),
-                    view.GetObjectType(objView));
-            view.RefreshSaleList(saleList, SaleItemOnClickHandler, SaleItemOnLongClickHandler);
-            view.SetSaleTotal(String.valueOf(saleList.GetSaleTotal()));*/
         }
     };
 }
