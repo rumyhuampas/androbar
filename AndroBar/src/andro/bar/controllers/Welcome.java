@@ -1,16 +1,7 @@
 package andro.bar.controllers;
 
 import Database.MySQL;
-import andro.bar.wrappers.AndroThread;
-import andro.bar.wrappers.ExtraObject;
-import andro.bar.wrappers.dialogs.ImageDialog;
-import andro.bar.wrappers.dialogs.YesNoDialog;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.View;
-import android.widget.Button;
-import java.sql.SQLException;
+import andro.bar.wrappers.OrderList;
 
 public class Welcome extends andro.bar.controllers.Base {
 
@@ -18,6 +9,7 @@ public class Welcome extends andro.bar.controllers.Base {
     private andro.bar.views.Welcome view;
     private andro.bar.models.Welcome model;
     public static MySQL mysql;
+    public static OrderList MainList;
 
     public Welcome(andro.bar.Welcome activity) {
         Activity = activity;
@@ -25,6 +17,9 @@ public class Welcome extends andro.bar.controllers.Base {
         model = new andro.bar.models.Welcome();
         
         mysql = new MySQL("10.0.2.2:3306", "androbar", "root", "");
+        //mysql = new MySQL("192.168.1.103:3306", "androbar", "root", "");
+        MainList = new OrderList();
+        MainList.Clear();
         
         andro.bar.controllers.Base.RunActivity(Activity, andro.bar.Categories.class, null);
     }

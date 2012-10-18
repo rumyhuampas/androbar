@@ -86,6 +86,14 @@ public class ViewDrawer {
         return id;
     }
     
+    public static Integer GetProductId(View prodView){
+        LinearLayout main = (LinearLayout) prodView;
+        LinearLayout prod = (LinearLayout) main.getChildAt(0);
+        TextView idView = (TextView) prod.getChildAt(0);
+        Integer id = Integer.parseInt(idView.getText().toString());
+        return id;
+    }
+    
     public static View DrawProduct(Context context, Integer id, String name, Float price) {
         LinearLayout main = new LinearLayout(context);
         main.setOrientation(LinearLayout.VERTICAL);
@@ -102,6 +110,14 @@ public class ViewDrawer {
         prod.setLayoutParams(prodParams);
         
         main.addView(prod);
+        
+        TextView txtId = new TextView(context);
+        txtId.setText(id.toString());
+        //txtId.setHeight(0);
+        txtId.setWidth(0);
+        txtId.setVisibility(View.INVISIBLE);
+        
+        prod.addView(txtId);
         
         TextView txt = new TextView(context);
         LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,

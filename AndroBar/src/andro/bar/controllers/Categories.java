@@ -19,12 +19,19 @@ public class Categories extends andro.bar.controllers.Base {
         view = new andro.bar.views.Categories(activity);
         model = new andro.bar.models.Categories();
         
-        view.DrawToolBar();
+        view.DrawToolBar(OrderOnClickHandler);
 
         //extras = Activity.getIntent().getExtras();
         //GetExtras();
         LoadCategories();
     }
+    
+    public View.OnClickListener OrderOnClickHandler = new View.OnClickListener() {
+
+        public void onClick(View objView) {
+            RunActivity(Activity, andro.bar.Order.class, null);
+        }
+    };
 
     /*private void GetExtras() {
         ExtraObject extraObj = (ExtraObject) extras.getParcelable("categories");
@@ -82,7 +89,7 @@ public class Categories extends andro.bar.controllers.Base {
     public View.OnClickListener ObjectOnClickHandler = new View.OnClickListener() {
 
         public void onClick(View objView) {
-            final LoadingDialog loadDialog = view.CreateLoadingMessage(Activity, "Categorias", "Cargando...");
+            final LoadingDialog loadDialog = view.CreateLoadingMessage(Activity, "Categorias", "Abriendo...");
             loadDialog.show();
 
             AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "GetCategoryId", 

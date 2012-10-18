@@ -1,16 +1,12 @@
 package andro.bar.controllers;
 
 import andro.bar.wrappers.AndroThread;
-import andro.bar.wrappers.ExtraObject;
+import andro.bar.wrappers.ViewDrawer;
 import andro.bar.wrappers.dialogs.LoadingDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import entities.Category;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Products extends andro.bar.controllers.Base {
 
@@ -68,7 +64,7 @@ public class Products extends andro.bar.controllers.Base {
             Object[] products = (Object[]) message[0];
             LoadingDialog loadingDialog = (LoadingDialog) message[1];
             loadingDialog.hide();
-            view.DrawProducts(products, null, null);
+            view.DrawProducts(products, ObjectOnClickHandler, null);
         }
     };
     private Handler ExceptionHandler = new Handler() {
@@ -91,6 +87,21 @@ public class Products extends andro.bar.controllers.Base {
              * } });
             dialog.show();
              */
+        }
+    };
+    
+    public View.OnClickListener ObjectOnClickHandler = new View.OnClickListener() {
+
+        public void onClick(View objView) {
+            andro.bar.controllers.Welcome.MainList.Add(ViewDrawer.GetProductId(objView));
+            
+            view.ShowToast(Activity, "Producto agregado");
+
+            /*saleList.AddSaleItem(view.GetObjectId(objView), view.GetObjectName(objView),
+                    Float.parseFloat(view.GetObjectPrice(objView).replace("$", "")),
+                    view.GetObjectType(objView));
+            view.RefreshSaleList(saleList, SaleItemOnClickHandler, SaleItemOnLongClickHandler);
+            view.SetSaleTotal(String.valueOf(saleList.GetSaleTotal()));*/
         }
     };
 }

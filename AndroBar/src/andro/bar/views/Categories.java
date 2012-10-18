@@ -15,10 +15,12 @@ public class Categories extends andro.bar.views.Base {
         Activity = activity;
     }
     
-    public void DrawToolBar(){
+    public void DrawToolBar(View.OnClickListener OrderOnClickHandler){
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.cat_List);
         llMain.removeAllViews();
-        llMain.addView(ViewDrawer.DrawToolBar(Activity));
+        View order = ViewDrawer.DrawToolBar(Activity);
+        order.setOnClickListener(OrderOnClickHandler);
+        llMain.addView(order);
     }
     
     public void DrawCategories(Object[] categories, View.OnClickListener CategoryOnClickHandler, View.OnLongClickListener CategoryOnLongClickHandler){
