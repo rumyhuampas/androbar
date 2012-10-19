@@ -4,7 +4,6 @@ import andro.bar.wrappers.ViewDrawer;
 import android.view.View;
 import entities.Category;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class Categories extends andro.bar.models.Base {
 

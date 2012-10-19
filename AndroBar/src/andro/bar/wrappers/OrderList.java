@@ -17,6 +17,7 @@ public class OrderList {
 
     private ArrayList list;
     private Context currentContext;
+    private LinearLayout mainView;
 
     public OrderList() {
         list = new ArrayList();
@@ -74,12 +75,14 @@ public class OrderList {
                     }
                 }
             }
+            mainView.removeAllViews();
+            DrawList(currentContext, mainView);
         }
-        
     };
 
-    public View DrawList(Context context) {
+    public void DrawList(Context context, LinearLayout mainV) {
         currentContext = context;
+        mainView = mainV;
         
         LinearLayout main = new LinearLayout(context);
         main.setOrientation(LinearLayout.VERTICAL);
@@ -160,7 +163,7 @@ public class OrderList {
             main.addView(DrawSeparator(context));
         }
 
-        return main;
+        mainV.addView(main);
     }
 
     private View DrawTableHeaders(Context context) {

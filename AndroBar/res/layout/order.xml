@@ -16,7 +16,23 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
         >
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/order_buttonsPanel"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="3"
+        >
+            <Button
+                android:id="@+id/order_btnConfirm"
+                android:text="Confirmar Pedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+            >
+            </Button>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -4,7 +4,6 @@ import andro.bar.R;
 import andro.bar.wrappers.ViewDrawer;
 import android.view.View;
 import android.widget.LinearLayout;
-import java.io.InputStream;
 
 public class Products extends andro.bar.views.Base {
     private andro.bar.Products Activity;
