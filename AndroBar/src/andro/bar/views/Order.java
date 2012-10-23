@@ -1,6 +1,7 @@
 package andro.bar.views;
 
 import andro.bar.R;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 public class Order extends andro.bar.views.Base {
@@ -15,5 +16,9 @@ public class Order extends andro.bar.views.Base {
         llMain.removeAllViews();
         andro.bar.controllers.Welcome.MainList.DrawList(Activity, llMain);
         //llMain.addView(order);
+    }
+    
+    public Button GetConfirmButton(){
+        return (Button) Activity.findViewById(R.id.order_btnConfirm);
     }
 }

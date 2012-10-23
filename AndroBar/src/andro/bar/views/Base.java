@@ -1,10 +1,7 @@
 package andro.bar.views;
 
 import andro.bar.R;
-import andro.bar.wrappers.dialogs.ComboDialog;
-import andro.bar.wrappers.dialogs.ImageDialog;
-import andro.bar.wrappers.dialogs.LoadingDialog;
-import andro.bar.wrappers.dialogs.YesNoDialog;
+import andro.bar.wrappers.dialogs.*;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -27,5 +24,9 @@ public class Base {
     
     public andro.bar.wrappers.dialogs.ComboDialog CreateComboMessage(Context context, String title, String prompt, int ArrayID){
         return new ComboDialog(context, title, prompt, ArrayID);
+    }
+    
+    public andro.bar.wrappers.dialogs.TxtDialog CreateTxtMessage(Context context, String title){
+        return new TxtDialog(context, title);
     }
 }

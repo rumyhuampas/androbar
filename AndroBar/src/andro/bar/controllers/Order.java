@@ -1,6 +1,8 @@
 package andro.bar.controllers;
 
+import andro.bar.wrappers.dialogs.TxtDialog;
 import android.os.Bundle;
+import android.view.View;
 
 public class Order extends andro.bar.controllers.Base {
 
@@ -16,6 +18,19 @@ public class Order extends andro.bar.controllers.Base {
         //model = new andro.bar.models.Order();
         
         view.DrawList();
+        SetClickListeners();
     }
     
+    private void SetClickListeners(){
+        view.GetConfirmButton().setOnClickListener(BtnConfirmOnClickHandler);
+    }
+    
+    public View.OnClickListener BtnConfirmOnClickHandler = new View.OnClickListener() {
+
+        public void onClick(View objView) {
+            //RunActivity(Activity, andro.bar.Order.class, null);
+            TxtDialog dialog = view.CreateTxtMessage(Activity, "Numero de Mesa");
+            dialog.show();
+        }
+    };
 }
