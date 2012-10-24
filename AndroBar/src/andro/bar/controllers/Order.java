@@ -27,10 +27,25 @@ public class Order extends andro.bar.controllers.Base {
     
     public View.OnClickListener BtnConfirmOnClickHandler = new View.OnClickListener() {
 
+        TxtDialog dialog = null;
+        
         public void onClick(View objView) {
             //RunActivity(Activity, andro.bar.Order.class, null);
-            TxtDialog dialog = view.CreateTxtMessage(Activity, "Numero de Mesa");
+            dialog = view.CreateNumericTxtMessage(Activity, "Numero de Mesa");
+            dialog.SetCallback(TxtDialogButtonHandler);
             dialog.show();
         }
+        
+        public View.OnClickListener TxtDialogButtonHandler = new View.OnClickListener() {
+
+            public void onClick(View objView) {
+                if(!dialog.GetText().equals("")){
+                    dialog.hide();
+                }
+                else{
+                    view.ShowToast(Activity, "Debe ingresar el numero de mesa");
+                }
+            }
+        };
     };
 }
