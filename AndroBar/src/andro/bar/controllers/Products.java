@@ -14,7 +14,6 @@ public class Products extends andro.bar.controllers.Base {
     private andro.bar.views.Products view;
     private andro.bar.models.Products model;
     private Bundle extras;
-    //private Category cat;
 
     public Products(andro.bar.Products activity) {
         Activity = activity;
@@ -64,7 +63,7 @@ public class Products extends andro.bar.controllers.Base {
             Object[] products = (Object[]) message[0];
             LoadingDialog loadingDialog = (LoadingDialog) message[1];
             loadingDialog.hide();
-            view.DrawProducts(products, ObjectOnClickHandler, null);
+            view.DrawProducts(products, ObjectOnClickHandler, ObjectOnLongClickHandler);
         }
     };
     private Handler ExceptionHandler = new Handler() {
@@ -96,6 +95,22 @@ public class Products extends andro.bar.controllers.Base {
             andro.bar.controllers.Welcome.MainList.Add(ViewDrawer.GetProductId(objView));
             
             view.ShowToast(Activity, "Producto agregado");
+        }
+    };
+    
+    public View.OnLongClickListener ObjectOnLongClickHandler = new View.OnLongClickListener() {
+
+        public boolean onLongClick(View view) {
+            Integer prodId = ViewDrawer.GetProductId(view);
+            //LoadingDialog loadingDialog = (LoadingDialog) message[1];
+            //loadingDialog.hide();
+            
+            Bundle extras = new Bundle();
+            extras.putInt("productId", prodId);
+            
+            RunActivity(Activity, andro.bar.ProductDetail.class, extras);
+            
+            return true;
         }
     };
 }

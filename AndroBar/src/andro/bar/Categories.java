@@ -14,4 +14,10 @@ public class Categories extends Activity {
         
         controller = new andro.bar.controllers.Categories(this);
     }
+    
+    @Override
+    public void onBackPressed(){
+        controller.Exit();
+        return;
+    }
 }

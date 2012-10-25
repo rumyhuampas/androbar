@@ -2,10 +2,12 @@ package andro.bar.controllers;
 
 import andro.bar.wrappers.AndroThread;
 import andro.bar.wrappers.dialogs.LoadingDialog;
+import andro.bar.wrappers.dialogs.YesNoDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 
 public class Categories extends andro.bar.controllers.Base {
 
@@ -132,4 +134,19 @@ public class Categories extends andro.bar.controllers.Base {
             return true;
         }
     };
+    
+    public void Exit() {
+        final YesNoDialog dialog = andro.bar.views.Base.CreateYesNoMessage(Activity, "¿Salir?", "¿Esta seguro?");
+        dialog.SetCallback(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                if (((Button) view).getText() == YesNoDialog.BUTTON_YES) {
+                    Activity.finish();
+                } else {
+                    dialog.hide();
+                }
+            }
+        });
+        dialog.show();
+    }
 }

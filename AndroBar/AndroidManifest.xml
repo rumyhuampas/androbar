@@ -29,5 +29,8 @@
         <activity android:name="Order"
                   android:configChanges="orientation">
         </activity>
+        <activity android:name="ProductDetail"
+                  android:configChanges="orientation">
+        </activity>
     </application>
 </manifest> 
