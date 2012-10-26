@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AndroBarServer.Model;
 using System.Collections;
+using System.IO;
 
 namespace AndroBarServer.Controller
 {
@@ -41,7 +42,7 @@ namespace AndroBarServer.Controller
             _db.SaveChanges();
         }
 
-        public int SaveProduct(int id, string name, string desc, string price, string costPrice)
+        public int SaveProduct(int id, string name, string desc, string price, string costPrice, Stream image)
         {
             name = name.Trim();
             desc = desc.Trim();
@@ -55,6 +56,10 @@ namespace AndroBarServer.Controller
                 p.Description = desc;
                 p.Price = float.Parse(price);
                 p.CostPrice = float.Parse(costPrice);
+                if (image != null)
+                {
+                    p.Image = ABMHelper.StreamToByteArray(image, 1024);
+                }
                 _db.AddToproducts(p);
             }
             else
@@ -64,6 +69,10 @@ namespace AndroBarServer.Controller
                 p.Description = desc;
                 p.Price = float.Parse(price);
                 p.CostPrice = float.Parse(costPrice);
+                if (image != null)
+                {
+                    p.Image = ABMHelper.StreamToByteArray(image, 1024);
+                }
             }
             _db.SaveChanges();
             return p.Id;

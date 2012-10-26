@@ -43,14 +43,18 @@
             this.lblDesc = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
+            this.pboxImag = new System.Windows.Forms.PictureBox();
+            this.lblImag = new System.Windows.Forms.Label();
+            this.ofImag = new System.Windows.Forms.OpenFileDialog();
             this.gbData.SuspendLayout();
             this.gbxCat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxImag)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(456, 246);
+            this.btnOK.Location = new System.Drawing.Point(456, 399);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 5;
@@ -60,7 +64,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(537, 246);
+            this.btnCancel.Location = new System.Drawing.Point(537, 399);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -70,6 +74,8 @@
             // 
             // gbData
             // 
+            this.gbData.Controls.Add(this.pboxImag);
+            this.gbData.Controls.Add(this.lblImag);
             this.gbData.Controls.Add(this.gbxCat);
             this.gbData.Controls.Add(this.lbCostPrice);
             this.gbData.Controls.Add(this.txtCostPrice);
@@ -81,7 +87,7 @@
             this.gbData.Controls.Add(this.lblName);
             this.gbData.Location = new System.Drawing.Point(2, 2);
             this.gbData.Name = "gbData";
-            this.gbData.Size = new System.Drawing.Size(610, 238);
+            this.gbData.Size = new System.Drawing.Size(610, 391);
             this.gbData.TabIndex = 3;
             this.gbData.TabStop = false;
             this.gbData.Text = "Datos";
@@ -93,7 +99,7 @@
             this.gbxCat.Controls.Add(this.dgvCat);
             this.gbxCat.Location = new System.Drawing.Point(306, 19);
             this.gbxCat.Name = "gbxCat";
-            this.gbxCat.Size = new System.Drawing.Size(298, 213);
+            this.gbxCat.Size = new System.Drawing.Size(298, 359);
             this.gbxCat.TabIndex = 10;
             this.gbxCat.TabStop = false;
             this.gbxCat.Text = "Categorias";
@@ -132,7 +138,7 @@
             this.dgvCat.RowHeadersVisible = false;
             this.dgvCat.RowTemplate.Height = 24;
             this.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCat.Size = new System.Drawing.Size(286, 159);
+            this.dgvCat.Size = new System.Drawing.Size(286, 305);
             this.dgvCat.TabIndex = 12;
             this.dgvCat.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellClick);
             this.dgvCat.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCat_CellMouseEnter);
@@ -151,14 +157,14 @@
             // 
             this.txtCostPrice.Location = new System.Drawing.Point(85, 202);
             this.txtCostPrice.Name = "txtCostPrice";
-            this.txtCostPrice.Size = new System.Drawing.Size(115, 20);
+            this.txtCostPrice.Size = new System.Drawing.Size(150, 20);
             this.txtCostPrice.TabIndex = 8;
             // 
             // txtPrice
             // 
             this.txtPrice.Location = new System.Drawing.Point(85, 176);
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(115, 20);
+            this.txtPrice.Size = new System.Drawing.Size(150, 20);
             this.txtPrice.TabIndex = 7;
             // 
             // lblPrice
@@ -203,11 +209,38 @@
             this.lblName.TabIndex = 2;
             this.lblName.Text = "Nombre:";
             // 
+            // pboxImag
+            // 
+            this.pboxImag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pboxImag.Location = new System.Drawing.Point(85, 228);
+            this.pboxImag.Name = "pboxImag";
+            this.pboxImag.Size = new System.Drawing.Size(150, 150);
+            this.pboxImag.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pboxImag.TabIndex = 12;
+            this.pboxImag.TabStop = false;
+            this.pboxImag.Click += new System.EventHandler(this.pboxImag_Click);
+            // 
+            // lblImag
+            // 
+            this.lblImag.AutoSize = true;
+            this.lblImag.Location = new System.Drawing.Point(10, 237);
+            this.lblImag.Name = "lblImag";
+            this.lblImag.Size = new System.Drawing.Size(45, 13);
+            this.lblImag.TabIndex = 11;
+            this.lblImag.Text = "Imagen:";
+            // 
+            // ofImag
+            // 
+            this.ofImag.FileName = "Imagen";
+            this.ofImag.Filter = "Imagenes|*.bmp;*.jpg;*.png";
+            this.ofImag.Title = "Imagen";
+            this.ofImag.FileOk += new System.ComponentModel.CancelEventHandler(this.ofImag_FileOk);
+            // 
             // FProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(620, 280);
+            this.ClientSize = new System.Drawing.Size(620, 431);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.gbData);
@@ -222,6 +255,7 @@
             this.gbData.PerformLayout();
             this.gbxCat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pboxImag)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -243,5 +277,8 @@
         private System.Windows.Forms.ComboBox cmbCat;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView dgvCat;
+        private System.Windows.Forms.PictureBox pboxImag;
+        private System.Windows.Forms.Label lblImag;
+        private System.Windows.Forms.OpenFileDialog ofImag;
     }
 }

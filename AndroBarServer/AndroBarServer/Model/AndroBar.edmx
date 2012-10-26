@@ -44,6 +44,7 @@
           <Property Name="Description" Type="text" />
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="CostPrice" Type="float" Nullable="false" />
+          <Property Name="Image" Type="longblob" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -125,6 +126,7 @@
           <Property Type="Single" Name="Price" Nullable="false" />
           <Property Type="Single" Name="CostPrice" Nullable="false" />
           <NavigationProperty Name="category_products" Relationship="androbarModel.FK_category_products_products" FromRole="product" ToRole="category_products" />
+          <Property Type="Binary" Name="Image" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -186,6 +188,7 @@
           <EntitySetMapping Name="products">
             <EntityTypeMapping TypeName="androbarModel.product">
               <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="CostPrice" ColumnName="CostPrice" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

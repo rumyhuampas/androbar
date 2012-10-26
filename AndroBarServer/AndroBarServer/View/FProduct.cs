@@ -9,12 +9,14 @@ using System.Windows.Forms;
 using AndroBarServer.Controller;
 using AndroBarServer.Properties;
 using AndroBarServer.Model;
+using System.IO;
 
 namespace AndroBarServer.View
 {
     public partial class FProduct : Form
     {
         private Product _controller;
+        private bool _imageChanged;
         private int _prodId;
         BackgroundWorker productLoader;
         IEnumerable<dynamic> dgvCategories = null;
@@ -27,6 +29,7 @@ namespace AndroBarServer.View
 
             _controller = new Product();
             _prodId = -1;
+            _imageChanged = false;
 
             productLoader = new BackgroundWorker();
             productLoader.DoWork += new DoWorkEventHandler(productLoader_DoWork);
@@ -43,6 +46,7 @@ namespace AndroBarServer.View
 
             _controller = new Product();
             _prodId = prodId;
+            _imageChanged = false;
 
             productLoader = new BackgroundWorker();
             productLoader.DoWork += new DoWorkEventHandler(productLoader_DoWork);
@@ -62,10 +66,17 @@ namespace AndroBarServer.View
             if(prod.Description != null) rtxtDesc.Text = prod.Description;
             txtCostPrice.Text = prod.CostPrice.ToString();
             txtPrice.Text = prod.Price.ToString();
+            if (prod.Image != null)
+            {
+                pboxImag.Image = Image.FromStream(new MemoryStream(prod.Image));
+            }
         }
 
         private void ClearForm()
         {
+            pboxImag.Image = null;
+            ofImag.FileName = "";
+            _imageChanged = false;
             _prodId = -1;
             txtName.Clear();
             rtxtDesc.Clear();
@@ -77,6 +88,17 @@ namespace AndroBarServer.View
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void pboxImag_Click(object sender, EventArgs e)
+        {
+            ofImag.ShowDialog(this);
+        }
+
+        private void ofImag_FileOk(object sender, CancelEventArgs e)
+        {
+            pboxImag.ImageLocation = ofImag.FileName;
+            _imageChanged = true;
         }
 
         private void FProduct_Shown(object sender, EventArgs e)
@@ -164,7 +186,14 @@ namespace AndroBarServer.View
             try
             {
                 _controller.DeleteProductCategoryRelations(_prodId);
-                _prodId = _controller.SaveProduct(_prodId, txtName.Text, rtxtDesc.Text, txtPrice.Text, txtCostPrice.Text);
+                if (_imageChanged == true)
+                {
+                    _prodId = _controller.SaveProduct(_prodId, txtName.Text, rtxtDesc.Text, txtPrice.Text, txtCostPrice.Text, ofImag.OpenFile());
+                }
+                else
+                {
+                    _prodId = _controller.SaveProduct(_prodId, txtName.Text, rtxtDesc.Text, txtPrice.Text, txtCostPrice.Text, null);
+                }
                 if (_prodId != -1)
                 {
                     if (dgvCat.Rows.Count > 0)

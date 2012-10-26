@@ -646,6 +646,30 @@ namespace AndroBarServer.Model
         private global::System.Single _CostPrice;
         partial void OnCostPriceChanging(global::System.Single value);
         partial void OnCostPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] Image
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_Image);
+            }
+            set
+            {
+                OnImageChanging(value);
+                ReportPropertyChanging("Image");
+                _Image = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Image");
+                OnImageChanged();
+            }
+        }
+        private global::System.Byte[] _Image;
+        partial void OnImageChanging(global::System.Byte[] value);
+        partial void OnImageChanged();
 
         #endregion
     
