@@ -1,7 +1,17 @@
 package entities;
 
+import image.ImageManagement;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Product {
 
@@ -11,15 +21,86 @@ public class Product {
     public static final String FIELD_DESC = "Description";
     public static final String FIELD_PRICE = "Price";
     public static final String FIELD_COSTPRICE = "CostPrice";
+    public static final String FIELD_IMAGE = "Image";
     private Connection Conn;
     private int Id;
     public String Name;
     public String Description;
     public Float Price;
     public Float CostPrice;
+    private Image Img;
+    private File ImageFile;
+    public boolean ImageChanged;
+    public InputStream ImageStream;
 
     public int getId() {
         return this.Id;
+    }
+
+    public void SetImage(String imagePath) {
+        if (imagePath != null) {
+            this.ImageFile = new File(imagePath);
+            if (this.ImageFile.exists()) {
+                try {
+                    this.ImageStream = new FileInputStream(this.ImageFile);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                this.ImageFile = null;
+            }
+        }
+    }
+
+    public Image GetImage() {
+        if (this.ImageStream != null) {
+            try {
+                this.Img = ImageIO.read(this.ImageStream);
+                this.ImageStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return this.Img;
+    }
+
+    public ImageIcon GetImageIcon() {
+        if (this.Img == null) {
+            GetImage();
+        }
+        if (this.Img != null) {
+            return new ImageIcon(this.Img);
+        } else {
+            return null;
+        }
+    }
+
+    public ImageIcon GetImageIconResized(int width, int height) {
+        if (this.Img == null) {
+            GetImage();
+        }
+        if (this.Img != null) {
+            Image image2 = this.Img;
+            ImageManagement gImg = new ImageManagement(image2);
+            image2 = gImg.getImage();
+            BufferedImage tnsImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            Graphics2D graphics2D = tnsImg.createGraphics();
+            graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            graphics2D.drawImage(image2, 0, 0, width, height, null);
+            //  Icon icon = new ImageIcon(tnsImg);
+
+
+            return new ImageIcon(tnsImg);
+        } else {
+            return null;
+        }
+
+    }
+
+    public void ClearImage() {
+        this.Img = null;
+        this.ImageFile = null;
+        this.ImageStream = null;
     }
 
     public Product(Connection conn) throws SQLException {
@@ -33,6 +114,7 @@ public class Product {
         this.Description = "";
         this.Price = Float.parseFloat("0");
         this.CostPrice = Float.parseFloat("0");
+        this.ClearImage();
     }
 
     public boolean Load(Integer id) throws SQLException {
@@ -68,6 +150,7 @@ public class Product {
                 this.Description = results.getString(this.FIELD_DESC);
                 this.Price = results.getFloat(this.FIELD_PRICE);
                 this.CostPrice = results.getFloat(this.FIELD_COSTPRICE);
+                this.ImageStream = results.getBinaryStream(this.FIELD_IMAGE);
                 return true;
             } else {
                 return false;
@@ -94,14 +177,20 @@ public class Product {
                 + this.FIELD_NAME + ", "
                 + this.FIELD_DESC + ", "
                 + this.FIELD_PRICE + ","
-                + this.FIELD_COSTPRICE
-                + ") VALUES (?,?,?,?)";
+                + this.FIELD_COSTPRICE + ","
+                + this.FIELD_IMAGE
+                + ") VALUES (?,?,?,?,?)";
         PreparedStatement qry = this.Conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         try {
             qry.setString(1, this.Name);
             qry.setString(2, this.Description);
             qry.setFloat(3, this.Price);
             qry.setFloat(4, this.CostPrice);
+            if (this.ImageFile != null) {
+                qry.setBinaryStream(5, this.ImageStream, (int) (this.ImageFile.length()));
+            } else {
+                qry.setBinaryStream(5, null);
+            }
             if (qry.executeUpdate() > 0) {
                 ResultSet result = qry.getGeneratedKeys();
                 result.next();
@@ -120,7 +209,8 @@ public class Product {
                 + this.FIELD_NAME + " = ?,"
                 + this.FIELD_DESC + " = ?,"
                 + this.FIELD_PRICE + " = ?,"
-                + this.FIELD_COSTPRICE + " = ?"
+                + this.FIELD_COSTPRICE + " = ?,"
+                + this.FIELD_IMAGE + " = ?"
                 + " WHERE " + this.FIELD_ID + " = ?";
         PreparedStatement qry = this.Conn.prepareStatement(sql);
         try {
@@ -128,7 +218,13 @@ public class Product {
             qry.setString(2, this.Description);
             qry.setFloat(3, this.Price);
             qry.setFloat(4, this.CostPrice);
-            qry.setInt(5, this.Id);
+            if (this.ImageFile != null) {
+                // DE DONDE VIENE IMAGEFILE (EL PATH)SI NO ESTA EN LA BASE DE DATOS Y EL MODIFICAR OBTIENE LOS DATOS D AHI
+                qry.setBinaryStream(5, this.ImageStream, (int) (this.ImageFile.length()));
+            } else {
+                qry.setBinaryStream(5, null);
+            }
+            qry.setInt(6, this.Id);
             return qry.executeUpdate() > 0;
         } finally {
             qry.close();
