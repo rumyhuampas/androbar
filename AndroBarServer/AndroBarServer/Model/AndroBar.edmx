@@ -8,7 +8,10 @@
         <EntityContainer Name="androbarModelStoreContainer">
           <EntitySet Name="categories" EntityType="androbarModel.Store.categories" store:Type="Tables" Schema="androbar" />
           <EntitySet Name="category_products" EntityType="androbarModel.Store.category_products" store:Type="Tables" Schema="androbar" />
+          <EntitySet Name="order_products" EntityType="androbarModel.Store.order_products" store:Type="Tables" Schema="androbar" />
+          <EntitySet Name="orders" EntityType="androbarModel.Store.orders" store:Type="Tables" Schema="androbar" />
           <EntitySet Name="products" EntityType="androbarModel.Store.products" store:Type="Tables" Schema="androbar" />
+          <EntitySet Name="tables" EntityType="androbarModel.Store.tables" store:Type="Tables" Schema="androbar" />
           <EntitySet Name="users" EntityType="androbarModel.Store.users" store:Type="Tables" Schema="androbar" />
           <AssociationSet Name="FK_category_products_category" Association="androbarModel.Store.FK_category_products_category">
             <End Role="categories" EntitySet="categories" />
@@ -17,6 +20,18 @@
           <AssociationSet Name="FK_category_products_products" Association="androbarModel.Store.FK_category_products_products">
             <End Role="products" EntitySet="products" />
             <End Role="category_products" EntitySet="category_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_products_orders" Association="androbarModel.Store.FK_order_products_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_products" EntitySet="order_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_products_products" Association="androbarModel.Store.FK_order_products_products">
+            <End Role="products" EntitySet="products" />
+            <End Role="order_products" EntitySet="order_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_tables" Association="androbarModel.Store.FK_orders_tables">
+            <End Role="tables" EntitySet="tables" />
+            <End Role="orders" EntitySet="orders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="categories">
@@ -35,6 +50,23 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="order_products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TableId" Type="int" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="products">
           <Key>
             <PropertyRef Name="Id" />
@@ -45,6 +77,13 @@
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="CostPrice" Type="float" Nullable="false" />
           <Property Name="Image" Type="longblob" />
+        </EntityType>
+        <EntityType Name="tables">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -79,6 +118,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_order_products_orders">
+          <End Role="orders" Type="androbarModel.Store.orders" Multiplicity="1" />
+          <End Role="order_products" Type="androbarModel.Store.order_products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="order_products">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_products_products">
+          <End Role="products" Type="androbarModel.Store.products" Multiplicity="1" />
+          <End Role="order_products" Type="androbarModel.Store.order_products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="order_products">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_tables">
+          <End Role="tables" Type="androbarModel.Store.tables" Multiplicity="1" />
+          <End Role="orders" Type="androbarModel.Store.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tables">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -95,6 +170,21 @@
           <AssociationSet Name="FK_category_products_products" Association="androbarModel.FK_category_products_products">
             <End Role="product" EntitySet="products" />
             <End Role="category_products" EntitySet="category_products" />
+          </AssociationSet>
+          <EntitySet Name="order_products" EntityType="androbarModel.order_products" />
+          <EntitySet Name="orders" EntityType="androbarModel.order" />
+          <EntitySet Name="tables" EntityType="androbarModel.table" />
+          <AssociationSet Name="FK_order_products_orders" Association="androbarModel.FK_order_products_orders">
+            <End Role="order" EntitySet="orders" />
+            <End Role="order_products" EntitySet="order_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_products_products" Association="androbarModel.FK_order_products_products">
+            <End Role="product" EntitySet="products" />
+            <End Role="order_products" EntitySet="order_products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_tables" Association="androbarModel.FK_orders_tables">
+            <End Role="table" EntitySet="tables" />
+            <End Role="order" EntitySet="orders" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="category">
@@ -127,6 +217,7 @@
           <Property Type="Single" Name="CostPrice" Nullable="false" />
           <NavigationProperty Name="category_products" Relationship="androbarModel.FK_category_products_products" FromRole="product" ToRole="category_products" />
           <Property Type="Binary" Name="Image" />
+          <NavigationProperty Name="order_products" Relationship="androbarModel.FK_order_products_products" FromRole="product" ToRole="order_products" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -158,6 +249,71 @@
             </Principal>
             <Dependent Role="category_products">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="order_products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="OrderId" Nullable="false" />
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <NavigationProperty Name="order" Relationship="androbarModel.FK_order_products_orders" FromRole="order_products" ToRole="order" />
+          <NavigationProperty Name="product" Relationship="androbarModel.FK_order_products_products" FromRole="order_products" ToRole="product" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TableId" Nullable="false" />
+          <Property Type="DateTime" Name="DateTime" Nullable="false" />
+          <Property Type="String" Name="Status" Nullable="false" />
+          <NavigationProperty Name="order_products" Relationship="androbarModel.FK_order_products_orders" FromRole="order" ToRole="order_products" />
+          <NavigationProperty Name="table" Relationship="androbarModel.FK_orders_tables" FromRole="order" ToRole="table" />
+        </EntityType>
+        <EntityType Name="table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Number" Nullable="false" />
+          <NavigationProperty Name="orders" Relationship="androbarModel.FK_orders_tables" FromRole="table" ToRole="order" />
+        </EntityType>
+        <Association Name="FK_order_products_orders">
+          <End Type="androbarModel.order" Role="order" Multiplicity="1" />
+          <End Type="androbarModel.order_products" Role="order_products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="order_products">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_products_products">
+          <End Type="androbarModel.product" Role="product" Multiplicity="1" />
+          <End Type="androbarModel.order_products" Role="order_products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="order_products">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_tables">
+          <End Type="androbarModel.table" Role="table" Multiplicity="1" />
+          <End Type="androbarModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="TableId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -207,6 +363,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="order_products">
+            <EntityTypeMapping TypeName="androbarModel.order_products">
+              <MappingFragment StoreEntitySet="order_products">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="androbarModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tables">
+            <EntityTypeMapping TypeName="androbarModel.table">
+              <MappingFragment StoreEntitySet="tables">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -237,9 +420,28 @@
           <ConnectorPoint PointX="3" PointY="1.8939925130208337" />
         </AssociationConnector>
         <AssociationConnector Association="androbarModel.FK_category_products_products" >
-          <ConnectorPoint PointX="2.25" PointY="5.8240364583333353" />
-          <ConnectorPoint PointX="4.40625" PointY="5.8240364583333353" />
+          <ConnectorPoint PointX="2.25" PointY="6.016337890625" />
+          <ConnectorPoint PointX="4.40625" PointY="6.016337890625" />
           <ConnectorPoint PointX="4.40625" PointY="2.8552864583333317" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="androbarModel.order_products" Width="1.5" PointX="9.875" PointY="2.75" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="androbarModel.order" Width="1.5" PointX="7.625" PointY="0.875" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="androbarModel.table" Width="1.5" PointX="5.375" PointY="1.25" Height="1.5956835937499996" />
+        <AssociationConnector Association="androbarModel.FK_order_products_orders" >
+          <ConnectorPoint PointX="9.125" PointY="1.8124995" />
+          <ConnectorPoint PointX="10.625" PointY="1.8124995" />
+          <ConnectorPoint PointX="10.625" PointY="2.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="androbarModel.FK_order_products_products" >
+          <ConnectorPoint PointX="2.25" PointY="5.7771589583333327" />
+          <ConnectorPoint PointX="4.322916666666667" PointY="5.7771589583333318" />
+          <ConnectorPoint PointX="4.489583333333333" PointY="5.7771589583333327" />
+          <ConnectorPoint PointX="10.625" PointY="5.7771589583333327" />
+          <ConnectorPoint PointX="10.625" PointY="4.7302864583333317" />
+        </AssociationConnector>
+        <AssociationConnector Association="androbarModel.FK_orders_tables" >
+          <ConnectorPoint PointX="6.875" PointY="2.047841796875" />
+          <ConnectorPoint PointX="7.625" PointY="2.047841796875" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

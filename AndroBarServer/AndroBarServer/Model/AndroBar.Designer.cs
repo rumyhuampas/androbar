@@ -20,6 +20,9 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("androbarModel", "FK_category_products_category", "category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AndroBarServer.Model.category), "category_products", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AndroBarServer.Model.category_products), true)]
 [assembly: EdmRelationshipAttribute("androbarModel", "FK_category_products_products", "product", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AndroBarServer.Model.product), "category_products", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AndroBarServer.Model.category_products), true)]
+[assembly: EdmRelationshipAttribute("androbarModel", "FK_order_products_orders", "order", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AndroBarServer.Model.order), "order_products", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AndroBarServer.Model.order_products), true)]
+[assembly: EdmRelationshipAttribute("androbarModel", "FK_order_products_products", "product", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AndroBarServer.Model.product), "order_products", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AndroBarServer.Model.order_products), true)]
+[assembly: EdmRelationshipAttribute("androbarModel", "FK_orders_tables", "table", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AndroBarServer.Model.table), "order", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AndroBarServer.Model.order), true)]
 
 #endregion
 
@@ -134,6 +137,54 @@ namespace AndroBarServer.Model
             }
         }
         private ObjectSet<user> _users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<order_products> order_products
+        {
+            get
+            {
+                if ((_order_products == null))
+                {
+                    _order_products = base.CreateObjectSet<order_products>("order_products");
+                }
+                return _order_products;
+            }
+        }
+        private ObjectSet<order_products> _order_products;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<order> orders
+        {
+            get
+            {
+                if ((_orders == null))
+                {
+                    _orders = base.CreateObjectSet<order>("orders");
+                }
+                return _orders;
+            }
+        }
+        private ObjectSet<order> _orders;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<table> tables
+        {
+            get
+            {
+                if ((_tables == null))
+                {
+                    _tables = base.CreateObjectSet<table>("tables");
+                }
+                return _tables;
+            }
+        }
+        private ObjectSet<table> _tables;
 
         #endregion
         #region AddTo Methods
@@ -168,6 +219,30 @@ namespace AndroBarServer.Model
         public void AddTousers(user user)
         {
             base.AddObject("users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the order_products EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToorder_products(order_products order_products)
+        {
+            base.AddObject("order_products", order_products);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the orders EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToorders(order order)
+        {
+            base.AddObject("orders", order);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the tables EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTotables(table table)
+        {
+            base.AddObject("tables", table);
         }
 
         #endregion
@@ -497,6 +572,388 @@ namespace AndroBarServer.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="androbarModel", Name="order")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class order : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new order object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="tableId">Initial value of the TableId property.</param>
+        /// <param name="dateTime">Initial value of the DateTime property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
+        public static order Createorder(global::System.Int32 id, global::System.Int32 tableId, global::System.DateTime dateTime, global::System.String status)
+        {
+            order order = new order();
+            order.Id = id;
+            order.TableId = tableId;
+            order.DateTime = dateTime;
+            order.Status = status;
+            return order;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TableId
+        {
+            get
+            {
+                return _TableId;
+            }
+            set
+            {
+                OnTableIdChanging(value);
+                ReportPropertyChanging("TableId");
+                _TableId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TableId");
+                OnTableIdChanged();
+            }
+        }
+        private global::System.Int32 _TableId;
+        partial void OnTableIdChanging(global::System.Int32 value);
+        partial void OnTableIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateTime
+        {
+            get
+            {
+                return _DateTime;
+            }
+            set
+            {
+                OnDateTimeChanging(value);
+                ReportPropertyChanging("DateTime");
+                _DateTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateTime");
+                OnDateTimeChanged();
+            }
+        }
+        private global::System.DateTime _DateTime;
+        partial void OnDateTimeChanging(global::System.DateTime value);
+        partial void OnDateTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("androbarModel", "FK_order_products_orders", "order_products")]
+        public EntityCollection<order_products> order_products
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<order_products>("androbarModel.FK_order_products_orders", "order_products");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<order_products>("androbarModel.FK_order_products_orders", "order_products", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("androbarModel", "FK_orders_tables", "table")]
+        public table table
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<table>("androbarModel.FK_orders_tables", "table").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<table>("androbarModel.FK_orders_tables", "table").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<table> tableReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<table>("androbarModel.FK_orders_tables", "table");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<table>("androbarModel.FK_orders_tables", "table", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="androbarModel", Name="order_products")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class order_products : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new order_products object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="orderId">Initial value of the OrderId property.</param>
+        /// <param name="productId">Initial value of the ProductId property.</param>
+        public static order_products Createorder_products(global::System.Int32 id, global::System.Int32 orderId, global::System.Int32 productId)
+        {
+            order_products order_products = new order_products();
+            order_products.Id = id;
+            order_products.OrderId = orderId;
+            order_products.ProductId = productId;
+            return order_products;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrderId
+        {
+            get
+            {
+                return _OrderId;
+            }
+            set
+            {
+                OnOrderIdChanging(value);
+                ReportPropertyChanging("OrderId");
+                _OrderId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrderId");
+                OnOrderIdChanged();
+            }
+        }
+        private global::System.Int32 _OrderId;
+        partial void OnOrderIdChanging(global::System.Int32 value);
+        partial void OnOrderIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProductId
+        {
+            get
+            {
+                return _ProductId;
+            }
+            set
+            {
+                OnProductIdChanging(value);
+                ReportPropertyChanging("ProductId");
+                _ProductId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ProductId");
+                OnProductIdChanged();
+            }
+        }
+        private global::System.Int32 _ProductId;
+        partial void OnProductIdChanging(global::System.Int32 value);
+        partial void OnProductIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("androbarModel", "FK_order_products_orders", "order")]
+        public order order
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<order>("androbarModel.FK_order_products_orders", "order").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<order>("androbarModel.FK_order_products_orders", "order").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<order> orderReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<order>("androbarModel.FK_order_products_orders", "order");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<order>("androbarModel.FK_order_products_orders", "order", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("androbarModel", "FK_order_products_products", "product")]
+        public product product
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_order_products_products", "product").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_order_products_products", "product").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<product> productReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<product>("androbarModel.FK_order_products_products", "product");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<product>("androbarModel.FK_order_products_products", "product", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="androbarModel", Name="product")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -693,6 +1150,134 @@ namespace AndroBarServer.Model
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<category_products>("androbarModel.FK_category_products_products", "category_products", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("androbarModel", "FK_order_products_products", "order_products")]
+        public EntityCollection<order_products> order_products
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<order_products>("androbarModel.FK_order_products_products", "order_products");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<order_products>("androbarModel.FK_order_products_products", "order_products", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="androbarModel", Name="table")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class table : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new table object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="number">Initial value of the Number property.</param>
+        public static table Createtable(global::System.Int32 id, global::System.Int32 number)
+        {
+            table table = new table();
+            table.Id = id;
+            table.Number = number;
+            return table;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Number
+        {
+            get
+            {
+                return _Number;
+            }
+            set
+            {
+                OnNumberChanging(value);
+                ReportPropertyChanging("Number");
+                _Number = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Number");
+                OnNumberChanged();
+            }
+        }
+        private global::System.Int32 _Number;
+        partial void OnNumberChanging(global::System.Int32 value);
+        partial void OnNumberChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("androbarModel", "FK_orders_tables", "order")]
+        public EntityCollection<order> orders
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<order>("androbarModel.FK_orders_tables", "order");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<order>("androbarModel.FK_orders_tables", "order", value);
                 }
             }
         }

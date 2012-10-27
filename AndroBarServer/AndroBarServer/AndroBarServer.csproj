@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ScrollablePanelApp">
+      <HintPath>..\..\ScrollablePanelApp\ScrollablePanelApp\bin\Debug\ScrollablePanelApp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
@@ -52,6 +55,7 @@
     <Compile Include="Controller\ABMHelper.cs" />
     <Compile Include="Controller\Categories.cs" />
     <Compile Include="Controller\Category.cs" />
+    <Compile Include="Controller\Main.cs" />
     <Compile Include="Controller\Product.cs" />
     <Compile Include="Controller\Products.cs" />
     <Compile Include="View\FCategories.cs">
@@ -134,6 +138,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\currency_dollar_yellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

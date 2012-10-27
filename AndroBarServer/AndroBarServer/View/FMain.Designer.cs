@@ -28,15 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miABM = new System.Windows.Forms.ToolStripMenuItem();
             this.miCat = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.miProd = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusMain = new System.Windows.Forms.StatusStrip();
+            this.toolMain = new System.Windows.Forms.ToolStrip();
+            this.splitMain = new System.Windows.Forms.SplitContainer();
+            this.dgvTables = new System.Windows.Forms.DataGridView();
+            this.pnlTop = new System.Windows.Forms.Panel();
+            this.lblOrderTitle = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlOrder = new System.Windows.Forms.Panel();
             this.menuMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
+            this.splitMain.Panel1.SuspendLayout();
+            this.splitMain.Panel2.SuspendLayout();
+            this.splitMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTables)).BeginInit();
+            this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuMain
@@ -61,8 +76,9 @@
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(152, 22);
+            this.miExit.Size = new System.Drawing.Size(96, 22);
             this.miExit.Text = "Salir";
+            this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
             // miABM
             // 
@@ -76,47 +92,157 @@
             // miCat
             // 
             this.miCat.Name = "miCat";
-            this.miCat.Size = new System.Drawing.Size(152, 22);
+            this.miCat.Size = new System.Drawing.Size(130, 22);
             this.miCat.Text = "Categorias";
             this.miCat.Click += new System.EventHandler(this.miCat_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(852, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(852, 25);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // miProd
             // 
             this.miProd.Name = "miProd";
-            this.miProd.Size = new System.Drawing.Size(152, 22);
+            this.miProd.Size = new System.Drawing.Size(130, 22);
             this.miProd.Text = "Productos";
             this.miProd.Click += new System.EventHandler(this.miProd_Click);
+            // 
+            // statusMain
+            // 
+            this.statusMain.Location = new System.Drawing.Point(0, 470);
+            this.statusMain.Name = "statusMain";
+            this.statusMain.Size = new System.Drawing.Size(852, 22);
+            this.statusMain.TabIndex = 1;
+            this.statusMain.Text = "statusStrip1";
+            // 
+            // toolMain
+            // 
+            this.toolMain.Location = new System.Drawing.Point(0, 24);
+            this.toolMain.Name = "toolMain";
+            this.toolMain.Size = new System.Drawing.Size(852, 25);
+            this.toolMain.TabIndex = 2;
+            this.toolMain.Text = "toolStrip1";
+            // 
+            // splitMain
+            // 
+            this.splitMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitMain.Location = new System.Drawing.Point(0, 49);
+            this.splitMain.Name = "splitMain";
+            // 
+            // splitMain.Panel1
+            // 
+            this.splitMain.Panel1.Controls.Add(this.dgvTables);
+            this.splitMain.Panel1.Padding = new System.Windows.Forms.Padding(10);
+            // 
+            // splitMain.Panel2
+            // 
+            this.splitMain.Panel2.Controls.Add(this.pnlOrder);
+            this.splitMain.Panel2.Controls.Add(this.panel2);
+            this.splitMain.Panel2.Controls.Add(this.pnlTop);
+            this.splitMain.Panel2.Padding = new System.Windows.Forms.Padding(10);
+            this.splitMain.Size = new System.Drawing.Size(852, 421);
+            this.splitMain.SplitterDistance = 193;
+            this.splitMain.TabIndex = 3;
+            // 
+            // dgvTables
+            // 
+            this.dgvTables.AllowUserToAddRows = false;
+            this.dgvTables.AllowUserToDeleteRows = false;
+            this.dgvTables.AllowUserToResizeRows = false;
+            this.dgvTables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvTables.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvTables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTables.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTables.Location = new System.Drawing.Point(10, 10);
+            this.dgvTables.MultiSelect = false;
+            this.dgvTables.Name = "dgvTables";
+            this.dgvTables.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTables.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvTables.RowHeadersVisible = false;
+            this.dgvTables.RowTemplate.Height = 24;
+            this.dgvTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTables.Size = new System.Drawing.Size(173, 401);
+            this.dgvTables.TabIndex = 13;
+            this.dgvTables.SelectionChanged += new System.EventHandler(this.dgvTables_SelectionChanged);
+            // 
+            // pnlTop
+            // 
+            this.pnlTop.Controls.Add(this.lblOrderTitle);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTop.Location = new System.Drawing.Point(10, 10);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(635, 40);
+            this.pnlTop.TabIndex = 0;
+            // 
+            // lblOrderTitle
+            // 
+            this.lblOrderTitle.AutoSize = true;
+            this.lblOrderTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderTitle.Location = new System.Drawing.Point(3, 9);
+            this.lblOrderTitle.Name = "lblOrderTitle";
+            this.lblOrderTitle.Size = new System.Drawing.Size(60, 24);
+            this.lblOrderTitle.TabIndex = 0;
+            this.lblOrderTitle.Text = "Mesa";
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(10, 356);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(635, 55);
+            this.panel2.TabIndex = 2;
+            // 
+            // pnlOrder
+            // 
+            this.pnlOrder.AutoScroll = true;
+            this.pnlOrder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlOrder.Location = new System.Drawing.Point(10, 50);
+            this.pnlOrder.Name = "pnlOrder";
+            this.pnlOrder.Size = new System.Drawing.Size(635, 306);
+            this.pnlOrder.TabIndex = 3;
             // 
             // FMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(852, 492);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.splitMain);
+            this.Controls.Add(this.toolMain);
+            this.Controls.Add(this.statusMain);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
             this.Name = "FMain";
             this.Text = "AndroBar";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FMain_Load);
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
+            this.splitMain.Panel1.ResumeLayout(false);
+            this.splitMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
+            this.splitMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTables)).EndInit();
+            this.pnlTop.ResumeLayout(false);
+            this.pnlTop.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,13 +251,19 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuMain;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.StatusStrip statusMain;
+        private System.Windows.Forms.ToolStrip toolMain;
         private System.Windows.Forms.ToolStripMenuItem miFile;
         private System.Windows.Forms.ToolStripMenuItem miExit;
         private System.Windows.Forms.ToolStripMenuItem miABM;
         private System.Windows.Forms.ToolStripMenuItem miCat;
         private System.Windows.Forms.ToolStripMenuItem miProd;
+        private System.Windows.Forms.SplitContainer splitMain;
+        private System.Windows.Forms.DataGridView dgvTables;
+        private System.Windows.Forms.Panel pnlTop;
+        private System.Windows.Forms.Label lblOrderTitle;
+        private System.Windows.Forms.Panel pnlOrder;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
