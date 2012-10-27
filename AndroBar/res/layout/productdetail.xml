@@ -10,30 +10,72 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:padding="10px"
     >
         <TextView
             android:id="@+id/pd_name"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:textColor="#FFF"
         >
         </TextView>
-        <ImageView
-            android:id="@+id/pd_img"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:padding="10px"
+            android:gravity="center"
             android:layout_weight="1"
         >
-        </ImageView>
-        <TextView
-            android:id="@+id/pd_desc"
+            <ImageView
+                android:id="@+id/pd_img"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+            >
+            </ImageView>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:background="#FFF"
-            android:lines="5"
+            android:layout_height="wrap_content"
+            android:padding="10px"
         >
-        </TextView>
+            <TextView
+                android:id="@+id/pd_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#FFF"
+                android:lines="5"
+                android:textColor="#000"
+                android:padding="10px"
+            >
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10px"
+        >
+            <TextView
+                android:id="@+id/pd_lblPrice"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textColor="#FFF"
+                android:text="Precio:"
+            >
+            </TextView>
+            <TextView
+                android:id="@+id/pd_txtPrice"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="#FFF"
+                android:textColor="#000"
+            >
+            </TextView>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

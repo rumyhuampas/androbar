@@ -10,7 +10,7 @@ public class ProductDetail extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        setContentView(R.layout.categories);
+        setContentView(R.layout.productdetail);
         
         controller = new andro.bar.controllers.ProductDetail(this);
     }
