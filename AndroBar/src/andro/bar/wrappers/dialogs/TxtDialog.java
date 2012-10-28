@@ -26,6 +26,14 @@ public class TxtDialog extends andro.bar.wrappers.dialogs.Base {
         etxt.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
     
+    public TxtDialog(Context context, String title, String defaultText){
+        super(context, title);
+        dialog.setContentView(R.layout.txtdialog);
+        ((Button)dialog.findViewById(R.id.txtd_btnOK)).setOnClickListener(defaultCallback);
+        etxt = ((EditText)dialog.findViewById(R.id.txtd_txt));
+        etxt.setText(defaultText);
+    }
+    
     public void SetCallback(View.OnClickListener callback){
         if (callback == null){
             callback = defaultCallback;

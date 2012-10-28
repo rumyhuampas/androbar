@@ -30,6 +30,10 @@ public class Base {
         return new TxtDialog(context, title);
     }
     
+    public andro.bar.wrappers.dialogs.TxtDialog CreateTxtMessage(Context context, String title, String defaultText){
+        return new TxtDialog(context, title, defaultText);
+    }
+    
     public andro.bar.wrappers.dialogs.TxtDialog CreateNumericTxtMessage(Context context, String title){
         return new TxtDialog(context, title, true);
     }
