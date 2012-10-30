@@ -3,6 +3,7 @@ package entities;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Order {
 
@@ -32,8 +33,7 @@ public class Order {
     public void Clear() {
         this.Id = -1;
         this.TableId = -1;
-        java.util.Date today = new java.util.Date();
-        this.DateTime = new Date(today.getTime());
+        this.DateTime = null;
         this.Status = "RECEIVED";
     }
 
@@ -80,11 +80,25 @@ public class Order {
                 + this.FIELD_DATETIME + ", "
                 + this.FIELD_STATUS
                 + ") VALUES (?,?,?)";
-        PreparedStatement qry = this.Conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql2 = "INSERT INTO " + this.TABLENAME + " ("
+                + this.FIELD_TABLEID + ", "
+                + this.FIELD_DATETIME + ", "
+                + this.FIELD_STATUS
+                + ") VALUES (?,NOW(),?)";
+        PreparedStatement qry = null;
+        if (this.DateTime != null) {
+            qry = this.Conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        } else {
+            qry = this.Conn.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+        }
         try {
             qry.setInt(1, this.TableId);
-            qry.setDate(2, this.DateTime);
-            qry.setString(3, this.Status);
+            if (this.DateTime != null) {
+                qry.setDate(2, this.DateTime);
+                qry.setString(3, this.Status);
+            } else {
+                qry.setString(2, this.Status);
+            }
             if (qry.executeUpdate() > 0) {
                 ResultSet result = qry.getGeneratedKeys();
                 result.next();
@@ -158,7 +172,6 @@ public class Order {
      * row.add(results.getFloat(Product.FIELD_PRICE));
      * row.add(results.getFloat(Product.FIELD_COSTPRICE));
      * rows.add(row.toArray()); row.clear(); } return rows.toArray(); } finally
-     * { results.close(); } } finally { qry.close(); }
-    }
+     * { results.close(); } } finally { qry.close(); } }
      */
 }
