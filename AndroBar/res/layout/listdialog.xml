@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:paddingRight="10dp"
+              android:paddingLeft="10dp"
+>
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+    >
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+        >
+            <RadioGroup
+                android:id="@+id/listd_items"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </RadioGroup>
+        </ScrollView>
+    </LinearLayout>
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+    >
+        <Button
+            android:id="@+id/listd_btnOK"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="OK"
+        />
+    </LinearLayout>
+</LinearLayout>

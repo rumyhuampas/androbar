@@ -4,6 +4,7 @@ import andro.bar.R;
 import andro.bar.wrappers.dialogs.*;
 import android.content.Context;
 import android.widget.Toast;
+import java.util.ArrayList;
 
 public class Base {
     public static void ShowToast(Context context, String msg){
@@ -36,5 +37,9 @@ public class Base {
     
     public andro.bar.wrappers.dialogs.TxtDialog CreateNumericTxtMessage(Context context, String title){
         return new TxtDialog(context, title, true);
+    }
+    
+    public andro.bar.wrappers.dialogs.ListDialog CreateListMessage(Context context, String title, ArrayList items){
+        return new ListDialog(context, title, items);
     }
 }

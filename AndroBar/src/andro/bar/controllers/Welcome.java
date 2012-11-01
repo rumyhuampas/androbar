@@ -2,6 +2,7 @@ package andro.bar.controllers;
 
 import Database.MySQL;
 import andro.bar.wrappers.OrderList;
+import andro.bar.wrappers.dialogs.ListDialog;
 import andro.bar.wrappers.dialogs.TxtDialog;
 import android.view.View;
 
@@ -29,7 +30,7 @@ public class Welcome extends andro.bar.controllers.Base {
 
             public void onClick(View view) {
                 mysql = new MySQL(dialog.GetText() + ":3306", "androbar", "root", "");
-                
+
                 MainList = new OrderList();
                 MainList.Clear();
 
