@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -15,11 +16,14 @@ public class Order {
     private static final String CATPROD_TABLENAME = "Category_Products";
     private static final String FIELD_CATID = "CategoryId";
     private static final String FIELD_PRODID = "ProductId";
+    private static final String OP_TABLENAME = "Order_Products";
+    private static final String FIELD_ORDERID = "OrderId";
     private Connection Conn;
     private int Id;
     public int TableId;
     private Date DateTime;
     private String Status;
+    public ArrayList Products;
 
     public int getId() {
         return this.Id;
@@ -27,6 +31,7 @@ public class Order {
 
     public Order(Connection conn) throws SQLException {
         this.Conn = conn;
+        this.Products = new ArrayList();
         this.Clear();
     }
 
@@ -35,6 +40,7 @@ public class Order {
         this.TableId = -1;
         this.DateTime = null;
         this.Status = "RECEIVED";
+        this.Products.clear();
     }
 
     public boolean Load(Integer id) throws SQLException {
@@ -57,6 +63,7 @@ public class Order {
                 this.TableId = results.getInt(this.FIELD_TABLEID);
                 this.DateTime = results.getDate(this.FIELD_DATETIME);
                 this.Status = results.getString(FIELD_STATUS);
+                SelectProducts(this.Id);
                 return true;
             } else {
                 return false;
@@ -66,11 +73,46 @@ public class Order {
         }
     }
 
+    private boolean SelectProducts(int orderId) throws SQLException {
+        String sql = "SELECT * FROM " + this.OP_TABLENAME + " WHERE "
+                + this.FIELD_ORDERID + " = ?";
+        PreparedStatement qry = this.Conn.prepareStatement(sql);
+        try {
+            qry.setInt(1, orderId);
+            ResultSet results = qry.executeQuery();
+            try {
+                while (results.next()) {
+                    Product prod = new Product(this.Conn);
+                    prod.Load(results.getInt(this.FIELD_PRODID));
+                    this.Products.add(prod);
+                }
+                return true;
+            } finally {
+                results.close();
+            }
+        } finally {
+            qry.close();
+        }
+    }
+
     public boolean Save() throws SQLException {
         if (this.Id == -1) {
-            return InsertOrder();
+            if (InsertOrder()) {
+                return InsertProducts();
+            } else {
+                return false;
+            }
         } else {
-            return UpdateOrder();
+            if (UpdateOrder()) {
+                if (DeleteProducts()) {
+                    return InsertProducts();
+                }
+                else{
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
     }
 
@@ -146,6 +188,52 @@ public class Order {
         } finally {
             qry.close();
         }
+    }
+
+    public boolean DeleteProducts() throws SQLException {
+        String sql = "DELETE FROM " + this.OP_TABLENAME + " WHERE "
+                + this.FIELD_ORDERID + " = ?";
+        PreparedStatement qry = this.Conn.prepareStatement(sql);
+        try {
+            qry.setInt(1, this.Id);
+            if (qry.executeUpdate() > 0) {
+                this.Id = -1;
+                return true;
+            } else {
+                return false;
+            }
+        } finally {
+            qry.close();
+        }
+    }
+
+    private boolean InsertProducts() throws SQLException {
+        boolean result = false;
+        String sql = "INSERT INTO " + this.OP_TABLENAME + " ("
+                + this.FIELD_ORDERID + ", "
+                + this.FIELD_PRODID
+                + ") VALUES (?,?)";
+        this.Conn.setAutoCommit(false);
+        try {
+            PreparedStatement qry = null;
+            qry = this.Conn.prepareStatement(sql);
+            for (int i = 0; i < this.Products.size(); i++) {
+                qry.setInt(1, this.Id);
+                Product prod = (Product) this.Products.get(i);
+                qry.setInt(2, prod.getId());
+                qry.addBatch();
+            }
+            qry.executeBatch();
+            this.Conn.commit();
+
+            result = true;
+        } catch (Exception ex) {
+            this.Conn.rollback();
+            result = false;
+        } finally {
+            this.Conn.setAutoCommit(true);
+        }
+        return result;
     }
 
     /*
