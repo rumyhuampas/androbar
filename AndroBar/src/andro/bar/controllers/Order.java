@@ -26,6 +26,13 @@ public class Order extends andro.bar.controllers.Base {
 
         view.DrawList();
         SetClickListeners();
+        //CheckConfirmButton();
+    }
+    
+    private void CheckConfirmButton(){
+        if(andro.bar.controllers.Welcome.MainList.Size() <= 0){
+            view.DisableConfirmButton();
+        }
     }
 
     private void SetClickListeners() {
@@ -53,7 +60,7 @@ public class Order extends andro.bar.controllers.Base {
                 ArrayList tables = (ArrayList) message[0];
 
                 dialog = view.CreateListMessage(Activity, "Elegir Mesa", tables);
-                dialog.SetCallback(TxtDialogButtonHandler);
+                dialog.SetCallback(ListDialogButtonHandler);
                 dialog.show();
             }
         };
@@ -67,7 +74,7 @@ public class Order extends andro.bar.controllers.Base {
                 dialog.show();
             }
         };
-        public View.OnClickListener TxtDialogButtonHandler = new View.OnClickListener() {
+        public View.OnClickListener ListDialogButtonHandler = new View.OnClickListener() {
 
             public void onClick(View objView) {
                 if (!dialog.GetSelected().equals("")) {

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ public class OrderList {
     private ArrayList list;
     private Context currentContext;
     private LinearLayout mainView;
+    private Button ConfirmButton;
 
     public OrderList() {
         list = new ArrayList();
@@ -25,6 +27,14 @@ public class OrderList {
 
     public void Clear() {
         list.clear();
+    }
+
+    public int Size() {
+        return list.size();
+    }
+
+    public OrderItem Get(int i) {
+        return (OrderItem) list.get(i);
     }
 
     public void Add(int prodId) {
@@ -67,23 +77,27 @@ public class OrderList {
             for (int i = 0; i < list.size(); i++) {
                 item = (OrderItem) list.get(i);
                 if (item.product.getId() == id) {
-                    if(item.amount == 1){
+                    if (item.amount == 1) {
                         list.remove(i);
-                    }
-                    else{
+                    } else {
                         item.amount--;
                     }
                 }
             }
             mainView.removeAllViews();
-            DrawList(currentContext, mainView);
+            DrawList(currentContext, mainView, ConfirmButton);
         }
     };
 
-    public void DrawList(Context context, LinearLayout mainV) {
+    public void DrawList(Context context, LinearLayout mainV, Button confirmButton) {
         currentContext = context;
         mainView = mainV;
-        
+        ConfirmButton = confirmButton;
+
+        if (list.size() <= 0) {
+            ConfirmButton.setEnabled(false);
+        }
+
         LinearLayout main = new LinearLayout(context);
         main.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,

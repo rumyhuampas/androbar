@@ -14,11 +14,15 @@ public class Order extends andro.bar.views.Base {
     public void DrawList(){
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.order_List);
         llMain.removeAllViews();
-        andro.bar.controllers.Welcome.MainList.DrawList(Activity, llMain);
+        andro.bar.controllers.Welcome.MainList.DrawList(Activity, llMain, GetConfirmButton());
         //llMain.addView(order);
     }
     
     public Button GetConfirmButton(){
         return (Button) Activity.findViewById(R.id.order_btnConfirm);
+    }
+    
+    public void DisableConfirmButton(){
+        ((Button) Activity.findViewById(R.id.order_btnConfirm)).setEnabled(false);
     }
 }
