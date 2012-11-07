@@ -94,7 +94,7 @@ public class Products extends andro.bar.controllers.Base {
         public void onClick(View objView) {
             andro.bar.controllers.Welcome.MainList.Add(ViewDrawer.GetProductId(objView));
             
-            view.ShowToast(Activity, "Producto agregado");
+            view.ShowShortToast(Activity, "Producto agregado");
         }
     };
     

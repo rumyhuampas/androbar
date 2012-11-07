@@ -88,6 +88,24 @@ public class OrderList {
             DrawList(currentContext, mainView, ConfirmButton);
         }
     };
+    
+    private View.OnLongClickListener ItemOnLongClickHandler = new View.OnLongClickListener() {
+
+        public boolean onLongClick(View objView) {
+            Integer id = (Integer) ((ImageView) objView).getTag();
+
+            OrderItem item = null;
+            for (int i = 0; i < list.size(); i++) {
+                item = (OrderItem) list.get(i);
+                if (item.product.getId() == id) {
+                        list.remove(i);
+                }
+            }
+            mainView.removeAllViews();
+            DrawList(currentContext, mainView, ConfirmButton);
+            return true;
+        }
+    };
 
     public void DrawList(Context context, LinearLayout mainV, Button confirmButton) {
         currentContext = context;
@@ -171,6 +189,7 @@ public class OrderList {
             //im.setPadding(5, 5, 5, 5);
             im.setTag(item.product.getId());
             im.setOnClickListener(ItemOnClickHandler);
+            im.setOnLongClickListener(ItemOnLongClickHandler);
 
             prod.addView(im);
 

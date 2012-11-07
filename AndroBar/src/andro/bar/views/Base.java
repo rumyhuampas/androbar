@@ -11,6 +11,10 @@ public class Base {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
     
+    public static void ShowShortToast(Context context, String msg){
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    }
+    
     public andro.bar.wrappers.dialogs.ImageDialog CreateErrorMessage(Context context, String msg){
         return new ImageDialog(context, "Error", msg, R.drawable.error);
     }

@@ -29,6 +29,7 @@ public class ViewDrawer {
         LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);
         mainParams.weight = 1;
+        //mainParams.setMargins(10, 10, 10, 10);
         main.setLayoutParams(mainParams);
         //main.setPadding(10, 10, 10, 10);
         
@@ -40,10 +41,11 @@ public class ViewDrawer {
         LinearLayout cat = new LinearLayout(context);
         cat.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams catParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
-                LinearLayout.LayoutParams.FILL_PARENT);
+                LinearLayout.LayoutParams.WRAP_CONTENT);
         catParams.weight = 1;
         cat.setLayoutParams(catParams);
         cat.setPadding(10, 10, 10, 10);
+        //catParams.setMargins(10, 10, 10, 10);
         
         main.addView(cat);
         
