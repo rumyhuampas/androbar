@@ -66,6 +66,7 @@
           <Property Name="TableId" Type="int" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ChargedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="products">
           <Key>
@@ -272,6 +273,7 @@
           <Property Type="String" Name="Status" Nullable="false" />
           <NavigationProperty Name="order_products" Relationship="androbarModel.FK_order_products_orders" FromRole="order" ToRole="order_products" />
           <NavigationProperty Name="table" Relationship="androbarModel.FK_orders_tables" FromRole="order" ToRole="table" />
+          <Property Type="DateTime" Name="ChargedOn" />
         </EntityType>
         <EntityType Name="table">
           <Key>
@@ -375,6 +377,7 @@
           <EntitySetMapping Name="orders">
             <EntityTypeMapping TypeName="androbarModel.order">
               <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="ChargedOn" ColumnName="ChargedOn" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="TableId" ColumnName="TableId" />

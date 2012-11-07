@@ -10,6 +10,65 @@ namespace AndroBarServer.Controller
 {
     public static class ABMHelper
     {
+        public const string OS_RECEIVED = "RECEIVED";
+        public const string OS_PENDING = "PENDING";
+        public const string OS_DELIVERED = "DELIVERED";
+        public const string OS_CANCELED = "CANCELED";
+        public const string OS_CHARGED = "CHARGED";
+
+        public static class OrderStatusComboList
+        {
+            public static object[] GetList(){
+                object[] col = new object[4];
+                col[0] = new ABMHelper.ComboBoxItem("Recibido", OS_RECEIVED);
+                col[1] = new ABMHelper.ComboBoxItem("Pendiente", OS_PENDING);
+                col[2] = new ABMHelper.ComboBoxItem("Entregado", OS_DELIVERED);
+                col[3] = new ABMHelper.ComboBoxItem("Cancelado", OS_CANCELED);
+                return col;
+            }
+
+            public static int GetItemIndex(string value)
+            {
+                switch (value)
+                {
+                    case OS_RECEIVED: return 0;
+                    case OS_PENDING: return 1;
+                    case OS_DELIVERED: return 2;
+                    case OS_CANCELED: return 3;
+                    default: return 0;
+                }
+            }
+
+            public static string GetItemValue(int index)
+            {
+                switch (index)
+                {
+                    case 0: return OS_RECEIVED;
+                    case 1: return OS_PENDING;
+                    case 3: return OS_DELIVERED;
+                    case 4: return OS_CANCELED;
+                    default: return OS_RECEIVED;
+                }
+            }
+        }
+
+        public class ComboBoxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public ComboBoxItem(string text, object value)
+            {
+                Text = text;
+                Value = value;
+            }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
+
         public static category GetCategory(int id)
         {
             return GetCategory(null, id);

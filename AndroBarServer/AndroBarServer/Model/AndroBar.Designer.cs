@@ -697,6 +697,30 @@ namespace AndroBarServer.Model
         private global::System.String _Status;
         partial void OnStatusChanging(global::System.String value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ChargedOn
+        {
+            get
+            {
+                return _ChargedOn;
+            }
+            set
+            {
+                OnChargedOnChanging(value);
+                ReportPropertyChanging("ChargedOn");
+                _ChargedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ChargedOn");
+                OnChargedOnChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ChargedOn;
+        partial void OnChargedOnChanging(Nullable<global::System.DateTime> value);
+        partial void OnChargedOnChanged();
 
         #endregion
     

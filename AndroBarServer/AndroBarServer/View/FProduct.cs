@@ -126,9 +126,12 @@ namespace AndroBarServer.View
             //dgvCat.DataSource = dgvCategories;
             dgvCat.Columns.Add("Id", "Id");
             dgvCat.Columns.Add("Name", "Name");
-            foreach (dynamic obj in dgvCategories)
+            if (dgvCategories != null)
             {
-                dgvCat.Rows.Add(obj.Id, obj.Name);
+                foreach (dynamic obj in dgvCategories)
+                {
+                    dgvCat.Rows.Add(obj.Id, obj.Name);
+                }
             }
             dgvCat.Columns.Add(deleteButtonColumn);
             cmbCat.DataSource = comboCategories;

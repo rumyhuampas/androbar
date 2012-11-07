@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,10 +42,12 @@
             this.toolMain = new System.Windows.Forms.ToolStrip();
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.dgvTables = new System.Windows.Forms.DataGridView();
+            this.pnlBottom = new System.Windows.Forms.Panel();
+            this.pnlRight = new System.Windows.Forms.Panel();
+            this.pnlOrder = new System.Windows.Forms.Panel();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblOrderTitle = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pnlOrder = new System.Windows.Forms.Panel();
+            this.tmrOrders = new System.Windows.Forms.Timer(this.components);
             this.menuMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
@@ -76,7 +79,7 @@
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(96, 22);
+            this.miExit.Size = new System.Drawing.Size(152, 22);
             this.miExit.Text = "Salir";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
@@ -133,8 +136,9 @@
             // splitMain.Panel2
             // 
             this.splitMain.Panel2.Controls.Add(this.pnlOrder);
-            this.splitMain.Panel2.Controls.Add(this.panel2);
             this.splitMain.Panel2.Controls.Add(this.pnlTop);
+            this.splitMain.Panel2.Controls.Add(this.pnlRight);
+            this.splitMain.Panel2.Controls.Add(this.pnlBottom);
             this.splitMain.Panel2.Padding = new System.Windows.Forms.Padding(10);
             this.splitMain.Size = new System.Drawing.Size(852, 421);
             this.splitMain.SplitterDistance = 193;
@@ -184,14 +188,39 @@
             this.dgvTables.TabIndex = 13;
             this.dgvTables.SelectionChanged += new System.EventHandler(this.dgvTables_SelectionChanged);
             // 
+            // pnlBottom
+            // 
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(10, 356);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(635, 55);
+            this.pnlBottom.TabIndex = 2;
+            // 
+            // pnlRight
+            // 
+            this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlRight.Location = new System.Drawing.Point(445, 10);
+            this.pnlRight.Name = "pnlRight";
+            this.pnlRight.Size = new System.Drawing.Size(200, 346);
+            this.pnlRight.TabIndex = 4;
+            // 
+            // pnlOrder
+            // 
+            this.pnlOrder.AutoScroll = true;
+            this.pnlOrder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlOrder.Location = new System.Drawing.Point(10, 50);
+            this.pnlOrder.Name = "pnlOrder";
+            this.pnlOrder.Size = new System.Drawing.Size(435, 306);
+            this.pnlOrder.TabIndex = 6;
+            // 
             // pnlTop
             // 
             this.pnlTop.Controls.Add(this.lblOrderTitle);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(10, 10);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(635, 40);
-            this.pnlTop.TabIndex = 0;
+            this.pnlTop.Size = new System.Drawing.Size(435, 40);
+            this.pnlTop.TabIndex = 5;
             // 
             // lblOrderTitle
             // 
@@ -203,22 +232,10 @@
             this.lblOrderTitle.TabIndex = 0;
             this.lblOrderTitle.Text = "Mesa";
             // 
-            // panel2
+            // tmrOrders
             // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(10, 356);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(635, 55);
-            this.panel2.TabIndex = 2;
-            // 
-            // pnlOrder
-            // 
-            this.pnlOrder.AutoScroll = true;
-            this.pnlOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlOrder.Location = new System.Drawing.Point(10, 50);
-            this.pnlOrder.Name = "pnlOrder";
-            this.pnlOrder.Size = new System.Drawing.Size(635, 306);
-            this.pnlOrder.TabIndex = 3;
+            this.tmrOrders.Interval = 3000;
+            this.tmrOrders.Tick += new System.EventHandler(this.tmrOrders_Tick);
             // 
             // FMain
             // 
@@ -230,6 +247,7 @@
             this.Controls.Add(this.statusMain);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
+            this.MinimumSize = new System.Drawing.Size(868, 530);
             this.Name = "FMain";
             this.Text = "AndroBar";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -260,10 +278,12 @@
         private System.Windows.Forms.ToolStripMenuItem miProd;
         private System.Windows.Forms.SplitContainer splitMain;
         private System.Windows.Forms.DataGridView dgvTables;
+        private System.Windows.Forms.Panel pnlBottom;
+        private System.Windows.Forms.Panel pnlOrder;
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Label lblOrderTitle;
-        private System.Windows.Forms.Panel pnlOrder;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlRight;
+        private System.Windows.Forms.Timer tmrOrders;
     }
 }
 
