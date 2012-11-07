@@ -32,5 +32,8 @@
         <activity android:name="ProductDetail"
                   android:configChanges="orientation">
         </activity>
+        <activity android:name="TableOrders"
+                  android:configChanges="orientation">
+        </activity>
     </application>
 </manifest> 

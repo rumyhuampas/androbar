@@ -21,7 +21,7 @@ public class Categories extends andro.bar.controllers.Base {
         view = new andro.bar.views.Categories(activity);
         model = new andro.bar.models.Categories();
         
-        view.DrawToolBar(OrderOnClickHandler);
+        view.DrawToolBar(OrderOnClickHandler, SearchOnClickHandler);
 
         //extras = Activity.getIntent().getExtras();
         //GetExtras();
@@ -32,6 +32,13 @@ public class Categories extends andro.bar.controllers.Base {
 
         public void onClick(View objView) {
             RunActivity(Activity, andro.bar.Order.class, null);
+        }
+    };
+    
+    public View.OnClickListener SearchOnClickHandler = new View.OnClickListener() {
+
+        public void onClick(View objView) {
+            RunActivity(Activity, andro.bar.TableOrders.class, null);
         }
     };
 

@@ -153,7 +153,7 @@ public class ViewDrawer {
         return main;
     }
     
-    public static View DrawToolBar(Context context) {
+    public static View DrawToolBar(Context context, View.OnClickListener orderOnClickHandler, View.OnClickListener searchOnClickHandler) {
         LinearLayout main = new LinearLayout(context);
         main.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 
@@ -161,7 +161,41 @@ public class ViewDrawer {
         main.setPadding(10, 10, 10, 10);
         main.setLayoutParams(mainParams);
         main.setBackgroundColor(Color.LTGRAY);
-        main.setGravity(Gravity.RIGHT);
+        //main.setGravity(Gravity.RIGHT);
+        
+        LinearLayout llLeft = new LinearLayout(context);
+        llLeft.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams llLeftParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 
+                LinearLayout.LayoutParams.FILL_PARENT);
+        llLeftParams.weight = 1;
+        llLeft.setPadding(10, 10, 10, 10);
+        llLeft.setLayoutParams(llLeftParams);
+        llLeft.setBackgroundColor(Color.LTGRAY);
+        
+        LinearLayout llRight = new LinearLayout(context);
+        main.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams llRightParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 
+                LinearLayout.LayoutParams.FILL_PARENT);
+        llRightParams.weight = 1;
+        llRight.setPadding(10, 10, 10, 10);
+        llRight.setLayoutParams(llRightParams);
+        llRight.setBackgroundColor(Color.LTGRAY);
+        llRight.setGravity(Gravity.RIGHT);
+        
+        main.addView(llLeft);
+        main.addView(llRight);
+        
+        ImageView imSearch = new ImageView(context);
+        LinearLayout.LayoutParams imSearchParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        //imCartParams.weight = 1;
+        //imCartParams.gravity = Gravity.RIGHT;
+        imSearch.setBackgroundResource(R.drawable.search);
+        imSearch.setLayoutParams(imSearchParams);
+        
+        imSearch.setOnClickListener(searchOnClickHandler);
+        
+        llLeft.addView(imSearch);
         
         ImageView imCart = new ImageView(context);
         LinearLayout.LayoutParams imCartParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -171,7 +205,9 @@ public class ViewDrawer {
         imCart.setBackgroundResource(R.drawable.cart);
         imCart.setLayoutParams(imCartParams);
         
-        main.addView(imCart);
+        imCart.setOnClickListener(orderOnClickHandler);
+        
+        llRight.addView(imCart);
         
         return main;
     }
