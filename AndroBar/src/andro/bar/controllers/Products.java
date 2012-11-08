@@ -20,7 +20,7 @@ public class Products extends andro.bar.controllers.Base {
         view = new andro.bar.views.Products(activity);
         model = new andro.bar.models.Products();
         
-        view.DrawToolBar(OrderOnClickHandler);
+        view.DrawToolBar(OrderOnClickHandler, SearchOnClickHandler);
 
         extras = Activity.getIntent().getExtras();
         LoadProducts();
@@ -30,6 +30,13 @@ public class Products extends andro.bar.controllers.Base {
 
         public void onClick(View objView) {
             RunActivity(Activity, andro.bar.Order.class, null);
+        }
+    };
+    
+    public View.OnClickListener SearchOnClickHandler = new View.OnClickListener() {
+
+        public void onClick(View objView) {
+            RunActivity(Activity, andro.bar.TableOrders.class, null);
         }
     };
 
