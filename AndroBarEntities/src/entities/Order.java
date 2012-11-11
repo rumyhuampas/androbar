@@ -28,6 +28,10 @@ public class Order {
     public int getId() {
         return this.Id;
     }
+    
+    public Date getDateTime(){
+        return DateTime;
+    }
 
     public Order(Connection conn) throws SQLException {
         this.Conn = conn;
@@ -106,8 +110,7 @@ public class Order {
             if (UpdateOrder()) {
                 if (DeleteProducts()) {
                     return InsertProducts();
-                }
-                else{
+                } else {
                     return false;
                 }
             } else {
@@ -236,30 +239,26 @@ public class Order {
         return result;
     }
 
-    /*
-     * public static Object[] GetAll(Connection conn) throws SQLException {
-     * String sql = "SELECT * FROM " + TABLENAME + " ORDER BY " + FIELD_NAME;
-     * PreparedStatement qry = conn.prepareStatement(sql); try { ArrayList rows
-     * = new ArrayList(); ArrayList row = new ArrayList(); ResultSet results =
-     * qry.executeQuery(); try { while (results.next()) {
-     * row.add(results.getInt(FIELD_ID));
-     * row.add(results.getString(FIELD_NAME)); rows.add(row.toArray());
-     * row.clear(); } return rows.toArray(); } finally { results.close(); } }
-     * finally { qry.close(); } }
-     *
-     * public Object[] GetProducts() throws SQLException { String sql = "SELECT
-     * * FROM " + Product.TABLENAME + " P, " + this.CATPROD_TABLENAME + " CP
-     * WHERE " + "P." + Product.FIELD_ID + " = CP." + this.FIELD_PRODID + " AND
-     * CP." + this.FIELD_CATID + " = ?"; PreparedStatement qry =
-     * this.Conn.prepareStatement(sql); try { qry.setInt(1, this.Id); ArrayList
-     * rows = new ArrayList(); ArrayList row = new ArrayList(); ResultSet
-     * results = qry.executeQuery(); try { while (results.next()) {
-     * row.add(results.getInt(Product.FIELD_ID));
-     * row.add(results.getString(Product.FIELD_NAME));
-     * row.add(results.getString(Product.FIELD_DESC));
-     * row.add(results.getFloat(Product.FIELD_PRICE));
-     * row.add(results.getFloat(Product.FIELD_COSTPRICE));
-     * rows.add(row.toArray()); row.clear(); } return rows.toArray(); } finally
-     * { results.close(); } } finally { qry.close(); } }
-     */
+    public static Object[] GetAll(Connection conn, Integer tableId) throws SQLException {
+        String sql = "SELECT * FROM " + TABLENAME 
+                + " WHERE " + FIELD_TABLEID + " = " + tableId.toString()
+                + " ORDER BY " + FIELD_DATETIME;
+        PreparedStatement qry = conn.prepareStatement(sql);
+        try {
+            ArrayList rows = new ArrayList();
+            ResultSet results = qry.executeQuery();
+            try {
+                while (results.next()) {
+                    Order ord = new Order(conn);
+                    ord.Load(results.getInt(FIELD_ID));
+                    rows.add(ord);
+                }
+                return rows.toArray();
+            } finally {
+                results.close();
+            }
+        } finally {
+            qry.close();
+        }
+    }
 }
