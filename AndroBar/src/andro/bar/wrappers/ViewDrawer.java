@@ -4,12 +4,10 @@ import andro.bar.R;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import java.io.InputStream;
 
 public class ViewDrawer {
@@ -210,5 +208,44 @@ public class ViewDrawer {
         llRight.addView(imCart);
         
         return main;
+    }
+    
+    public static View DrawTableOrdersToolBar(Context context, View.OnClickListener btnSearchOnClickHandler) {
+        LinearLayout main = new LinearLayout(context);
+        main.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams mainParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 
+                LinearLayout.LayoutParams.FILL_PARENT);
+        main.setPadding(10, 10, 10, 10);
+        main.setLayoutParams(mainParams);
+        main.setBackgroundColor(Color.LTGRAY);
+        //main.setGravity(Gravity.RIGHT);
+        
+        TextView lbl = new TextView(context);
+        lbl.setTextColor(Color.BLACK);
+        lbl.setText("Buscar: ");
+        
+        main.addView(lbl);
+        
+        EditText txt = new EditText(context);
+        LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 
+                LinearLayout.LayoutParams.FILL_PARENT);
+        txtParams.weight = 1;
+        txt.setLayoutParams(txtParams);
+        txt.setInputType(InputType.TYPE_CLASS_NUMBER);
+        
+        main.addView(txt);
+        
+        Button btn = new Button(context);
+        btn.setText("Buscar");
+        btn.setOnClickListener(btnSearchOnClickHandler);
+        
+        main.addView(btn);
+        
+        return main;
+    }
+    
+    public static String GetTableToolbarSearch(View toolbar){
+        EditText txt = (EditText)((LinearLayout)toolbar).getChildAt(1);
+        return txt.getText().toString();
     }
 }

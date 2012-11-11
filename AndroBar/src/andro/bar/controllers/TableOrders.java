@@ -14,19 +14,28 @@ import java.util.ArrayList;
 public class TableOrders extends andro.bar.controllers.Base {
 
     private andro.bar.TableOrders Activity;
-    //private andro.bar.views.TableOrders view;
+    private andro.bar.views.TableOrders view;
     //private andro.bar.models.TableOrders model;
     private Bundle extras;
     //private Category cat;
 
     public TableOrders(andro.bar.TableOrders activity) {
         Activity = activity;
-        //view = new andro.bar.views.TableOrders(activity);
+        view = new andro.bar.views.TableOrders(activity);
         //model = new andro.bar.models.TableOrders();
 
-        //view.DrawList();
+        view.DrawToolBar(BtnSearchOnClickHandler);
+        
         //SetClickListeners();
     }
+    
+    public View.OnClickListener BtnSearchOnClickHandler = new View.OnClickListener() {
+
+        public void onClick(View v) {
+            andro.bar.wrappers.TableOrders orders = new andro.bar.wrappers.TableOrders(Integer.parseInt(view.GetSearch()));
+            view.DrawList(orders);
+        }
+    };
 
     /*private void SetClickListeners() {
         view.GetConfirmButton().setOnClickListener(BtnConfirmOnClickHandler);
