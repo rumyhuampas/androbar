@@ -119,20 +119,20 @@ public class TableOrders {
 
             main.addView(prod);
 
-            TextView txtId = new TextView(context);
+            /*TextView txtId = new TextView(context);
             txtId.setText(((Integer) item.getId()).toString());
             //txtId.setHeight(0);
             txtId.setWidth(0);
             txtId.setVisibility(View.INVISIBLE);
 
-            prod.addView(txtId);
+            prod.addView(txtId);*/
 
             TextView txt = new TextView(context);
             LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                     LinearLayout.LayoutParams.FILL_PARENT);
             txtParams.weight = 1;
             txt.setLayoutParams(txtParams);
-            txt.setText(item.getId());
+            txt.setText(((Integer) item.getId()).toString());
             txt.setTextColor(Color.WHITE);
 
             prod.addView(txt);
@@ -140,11 +140,10 @@ public class TableOrders {
             TextView txtDate = new TextView(context);
             LinearLayout.LayoutParams txtDateParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                     LinearLayout.LayoutParams.FILL_PARENT);
-            txtDateParams.width = 128;
+            txtDateParams.weight = 1;
             txtDate.setLayoutParams(txtDateParams);
             txtDate.setText(String.valueOf(item.getDateTime()));
             txtDate.setTextColor(Color.WHITE);
-            txtDate.setGravity(Gravity.RIGHT);
 
             prod.addView(txtDate);
 
@@ -181,21 +180,20 @@ public class TableOrders {
                 LinearLayout.LayoutParams.FILL_PARENT);
         txtParams.weight = 1;
         txt.setLayoutParams(txtParams);
-        txt.setText("Numero de Orden");
+        txt.setText("Num de Orden");
         txt.setTextColor(Color.WHITE);
 
         header.addView(txt);
 
-        TextView txtPrice = new TextView(context);
-        LinearLayout.LayoutParams txtPriceParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
+        TextView txtDate = new TextView(context);
+        LinearLayout.LayoutParams txtDateParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
                 LinearLayout.LayoutParams.FILL_PARENT);
-        txtPriceParams.width = 128;
-        txtPrice.setLayoutParams(txtPriceParams);
-        txtPrice.setText("Fecha");
-        txtPrice.setTextColor(Color.WHITE);
-        txtPrice.setGravity(Gravity.RIGHT);
+        txtDateParams.weight = 1;
+        txtDate.setLayoutParams(txtDateParams);
+        txtDate.setText("Fecha");
+        txtDate.setTextColor(Color.WHITE);
 
-        header.addView(txtPrice);
+        header.addView(txtDate);
 
         TextView txtBtn = new TextView(context);
         LinearLayout.LayoutParams txtBtnParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,

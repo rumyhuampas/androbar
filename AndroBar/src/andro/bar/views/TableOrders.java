@@ -16,7 +16,7 @@ public class TableOrders extends andro.bar.views.Base {
     }
     
     public void DrawToolBar(View.OnClickListener btnSearchOnClickHandler){
-        LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.tableorder_Main);
+        LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.tableorder_Toolbar);
         llMain.removeAllViews();
         Toolbar = ViewDrawer.DrawTableOrdersToolBar(Activity, btnSearchOnClickHandler);
         llMain.addView(Toolbar);
@@ -27,9 +27,8 @@ public class TableOrders extends andro.bar.views.Base {
     }
     
     public void DrawList(andro.bar.wrappers.TableOrders orders){
-        LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.tableorder_List);
-        llMain.removeAllViews();
-        orders.DrawList(Activity, llMain, (Button)Activity.findViewById(R.id.tableorder_btnTableClose));
-        //llMain.addView(order);
+        LinearLayout llList = (LinearLayout) Activity.findViewById(R.id.tableorder_List);
+        llList.removeAllViews();
+        orders.DrawList(Activity, llList, (Button)Activity.findViewById(R.id.tableorder_btnTableClose));
     }
 }

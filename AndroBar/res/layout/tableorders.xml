@@ -19,6 +19,14 @@
             android:layout_weight="1"
         >
             <LinearLayout
+                android:id="@+id/tableorder_Toolbar"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+            >
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/tableorder_List"
                 android:orientation="vertical"
                 android:layout_width="fill_parent"

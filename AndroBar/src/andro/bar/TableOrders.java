@@ -10,7 +10,6 @@ public class TableOrders extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        
         setContentView(R.layout.tableorders);
         
         controller = new andro.bar.controllers.TableOrders(this);
