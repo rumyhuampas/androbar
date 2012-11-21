@@ -15,7 +15,6 @@ public class Order extends andro.bar.views.Base {
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.order_List);
         llMain.removeAllViews();
         andro.bar.controllers.Welcome.MainList.DrawList(Activity, llMain, GetConfirmButton());
-        //llMain.addView(order);
     }
     
     public Button GetConfirmButton(){

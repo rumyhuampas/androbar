@@ -4,7 +4,6 @@ import andro.bar.wrappers.AndroThread;
 import andro.bar.wrappers.dialogs.ImageDialog;
 import andro.bar.wrappers.dialogs.ListDialog;
 import andro.bar.wrappers.dialogs.LoadingDialog;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -15,7 +14,6 @@ public class Order extends andro.bar.controllers.Base {
     private andro.bar.Order Activity;
     private andro.bar.views.Order view;
     private andro.bar.models.Order model;
-    private Bundle extras;
 
     public Order(andro.bar.Order activity) {
         Activity = activity;
@@ -34,10 +32,11 @@ public class Order extends andro.bar.controllers.Base {
         ListDialog dialog = null;
 
         public void onClick(View objView) {
-            //RunActivity(Activity, andro.bar.Order.class, null);
+            final LoadingDialog loadDialog = view.CreateLoadingMessage(Activity, "Orden", "Obteniendo lista de mesas...");
+            loadDialog.show();
 
             AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "GetTables",
-                    null, null, ArrayList.class, null, GetTablesHandler, GetTablesExceptionHandler);
+                    null, null, ArrayList.class, loadDialog, GetTablesHandler, GetTablesExceptionHandler);
             thread.Start();
 
         }
@@ -46,9 +45,10 @@ public class Order extends andro.bar.controllers.Base {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-
                 Object[] message = (Object[]) msg.obj;
                 ArrayList tables = (ArrayList) message[0];
+                LoadingDialog loadingDialog = (LoadingDialog) message[1];
+                loadingDialog.hide();
 
                 dialog = view.CreateListMessage(Activity, "Elegir Mesa", tables);
                 dialog.SetCallback(ListDialogButtonHandler);
@@ -60,8 +60,13 @@ public class Order extends andro.bar.controllers.Base {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
+                Object[] message = (Object[]) msg.obj;
+                LoadingDialog loadingDialog = (LoadingDialog) message[1];
+                loadingDialog.hide();
 
-                ImageDialog dialog = view.CreateErrorMessage(Activity, "Un problema ocurrió al enviar el pedido.\n\n" + ((Exception) msg.obj).getMessage());
+                ImageDialog dialog = view.CreateErrorMessage(Activity,
+                        "Ocurrió un problema al enviar el pedido.\n\n"
+                        + ((Exception) msg.obj).getMessage());
                 dialog.show();
             }
         };
@@ -90,7 +95,6 @@ public class Order extends andro.bar.controllers.Base {
                     super.handleMessage(msg);
 
                     Object[] message = (Object[]) msg.obj;
-                    //Object[] categories = (Object[]) message[0];
                     LoadingDialog loadingDialog = (LoadingDialog) message[1];
                     loadingDialog.hide();
 
@@ -105,23 +109,10 @@ public class Order extends andro.bar.controllers.Base {
                 public void handleMessage(Message msg) {
                     super.handleMessage(msg);
 
-                    ImageDialog dialog = view.CreateErrorMessage(Activity, "Un problema ocurrió al enviar el pedido.\n\n" + ((Exception) msg.obj).getMessage());
+                    ImageDialog dialog = view.CreateErrorMessage(Activity, 
+                            "Ocurrió un problema al enviar el pedido.\n\n" 
+                            + ((Exception) msg.obj).getMessage());
                     dialog.show();
-                    /*
-                     * String errorMsg = "Un problema ocurrió al iniciar el
-                     * programa.\n\n" + ((Exception) msg.obj).getMessage() +
-                     * "\n\n¿Desea ir a la ventana de configuración?";
-                     * YesNoDialog dialog = view.CreateYesNoMessage(Activity,
-                     * "Error", errorMsg); dialog.SetCallback(new
-                     * View.OnClickListener() {
-                     *
-                     * public void onClick(View v) { if (((Button) v).getText()
-                     * == YesNoDialog.BUTTON_YES) { Bundle extras = new
-                     * Bundle(); extras.putString("activity", "WELCOME");
-                     * //andro.bar.controllers.Base.RunActivity(Activity,
-                     * andro.bar.Settings.class, extras); } else {
-                     * Activity.finish(); } } }); dialog.show();
-                     */
                 }
             };
         };
