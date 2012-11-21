@@ -2,7 +2,6 @@ package andro.bar.controllers;
 
 import Database.MySQL;
 import andro.bar.wrappers.OrderList;
-import andro.bar.wrappers.dialogs.ListDialog;
 import andro.bar.wrappers.dialogs.TxtDialog;
 import android.view.View;
 

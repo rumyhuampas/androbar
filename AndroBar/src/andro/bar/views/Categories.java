@@ -9,7 +9,6 @@ import java.io.InputStream;
 public class Categories extends andro.bar.views.Base {
 
     private andro.bar.Categories Activity;
-    private int TextSize;
 
     public Categories(andro.bar.Categories activity) {
         Activity = activity;
@@ -19,7 +18,6 @@ public class Categories extends andro.bar.views.Base {
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.cat_List);
         llMain.removeAllViews();
         View order = ViewDrawer.DrawToolBar(Activity, OrderOnClickHandler, SearchOnClickHandler);
-        //order.setOnClickListener(OrderOnClickHandler);
         llMain.addView(order);
     }
     

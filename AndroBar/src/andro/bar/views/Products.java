@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 
 public class Products extends andro.bar.views.Base {
     private andro.bar.Products Activity;
-    private int TextSize;
 
     public Products(andro.bar.Products activity) {
         Activity = activity;
@@ -17,7 +16,6 @@ public class Products extends andro.bar.views.Base {
         LinearLayout llMain = (LinearLayout) Activity.findViewById(R.id.prod_List);
         llMain.removeAllViews();
         View order = ViewDrawer.DrawToolBar(Activity, OrderOnClickHandler, SearchOnClickHandler);
-        //order.setOnClickListener(OrderOnClickHandler);
         llMain.addView(order);
     }
     

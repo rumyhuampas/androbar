@@ -4,7 +4,6 @@ import andro.bar.wrappers.AndroThread;
 import andro.bar.wrappers.dialogs.ImageDialog;
 import andro.bar.wrappers.dialogs.ListDialog;
 import andro.bar.wrappers.dialogs.LoadingDialog;
-import andro.bar.wrappers.dialogs.TxtDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,7 +16,6 @@ public class Order extends andro.bar.controllers.Base {
     private andro.bar.views.Order view;
     private andro.bar.models.Order model;
     private Bundle extras;
-    //private Category cat;
 
     public Order(andro.bar.Order activity) {
         Activity = activity;
@@ -26,13 +24,6 @@ public class Order extends andro.bar.controllers.Base {
 
         view.DrawList();
         SetClickListeners();
-        //CheckConfirmButton();
-    }
-    
-    private void CheckConfirmButton(){
-        if(andro.bar.controllers.Welcome.MainList.Size() <= 0){
-            view.DisableConfirmButton();
-        }
     }
 
     private void SetClickListeners() {

@@ -19,7 +19,6 @@ public class Base {
         if (extras != null) {
             intent.putExtras(extras);
         }
-        //context.startActivity(intent);
         activity.startActivityForResult(intent, 1);
     }
 }

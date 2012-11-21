@@ -2,6 +2,7 @@ package andro.bar.controllers;
 
 import andro.bar.wrappers.AndroThread;
 import andro.bar.wrappers.ViewDrawer;
+import andro.bar.wrappers.dialogs.ImageDialog;
 import andro.bar.wrappers.dialogs.LoadingDialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,20 +20,18 @@ public class Products extends andro.bar.controllers.Base {
         Activity = activity;
         view = new andro.bar.views.Products(activity);
         model = new andro.bar.models.Products();
-        
+
         view.DrawToolBar(OrderOnClickHandler, SearchOnClickHandler);
 
         extras = Activity.getIntent().getExtras();
         LoadProducts();
     }
-    
     public View.OnClickListener OrderOnClickHandler = new View.OnClickListener() {
 
         public void onClick(View objView) {
             RunActivity(Activity, andro.bar.Order.class, null);
         }
     };
-    
     public View.OnClickListener SearchOnClickHandler = new View.OnClickListener() {
 
         public void onClick(View objView) {
@@ -49,16 +48,6 @@ public class Products extends andro.bar.controllers.Base {
                 new Class[]{Integer.class}, new Object[]{catId},
                 Object[].class, loadDialog, LoadProductsHandler, ExceptionHandler);
         thread.Start();
-        /*
-         * try { andro.bar.controllers.Welcome.mysql.Open();
-         * model.LoadProducts(catId);
-         * andro.bar.controllers.Welcome.mysql.Close(); } catch (SQLException
-         * ex) { Logger.getLogger(Products.class.getName()).log(Level.SEVERE,
-         * null, ex); } catch (Exception ex) {
-         * Logger.getLogger(Products.class.getName()).log(Level.SEVERE, null,
-         * ex);
-        }
-         */
     }
     private Handler LoadProductsHandler = new Handler() {
 
@@ -78,45 +67,34 @@ public class Products extends andro.bar.controllers.Base {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            /*
-             * String errorMsg = "Un problema ocurrió al iniciar el
-             * programa.\n\n" + ((Exception) msg.obj).getMessage() + "\n\n¿Desea
-             * ir a la ventana de configuración?"; YesNoDialog dialog =
-             * view.CreateYesNoMessage(Activity, "Error", errorMsg);
-             * dialog.SetCallback(new View.OnClickListener() {
-             *
-             * public void onClick(View v) { if (((Button) v).getText() ==
-             * YesNoDialog.BUTTON_YES) { Bundle extras = new Bundle();
-             * extras.putString("activity", "WELCOME");
-             * //andro.bar.controllers.Base.RunActivity(Activity,
-             * andro.bar.Settings.class, extras); } else { Activity.finish(); }
-             * } });
+            String errorMsg = "Lo sentimos, ocurrio un problema.\n\n"
+                    + ((Exception) msg.obj).getMessage();
+            ImageDialog dialog = view.CreateErrorMessage(Activity, errorMsg);
+            dialog.SetCallback(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    Activity.finish();
+                }
+            });
             dialog.show();
-             */
         }
     };
-    
     public View.OnClickListener ObjectOnClickHandler = new View.OnClickListener() {
 
         public void onClick(View objView) {
             andro.bar.controllers.Welcome.MainList.Add(ViewDrawer.GetProductId(objView));
-            
+
             view.ShowShortToast(Activity, "Producto agregado");
         }
     };
-    
     public View.OnLongClickListener ObjectOnLongClickHandler = new View.OnLongClickListener() {
 
-        public boolean onLongClick(View view) {
-            Integer prodId = ViewDrawer.GetProductId(view);
-            //LoadingDialog loadingDialog = (LoadingDialog) message[1];
-            //loadingDialog.hide();
-            
+        public boolean onLongClick(View objView) {
+            Integer prodId = ViewDrawer.GetProductId(objView);
             Bundle extras = new Bundle();
             extras.putInt("productId", prodId);
-            
             RunActivity(Activity, andro.bar.ProductDetail.class, extras);
-            
+
             return true;
         }
     };

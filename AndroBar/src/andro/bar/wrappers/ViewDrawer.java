@@ -222,7 +222,7 @@ public class ViewDrawer {
         
         TextView lbl = new TextView(context);
         lbl.setTextColor(Color.BLACK);
-        lbl.setText("Buscar: ");
+        lbl.setText("Buscar Mesa: ");
         
         main.addView(lbl);
         
