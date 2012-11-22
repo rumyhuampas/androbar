@@ -1,10 +1,7 @@
 package entities;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class Order {
 
@@ -18,6 +15,15 @@ public class Order {
     private static final String FIELD_PRODID = "ProductId";
     private static final String OP_TABLENAME = "Order_Products";
     private static final String FIELD_ORDERID = "OrderId";
+    //
+    private static final String OS_RECEIVED = "RECEIVED";
+    private static final String OS_PENDING = "PENDING";
+    private static final String OS_DELIVERED = "DELIVERED";
+    private static final String OS_CANCEL_REQUESTED = "CANCEL_REQUESTED";
+    private static final String OS_CANCELED = "CANCELED";
+    private static final String OS_CHARGE_REQUESTED = "CHARGE_REQUESTED";
+    private static final String OS_CHARGED = "CHARGED";
+    //
     private Connection Conn;
     private int Id;
     public int TableId;
@@ -28,8 +34,8 @@ public class Order {
     public int getId() {
         return this.Id;
     }
-    
-    public Date getDateTime(){
+
+    public Date getDateTime() {
         return DateTime;
     }
 
@@ -240,8 +246,34 @@ public class Order {
     }
 
     public static Object[] GetAll(Connection conn, Integer tableId) throws SQLException {
-        String sql = "SELECT * FROM " + TABLENAME 
+        String sql = "SELECT * FROM " + TABLENAME
                 + " WHERE " + FIELD_TABLEID + " = " + tableId.toString()
+                + " ORDER BY " + FIELD_DATETIME;
+        PreparedStatement qry = conn.prepareStatement(sql);
+        try {
+            ArrayList rows = new ArrayList();
+            ResultSet results = qry.executeQuery();
+            try {
+                while (results.next()) {
+                    Order ord = new Order(conn);
+                    ord.Load(results.getInt(FIELD_ID));
+                    rows.add(ord);
+                }
+                return rows.toArray();
+            } finally {
+                results.close();
+            }
+        } finally {
+            qry.close();
+        }
+    }
+
+    public static Object[] GetActive(Connection conn, Integer tableId) throws SQLException {
+        String sql = "SELECT * FROM " + TABLENAME
+                + " WHERE " + FIELD_TABLEID + " = " + tableId.toString()
+                + " AND " + FIELD_STATUS + " NOT IN ('" 
+                + OS_CANCEL_REQUESTED + "','" + OS_CANCELED + "','" 
+                + OS_CHARGE_REQUESTED + "','" + OS_CHARGED + "') "
                 + " ORDER BY " + FIELD_DATETIME;
         PreparedStatement qry = conn.prepareStatement(sql);
         try {
