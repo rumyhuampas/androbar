@@ -1,10 +1,12 @@
 package andro.bar.controllers;
 
 import andro.bar.wrappers.AndroThread;
+import andro.bar.wrappers.dialogs.ImageDialog;
 import andro.bar.wrappers.dialogs.LoadingDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import entities.Product;
 
 public class ProductDetail extends andro.bar.controllers.Base {
@@ -21,9 +23,8 @@ public class ProductDetail extends andro.bar.controllers.Base {
 
         extras = Activity.getIntent().getExtras();
         LoadProduct();
-        //LoadCategories();
     }
-    
+
     private void LoadProduct() {
         Integer prodId = extras.getInt("productId");
 
@@ -52,21 +53,16 @@ public class ProductDetail extends andro.bar.controllers.Base {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            /*
-             * String errorMsg = "Un problema ocurrió al iniciar el
-             * programa.\n\n" + ((Exception) msg.obj).getMessage() + "\n\n¿Desea
-             * ir a la ventana de configuración?"; YesNoDialog dialog =
-             * view.CreateYesNoMessage(Activity, "Error", errorMsg);
-             * dialog.SetCallback(new View.OnClickListener() {
-             *
-             * public void onClick(View v) { if (((Button) v).getText() ==
-             * YesNoDialog.BUTTON_YES) { Bundle extras = new Bundle();
-             * extras.putString("activity", "WELCOME");
-             * //andro.bar.controllers.Base.RunActivity(Activity,
-             * andro.bar.Settings.class, extras); } else { Activity.finish(); }
-             * } });
+            String errorMsg = "Lo sentimos, ocurrio un problema.\n\n"
+                    + ((Exception) msg.obj).getMessage();
+            ImageDialog dialog = view.CreateErrorMessage(Activity, errorMsg);
+            dialog.SetCallback(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    Activity.finish();
+                }
+            });
             dialog.show();
-             */
         }
     };
 }

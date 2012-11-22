@@ -26,6 +26,10 @@ public class TableOrders extends andro.bar.views.Base {
         return ViewDrawer.GetTableToolbarSearch(Toolbar);
     }
     
+    public Button GetTableCloseButton(){
+        return (Button) Activity.findViewById(R.id.tableorder_btnTableClose);
+    }
+    
     public void DrawList(andro.bar.wrappers.TableOrders orders){
         LinearLayout llList = (LinearLayout) Activity.findViewById(R.id.tableorder_List);
         llList.removeAllViews();

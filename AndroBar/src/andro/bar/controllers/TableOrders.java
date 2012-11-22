@@ -1,14 +1,12 @@
 package andro.bar.controllers;
 
 import andro.bar.wrappers.AndroThread;
-import andro.bar.wrappers.dialogs.ImageDialog;
-import andro.bar.wrappers.dialogs.ListDialog;
-import andro.bar.wrappers.dialogs.LoadingDialog;
-import andro.bar.wrappers.dialogs.TxtDialog;
+import andro.bar.wrappers.dialogs.YesNoDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.Button;
 import java.util.ArrayList;
 
 public class TableOrders extends andro.bar.controllers.Base {
@@ -16,8 +14,7 @@ public class TableOrders extends andro.bar.controllers.Base {
     private andro.bar.TableOrders Activity;
     private andro.bar.views.TableOrders view;
     //private andro.bar.models.TableOrders model;
-    private Bundle extras;
-    //private Category cat;
+    private Integer tableId;
 
     public TableOrders(andro.bar.TableOrders activity) {
         Activity = activity;
@@ -25,34 +22,44 @@ public class TableOrders extends andro.bar.controllers.Base {
         //model = new andro.bar.models.TableOrders();
 
         view.DrawToolBar(BtnSearchOnClickHandler);
-        
-        //SetClickListeners();
+        SetClickListeners();
     }
-    
     public View.OnClickListener BtnSearchOnClickHandler = new View.OnClickListener() {
 
         public void onClick(View v) {
-            andro.bar.wrappers.TableOrders orders = new andro.bar.wrappers.TableOrders(Integer.parseInt(view.GetSearch()));
+            tableId = Integer.parseInt(view.GetSearch());
+            andro.bar.wrappers.TableOrders orders = new andro.bar.wrappers.TableOrders(tableId);
             view.DrawList(orders);
         }
     };
 
-    /*private void SetClickListeners() {
-        view.GetConfirmButton().setOnClickListener(BtnConfirmOnClickHandler);
+    private void SetClickListeners() {
+        view.GetTableCloseButton().setOnClickListener(BtnTableCloseOnClickHandler);
     }
-    public View.OnClickListener BtnConfirmOnClickHandler = new View.OnClickListener() {
+    public View.OnClickListener BtnTableCloseOnClickHandler = new View.OnClickListener() {
 
-        ListDialog dialog = null;
+        YesNoDialog dialog = null;
 
         public void onClick(View objView) {
-            //RunActivity(Activity, andro.bar.Order.class, null);
 
-            AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "GetTables",
-                    null, null, ArrayList.class, null, GetTablesHandler, GetTablesExceptionHandler);
-            thread.Start();
+            dialog = view.CreateYesNoMessage(Activity, "Cerrar mesa", "Cerrar mesa " + tableId.toString());
+            dialog.SetCallback(new View.OnClickListener() {
 
+                public void onClick(View v) {
+                    if (((Button) v).getText() == YesNoDialog.BUTTON_YES) {
+                        /*AndroThread thread = new AndroThread(andro.bar.controllers.Welcome.mysql, model, "GetTables",
+                                null, null, ArrayList.class, null, GetTablesHandler, GetTablesExceptionHandler);
+                        thread.Start();*/
+                        view.ShowToast(Activity, "mesa cerrada");
+                    } else {
+                        dialog.hide();
+                    }
+                }
+            });
+            
+            dialog.show();
         }
-        private Handler GetTablesHandler = new Handler() {
+        /*private Handler GetTablesHandler = new Handler() {
 
             @Override
             public void handleMessage(Message msg) {
@@ -120,6 +127,6 @@ public class TableOrders extends andro.bar.controllers.Base {
                     dialog.show();
                 }
             };
-        };
-    };*/
+        };*/
+    };
 }

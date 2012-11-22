@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import entities.Order;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +26,7 @@ public class TableOrders {
         try {
             try {
                 andro.bar.controllers.Welcome.mysql.Open();
-                Orders = Order.GetAll(andro.bar.controllers.Welcome.mysql.Conn, TableId);
+                Orders = Order.GetActive(andro.bar.controllers.Welcome.mysql.Conn, TableId);
             } catch (Exception ex) {
                 Logger.getLogger(TableOrders.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -94,6 +93,9 @@ public class TableOrders {
 
         if (Orders.length <= 0) {
             TableCloseButton.setEnabled(false);
+        }
+        else{
+            TableCloseButton.setEnabled(true);
         }
 
         LinearLayout main = new LinearLayout(context);
