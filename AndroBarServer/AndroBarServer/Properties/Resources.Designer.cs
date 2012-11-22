@@ -74,9 +74,23 @@ namespace AndroBarServer.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap gnome_view_refresh {
+            get {
+                object obj = ResourceManager.GetObject("gnome_view_refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap money {
             get {
                 object obj = ResourceManager.GetObject("money", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap view_refresh_4 {
+            get {
+                object obj = ResourceManager.GetObject("view-refresh-4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -43,6 +43,12 @@ namespace AndroBarServer
 
         private void FMain_Load(object sender, EventArgs e)
         {
+            LoadTables();
+            tmrOrders.Start();
+        }
+
+        private void LoadTables()
+        {
             dgvTables.Columns.Clear();
             dgvTables.DataSource = _controller.GetTables();
             //dgvTables.Columns[0].Visible = false;
@@ -55,8 +61,6 @@ namespace AndroBarServer
             imageColumn.DefaultCellStyle.NullValue = null;
 
             dgvTables.Columns.Add(imageColumn);
-
-            tmrOrders.Start();
         }
 
         private void dgvTables_SelectionChanged(object sender, EventArgs e)
@@ -146,6 +150,11 @@ namespace AndroBarServer
                 CheckTableImage((int) dgvTables.Rows[i].Cells[1].Value, dgvTables.Rows[i]);
             }
             tmrOrders.Start();
+        }
+
+        private void tsbtnRefreshTables_Click(object sender, EventArgs e)
+        {
+            LoadTables();
         }
     }
 }

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.miFile = new System.Windows.Forms.ToolStripMenuItem();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,13 +42,15 @@
             this.toolMain = new System.Windows.Forms.ToolStrip();
             this.splitMain = new System.Windows.Forms.SplitContainer();
             this.dgvTables = new System.Windows.Forms.DataGridView();
-            this.pnlBottom = new System.Windows.Forms.Panel();
-            this.pnlRight = new System.Windows.Forms.Panel();
             this.pnlOrder = new System.Windows.Forms.Panel();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lblOrderTitle = new System.Windows.Forms.Label();
+            this.pnlRight = new System.Windows.Forms.Panel();
+            this.pnlBottom = new System.Windows.Forms.Panel();
             this.tmrOrders = new System.Windows.Forms.Timer(this.components);
+            this.tsbtnRefreshTables = new System.Windows.Forms.ToolStripButton();
             this.menuMain.SuspendLayout();
+            this.toolMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
             this.splitMain.Panel1.SuspendLayout();
             this.splitMain.Panel2.SuspendLayout();
@@ -79,7 +81,7 @@
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(152, 22);
+            this.miExit.Size = new System.Drawing.Size(96, 22);
             this.miExit.Text = "Salir";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
@@ -116,6 +118,8 @@
             // 
             // toolMain
             // 
+            this.toolMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbtnRefreshTables});
             this.toolMain.Location = new System.Drawing.Point(0, 24);
             this.toolMain.Name = "toolMain";
             this.toolMain.Size = new System.Drawing.Size(852, 25);
@@ -151,58 +155,42 @@
             this.dgvTables.AllowUserToResizeRows = false;
             this.dgvTables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvTables.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvTables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvTables.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvTables.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvTables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvTables.Location = new System.Drawing.Point(10, 10);
             this.dgvTables.MultiSelect = false;
             this.dgvTables.Name = "dgvTables";
             this.dgvTables.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTables.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvTables.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvTables.RowHeadersVisible = false;
             this.dgvTables.RowTemplate.Height = 24;
             this.dgvTables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTables.Size = new System.Drawing.Size(173, 401);
             this.dgvTables.TabIndex = 13;
             this.dgvTables.SelectionChanged += new System.EventHandler(this.dgvTables_SelectionChanged);
-            // 
-            // pnlBottom
-            // 
-            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(10, 356);
-            this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(635, 55);
-            this.pnlBottom.TabIndex = 2;
-            // 
-            // pnlRight
-            // 
-            this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlRight.Location = new System.Drawing.Point(445, 10);
-            this.pnlRight.Name = "pnlRight";
-            this.pnlRight.Size = new System.Drawing.Size(200, 346);
-            this.pnlRight.TabIndex = 4;
             // 
             // pnlOrder
             // 
@@ -232,10 +220,35 @@
             this.lblOrderTitle.TabIndex = 0;
             this.lblOrderTitle.Text = "Mesa";
             // 
+            // pnlRight
+            // 
+            this.pnlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlRight.Location = new System.Drawing.Point(445, 10);
+            this.pnlRight.Name = "pnlRight";
+            this.pnlRight.Size = new System.Drawing.Size(200, 346);
+            this.pnlRight.TabIndex = 4;
+            // 
+            // pnlBottom
+            // 
+            this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBottom.Location = new System.Drawing.Point(10, 356);
+            this.pnlBottom.Name = "pnlBottom";
+            this.pnlBottom.Size = new System.Drawing.Size(635, 55);
+            this.pnlBottom.TabIndex = 2;
+            // 
             // tmrOrders
             // 
             this.tmrOrders.Interval = 3000;
             this.tmrOrders.Tick += new System.EventHandler(this.tmrOrders_Tick);
+            // 
+            // tsbtnRefreshTables
+            // 
+            this.tsbtnRefreshTables.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnRefreshTables.Image = global::AndroBarServer.Properties.Resources.gnome_view_refresh;
+            this.tsbtnRefreshTables.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnRefreshTables.Name = "tsbtnRefreshTables";
+            this.tsbtnRefreshTables.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnRefreshTables.Click += new System.EventHandler(this.tsbtnRefreshTables_Click);
             // 
             // FMain
             // 
@@ -254,6 +267,8 @@
             this.Load += new System.EventHandler(this.FMain_Load);
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
+            this.toolMain.ResumeLayout(false);
+            this.toolMain.PerformLayout();
             this.splitMain.Panel1.ResumeLayout(false);
             this.splitMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
@@ -284,6 +299,7 @@
         private System.Windows.Forms.Label lblOrderTitle;
         private System.Windows.Forms.Panel pnlRight;
         private System.Windows.Forms.Timer tmrOrders;
+        private System.Windows.Forms.ToolStripButton tsbtnRefreshTables;
     }
 }
 

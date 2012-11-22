@@ -13,7 +13,9 @@ namespace AndroBarServer.Controller
         public const string OS_RECEIVED = "RECEIVED";
         public const string OS_PENDING = "PENDING";
         public const string OS_DELIVERED = "DELIVERED";
+        public const string OS_CANCEL_REQUESTED = "CANCEL_REQUESTED";
         public const string OS_CANCELED = "CANCELED";
+        public const string OS_CHARGE_REQUESTED = "CHARGE_REQUESTED";
         public const string OS_CHARGED = "CHARGED";
 
         public static class OrderStatusComboList
