@@ -8,11 +8,12 @@ public class Table {
     public static final String TABLENAME = "Tables";
     public static final String FIELD_ID = "Id";
     public static final String FIELD_NUMBER = "Number";
-    
+    //
     private static final String ORDERSTABLENAME = "Orders";
     private static final String FIELD_TABLEID = "TableId";
     private static final String FIELD_STATUS = "Status";
-    
+    private static final String FIELD_DATETIME = "DateTime";
+    //
     private static final String OS_RECEIVED = "RECEIVED";
     private static final String OS_PENDING = "PENDING";
     private static final String OS_DELIVERED = "DELIVERED";
@@ -20,7 +21,7 @@ public class Table {
     private static final String OS_CANCELED = "CANCELED";
     private static final String OS_CHARGE_REQUESTED = "CHARGE_REQUESTED";
     private static final String OS_CHARGED = "CHARGED";
-    
+    //
     private Connection Conn;
     private int Id;
     public String Number;
@@ -187,7 +188,7 @@ public class Table {
         }
     }
     
-    private boolean RequestClose() throws SQLException {
+    public boolean RequestClose() throws SQLException {
         String sql = "UPDATE " + this.ORDERSTABLENAME + " SET "
                 + this.FIELD_STATUS + " = ?"
                 + " WHERE " + this.FIELD_TABLEID + " = ?"
@@ -197,9 +198,35 @@ public class Table {
 
         PreparedStatement qry = this.Conn.prepareStatement(sql);
         try {
-            qry.setInt(1, this.Id);
-            qry.setString(2, OS_CHARGE_REQUESTED);
+            qry.setString(1, OS_CHARGE_REQUESTED);
+            qry.setInt(2, this.Id);
             return qry.executeUpdate() > 0;
+        } finally {
+            qry.close();
+        }
+    }
+    
+    public static Object[] GetActiveOrders(Connection conn, Integer tableId) throws SQLException {
+        String sql = "SELECT * FROM " + ORDERSTABLENAME
+                + " WHERE " + FIELD_TABLEID + " = " + tableId.toString()
+                + " AND " + FIELD_STATUS + " NOT IN ('" 
+                + OS_CANCEL_REQUESTED + "','" + OS_CANCELED + "','" 
+                + OS_CHARGE_REQUESTED + "','" + OS_CHARGED + "') "
+                + " ORDER BY " + FIELD_DATETIME;
+        PreparedStatement qry = conn.prepareStatement(sql);
+        try {
+            ArrayList rows = new ArrayList();
+            ResultSet results = qry.executeQuery();
+            try {
+                while (results.next()) {
+                    Order ord = new Order(conn);
+                    ord.Load(results.getInt(FIELD_ID));
+                    rows.add(ord);
+                }
+                return rows.toArray();
+            } finally {
+                results.close();
+            }
         } finally {
             qry.close();
         }
