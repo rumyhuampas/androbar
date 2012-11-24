@@ -1,6 +1,7 @@
 package andro.bar.wrappers;
 
 import andro.bar.R;
+import andro.bar.wrappers.dialogs.LoadingDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import entities.Order;
+import entities.Table;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,13 +22,19 @@ public class TableOrders {
     private Context currentContext;
     private LinearLayout mainView;
     private Button TableCloseButton;
+    private andro.bar.views.Base view;
 
-    public TableOrders(Integer tableId) {
+    public TableOrders(andro.bar.views.Base v, Integer tableId) {
+        view = v;
         TableId = tableId;
+        GetOrders();
+    }
+
+    private void GetOrders() {
         try {
             try {
                 andro.bar.controllers.Welcome.mysql.Open();
-                Orders = Order.GetActive(andro.bar.controllers.Welcome.mysql.Conn, TableId);
+                Orders = Table.GetActiveOrders(andro.bar.controllers.Welcome.mysql.Conn, TableId);
             } catch (Exception ex) {
                 Logger.getLogger(TableOrders.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -34,13 +42,20 @@ public class TableOrders {
             andro.bar.controllers.Welcome.mysql.Close();
         }
     }
-    /*private View.OnClickListener ItemOnClickHandler = new View.OnClickListener() {
+    private View.OnClickListener ItemOnClickHandler = new View.OnClickListener() {
 
         public void onClick(View objView) {
+            //final LoadingDialog loadDialog = view.CreateLoadingMessage(currentContext, "Orden", "Enviando pedido...");
+            //loadDialog.show();
+
             try {
                 try {
+                    Integer id = (Integer) ((ImageView) objView).getTag();
+
                     andro.bar.controllers.Welcome.mysql.Open();
-                    entities.Order.GetAll(andro.bar.controllers.Welcome.mysql.Conn, TableId);
+                    Order order = new Order(andro.bar.controllers.Welcome.mysql.Conn);
+                    order.Load(id);
+                    order.RequestCancelation();
 
                 } catch (Exception ex) {
                     Logger.getLogger(TableOrders.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,42 +64,26 @@ public class TableOrders {
                 andro.bar.controllers.Welcome.mysql.Close();
             }
 
-
-            //andro.bar.controllers.Welcome.MainList.Add(ViewDrawer.GetProductId(objView));
-            Integer id = (Integer) ((ImageView) objView).getTag();
-
-            OrderItem item = null;
-            for (int i = 0; i < list.size(); i++) {
-                item = (OrderItem) list.get(i);
-                if (item.product.getId() == id) {
-                    if (item.amount == 1) {
-                        list.remove(i);
-                    } else {
-                        item.amount--;
-                    }
-                }
-            }
             mainView.removeAllViews();
-            DrawList(currentContext, mainView, ConfirmButton);
+            GetOrders();
+            DrawList(currentContext, mainView, TableCloseButton);
+
+            //loadDialog.hide();
+            view.ShowToast(currentContext, "Pedido enviado");
         }
     };
-    private View.OnLongClickListener ItemOnLongClickHandler = new View.OnLongClickListener() {
-
-        public boolean onLongClick(View objView) {
-            Integer id = (Integer) ((ImageView) objView).getTag();
-
-            OrderItem item = null;
-            for (int i = 0; i < list.size(); i++) {
-                item = (OrderItem) list.get(i);
-                if (item.product.getId() == id) {
-                    list.remove(i);
-                }
-            }
-            mainView.removeAllViews();
-            DrawList(currentContext, mainView, ConfirmButton);
-            return true;
-        }
-    };*/
+    /*
+     * private View.OnLongClickListener ItemOnLongClickHandler = new
+     * View.OnLongClickListener() {
+     *
+     * public boolean onLongClick(View objView) { Integer id = (Integer)
+     * ((ImageView) objView).getTag();
+     *
+     * OrderItem item = null; for (int i = 0; i < list.size(); i++) { item =
+     * (OrderItem) list.get(i); if (item.product.getId() == id) {
+     * list.remove(i); } } mainView.removeAllViews(); DrawList(currentContext,
+     * mainView, TableCloseButton); return true; } };
+     */
 
     public void DrawList(Context context, LinearLayout mainV, Button tableCloseButton) {
         currentContext = context;
@@ -93,8 +92,7 @@ public class TableOrders {
 
         if (Orders.length <= 0) {
             TableCloseButton.setEnabled(false);
-        }
-        else{
+        } else {
             TableCloseButton.setEnabled(true);
         }
 
@@ -120,14 +118,6 @@ public class TableOrders {
             prod.setLayoutParams(prodParams);
 
             main.addView(prod);
-
-            /*TextView txtId = new TextView(context);
-            txtId.setText(((Integer) item.getId()).toString());
-            //txtId.setHeight(0);
-            txtId.setWidth(0);
-            txtId.setVisibility(View.INVISIBLE);
-
-            prod.addView(txtId);*/
 
             TextView txt = new TextView(context);
             LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,
@@ -158,7 +148,7 @@ public class TableOrders {
             im.setLayoutParams(imParams);
             //im.setPadding(5, 5, 5, 5);
             im.setTag(item.getId());
-            //im.setOnClickListener(ItemOnClickHandler);
+            im.setOnClickListener(ItemOnClickHandler);
             //im.setOnLongClickListener(ItemOnLongClickHandler);
 
             prod.addView(im);
