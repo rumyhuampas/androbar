@@ -1,0 +1,1 @@
+android soft for bar
